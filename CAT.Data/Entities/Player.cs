@@ -22,8 +22,24 @@ namespace CAT.Data.Entities
         public string PlayerLastName { get; set; }
 
         [Required]
-        public string PlayerPosition { get; set; }
+        public PlayerPosition PositionOfPlayer { get; set; }
+
+        [Required]
+        public string PlayerTeam { get; set; }
 
         public virtual ICollection<Moment> Moments { get; set; } = new List<Moment>();
+    }
+
+    public enum PlayerPosition
+    {
+        Center = 1,
+        //[Display(Name = "Power Forward")]
+        PowerForward,
+        //[Display(Name = "Small Forward")]
+        SmallForward,
+        //[Display(Name = "Point Guard")]
+        PointGuard,
+        //[Display(Name = "Shooting Guard")]
+        ShootingGuard
     }
 }
