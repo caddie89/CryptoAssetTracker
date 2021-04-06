@@ -11,6 +11,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using CAT.WebMVC.Models;
+using CAT.Data.Entities;
+using CAT.Contexts.Data;
 
 namespace CAT.WebMVC
 {
