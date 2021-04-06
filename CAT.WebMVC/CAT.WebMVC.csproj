@@ -170,6 +170,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\Player\PlayerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -234,6 +235,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Player\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -250,6 +252,23 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CAT.Data\CAT.Data.csproj">
+      <Project>{46ef42c8-b209-428e-8267-9c86fcd0c6ad}</Project>
+      <Name>CAT.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CAT.Models\CAT.Models.csproj">
+      <Project>{0B8E6131-272F-4C02-A2C2-C3C442C2EE0D}</Project>
+      <Name>CAT.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CAT.Services\CAT.Services.csproj">
+      <Project>{1cc5c770-4bc2-4df2-97fd-f5a56027a38e}</Project>
+      <Name>CAT.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
