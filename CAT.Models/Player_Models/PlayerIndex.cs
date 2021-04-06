@@ -9,6 +9,9 @@ namespace CAT.Models
 {
     public class PlayerIndex
     {
+        [Display(Name = "Player ID")]
+        public int PlayerId { get; set; }
+
         [Display(Name = "First Name")]
         public string PlayerFirstName { get; set; }
 
