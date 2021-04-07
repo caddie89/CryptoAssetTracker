@@ -68,6 +68,8 @@
     <Compile Include="Entities\Moment.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Entities\Showcase.cs" />
+    <Compile Include="Entities\Team.cs" />
+    <Compile Include="Entities\TeamJson.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
