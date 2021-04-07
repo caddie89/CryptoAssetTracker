@@ -43,7 +43,16 @@ namespace CAT.WebMVC.Controllers.Player
         public ActionResult Index()
         {
             var service = CreatePlayerService();
-            var model = service.GetAllPlayers();
+            var model = service.GetPlayerIndex();
+
+            return View(model);
+        }
+
+        // GET: Player/Details/{id}
+        public ActionResult Details(int id)
+        {
+            var service = CreatePlayerService();
+            var model = service.GetPlayerDetail(id);
 
             return View(model);
         }

@@ -19,7 +19,7 @@ namespace CAT.Services.Player_Service
             _userId = userId;
         }
 
-        // CREATE a player
+        // Create a player
         public bool CreatePlayer(PlayerCreate model)
         {
             var entity =
@@ -39,8 +39,8 @@ namespace CAT.Services.Player_Service
             }
         }
 
-        // GET all Players
-        public IEnumerable<PlayerIndex> GetAllPlayers()
+        // Get all Players
+        public IEnumerable<PlayerIndex> GetPlayerIndex()
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -52,12 +52,34 @@ namespace CAT.Services.Player_Service
                         e =>
                         new PlayerIndex
                         {
+                            PlayerId = e.PlayerId,
                             PlayerFirstName = e.PlayerFirstName,
                             PlayerLastName = e.PlayerLastName,
                             PositionOfPlayer = e.PositionOfPlayer,
                             PlayerTeam = e.PlayerTeam
                         });
                 return query.ToArray();
+            }
+        }
+
+        // Get Player Details
+        public PlayerDetail GetPlayerDetail(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Players
+                    .Single(e => e.PlayerId == id && e.OwnerId == _userId);
+                return
+                    new PlayerDetail
+                    {
+                        PlayerId = entity.PlayerId,
+                        PlayerFirstName = entity.PlayerFirstName,
+                        PlayerLastName = entity.PlayerLastName,
+                        PositionOfPlayer = entity.PositionOfPlayer,
+                        PlayerTeam = entity.PlayerTeam
+                    };
             }
         }
     }
