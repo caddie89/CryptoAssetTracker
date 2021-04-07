@@ -19,7 +19,7 @@ namespace CAT.Services.Player_Service
             _userId = userId;
         }
 
-        // Create a player
+        // Create a Player
         public bool CreatePlayer(PlayerCreate model)
         {
             var entity =
@@ -82,5 +82,8 @@ namespace CAT.Services.Player_Service
                     };
             }
         }
+
+        // Edit a Player
+
     }
 }
