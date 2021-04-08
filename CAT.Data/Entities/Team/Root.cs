@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace CAT.Data.Entities
 {
-    public class TeamJson
+    public class Root
     {
         [JsonProperty("data")]
-        public Team Team { get; set; }
+        public List<Team> Teams { get; set; }
+        public Meta Meta { get; set; }
     }
 }

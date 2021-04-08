@@ -23,8 +23,8 @@ namespace CAT.Models.Player_Models
         public PlayerPosition PositionOfPlayer { get; set; }
 
         [Required]
-        [Display(Name = "Team")]
-        public string PlayerTeam { get; set; }
+        [Display(Name = "Team ID")]
+        public int? TeamId { get; set; }
     }
 }
 

@@ -21,6 +21,8 @@ namespace CAT.WebMVC.Controllers
 
         private readonly string _url = "https://www.balldontlie.io/api/v1/teams/1";
 
+        private readonly string _urlTeams = "https://www.balldontlie.io/api/v1/teams";
+
         public TeamController()
         {
             _client = new HttpClient();
@@ -29,28 +31,28 @@ namespace CAT.WebMVC.Controllers
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public async Task<ActionResult> ConsumeExternalAPI()
+        public async Task<ActionResult> SingleTeam()
         {
             HttpResponseMessage response = await _client.GetAsync(_url);
             if (response.IsSuccessStatusCode)
             {
                 Team team = await response.Content.ReadAsAsync<Team>();
                 var teamList = new List<Team> { team };
-                //var table = JsonConvert.DeserializeObject<Team>(data);
-                //var table = JsonConvert.DeserializeAnonymousType(data, new { Makes = default(Team) }).Makes;
-
-                //GridView gView = new GridView();
-                //gView.DataSource = table;
-                //gView.DataBind();
-                //using (StringWriter sw = new StringWriter())
-                //{
-                //    using (HtmlTextWriter htw = new HtmlTextWriter(sw))
-                //    {
-                //        gView.RenderControl(htw);
-                //        ViewBag.ReturnedData = sw.ToString();
-                //    }
-                //}
                 return View(teamList);
+            }
+            return View();
+        }
+
+        public async Task<ActionResult> MultipleTeams()
+        {
+            HttpResponseMessage response = await _client.GetAsync(_urlTeams);
+            if (response.IsSuccessStatusCode)
+            {
+                //var teams = await response.Content.ReadAsStringAsync();
+                //var teamsList = new List<Root> { JsonConvert.DeserializeObject<Root>(teams) };
+                Root teams = await response.Content.ReadAsAsync<Root>();
+                var teamsList = new List<Root> { teams };
+                return View(teamsList);
             }
             return View();
         }
@@ -82,5 +84,20 @@ namespace CAT.WebMVC.Controllers
 //            return View(result);
 //        }
 //        return View("Error");
+//    }
+//}
+
+//var table = JsonConvert.DeserializeObject<Team>(data);
+//var table = JsonConvert.DeserializeAnonymousType(data, new { Makes = default(Team) }).Makes;
+
+//GridView gView = new GridView();
+//gView.DataSource = table;
+//gView.DataBind();
+//using (StringWriter sw = new StringWriter())
+//{
+//    using (HtmlTextWriter htw = new HtmlTextWriter(sw))
+//    {
+//        gView.RenderControl(htw);
+//        ViewBag.ReturnedData = sw.ToString();
 //    }
 //}

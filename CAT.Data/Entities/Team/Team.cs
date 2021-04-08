@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace CAT.Data.Entities
 {
     public class Team
     {
+        [Key]
         [JsonProperty("id")]
         public int Id { get; set; }
 

@@ -242,7 +242,8 @@
     <Content Include="Views\Player\Index.cshtml" />
     <Content Include="Views\Player\Create.cshtml" />
     <Content Include="Views\Player\Details.cshtml" />
-    <Content Include="Views\Team\ConsumeExternalAPI.cshtml" />
+    <Content Include="Views\Team\SingleTeam.cshtml" />
+    <Content Include="Views\Team\MultipleTeams.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

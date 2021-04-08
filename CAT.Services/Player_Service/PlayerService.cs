@@ -5,8 +5,10 @@ using CAT.Models.Player_Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace CAT.Services.Player_Service
 {
@@ -29,7 +31,7 @@ namespace CAT.Services.Player_Service
                     PlayerFirstName = model.PlayerFirstName,
                     PlayerLastName = model.PlayerLastName,
                     PositionOfPlayer = model.PositionOfPlayer,
-                    PlayerTeam = model.PlayerTeam
+                    //TeamId = model.TeamId
                 };
 
             using (var ctx = new ApplicationDbContext())
