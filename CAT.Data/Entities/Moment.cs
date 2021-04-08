@@ -41,15 +41,26 @@ namespace CAT.Data.Entities
         public int AmountInPack { get; set; }
 
         [Required]
-        public decimal PurchasePrice { get; set; }
+        public decimal PurchasedForPrice { get; set; }
 
-        public decimal ActualPurchasePrice
+        public decimal ActualPurchasedForPrice
         {
             get
             {
-                decimal actualPrice = PurchasePrice / AmountInPack;
-                return actualPrice = (decimal)System.Math.Round
+                decimal actualPrice = PurchasedForPrice / AmountInPack;
+                return actualPrice = System.Math.Round
                 (actualPrice, 2);
+            }
+        }
+
+        public decimal SoldForPrice { get; set; }
+
+        public decimal ReturnOnInvestment
+        {
+            get
+            {
+                decimal returnOnInvestment = ActualPurchasedForPrice - SoldForPrice;
+                return returnOnInvestment = System.Math.Round(returnOnInvestment, 2);
             }
         }
 

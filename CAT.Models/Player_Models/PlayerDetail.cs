@@ -1,5 +1,4 @@
 ﻿using CAT.Data.Entities;
-using CAT.Models.Player_Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CAT.Models
+namespace CAT.Models.Player_Models
 {
-    public class PlayerIndex
+    public class PlayerDetail
     {
         [Display(Name = "Player ID")]
         public int PlayerId { get; set; }
