@@ -9,6 +9,19 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@if (TempData.ContainsKey("SaveResult"))
+{
+    <div class="alert alert-success fade in" role="alert">
+        @ViewBag.SaveResult
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+
+        @TempData["SaveResult"]
+    </div>
+}
+
 <table class="table">
     <tr>
         <th>
@@ -21,7 +34,7 @@
             @Html.DisplayNameFor(model => model.ActualPurchasedForPrice)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MomentFullName)
+            @Html.DisplayNameFor(model => model.MomentComplete)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.MomentCategory)
@@ -33,43 +46,44 @@
             @Html.DisplayNameFor(model => model.MomentSerialNumber)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Mint)
+            @Html.DisplayNameFor(model => model.MomentMint)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.MomentId)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.PlayerFullName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.ActualPurchasedForPrice)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.MomentFullName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.MomentCategory)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.MomentSet)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.MomentSerialNumber)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Mint)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.MomentId }) |
-        @Html.ActionLink("Details", "Details", new { id = item.MomentId }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.MomentId })
-    </td>
-</tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MomentId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlayerFullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActualPurchasedForPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MomentComplete)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MomentCategory)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MomentSet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SerialComplete)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mint)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.MomentId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.MomentId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.MomentId })
+            </td>
+        </tr>
+    }
 
 </table>

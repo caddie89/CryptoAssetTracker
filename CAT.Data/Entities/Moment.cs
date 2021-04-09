@@ -11,103 +11,47 @@ namespace CAT.Data.Entities
     public class Moment
     {
         [Key]
-        [Display(Name ="Moment ID")]
         public int MomentId { get; set; }
 
         [ForeignKey(nameof(Player))]
-        [Display(Name = "Player ID")]
         public int? PlayerId { get; set; }
         public virtual Player Player { get; set; }
 
-        
         [Required]
-        [Display(Name = "Username")]
         public Guid OwnerId { get; set; }
 
         [Required]
-        [Display(Name = "Category")]
         public string MomentCategory { get; set; }
 
         [Required]
-        [Display(Name = "Date of Moment")]
         public DateTimeOffset DateOfMoment { get; set; }
 
         [Required]
-        [Display(Name = "Set")]
         public string MomentSet { get; set; }
 
         [Required]
-        [Display(Name = "Series")]
         public int MomentSeries { get; set; }
 
         [Required]
-        [Display(Name = "Serial")]
         public int MomentSerialNumber { get; set; }
 
         [Required]
-        [Display(Name = "Tier")]
+        public int MomentCirculatingCount { get; set; }
+
+        [Required]
         public Tier MomentTier { get; set; }
 
         [Required]
-        [Display(Name = "Mint")]
         public Mint MomentMint { get; set; }
 
         [Required]
-        [Display(Name = "Purchased in Pack?")]
-        public bool PurchasedInPack { get; set; }
-
-        [Display(Name = "Quantity in Pack")]
-        public int AmountInPack { get; set; }
-
-        [Required]
-        [Display(Name = "Purchase Price")]
         public decimal PurchasedForPrice { get; set; }
 
-        [Display(Name = "Price")]
-        public decimal ActualPurchasedForPrice
-        {
-            get
-            {
-                decimal actualPrice = PurchasedForPrice / AmountInPack;
-                actualPrice = Math.Truncate(100 * actualPrice) / 100;
-                return actualPrice;
-            }
-        }
+        public bool PurchasedInPack { get; set; }
 
-        [Display(Name = "Sold Price")]
+        public decimal AmountInPack { get; set; }
+
         public decimal SoldForPrice { get; set; }
-
-        [Display(Name = "Profit/Loss")]
-        public decimal ProfitLossMargin
-        {
-            get
-            {
-                decimal profitLossMargin = ActualPurchasedForPrice - SoldForPrice;
-                profitLossMargin = Math.Truncate(100 * profitLossMargin) / 100;
-                return profitLossMargin;
-            }
-        }
-
-        [Display(Name = "Moment")]
-        public string MomentFullName
-        {
-            get
-            {
-                string momentFullName = $"{MomentCategory} - {DisplayDateOfMoment} - {MomentSet} (Series {MomentSeries})";
-                return momentFullName;
-            }
-        }
-
-        public string DisplayDateOfMoment
-        {
-            get
-            {
-                var date = DateOfMoment;
-                string fmt = "MMMM dd yyyy";
-                var displayDate = date.Date.ToString(fmt);
-                return displayDate;
-            }
-        }
 
         public virtual ICollection<Showcase> Showcases { get; set; } = new List<Showcase>();
     }

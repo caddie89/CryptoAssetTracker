@@ -32,6 +32,7 @@ namespace CAT.Services.Moment_Service
                     MomentSet = model.MomentSet,
                     MomentSeries = model.MomentSeries,
                     MomentSerialNumber = model.MomentSerialNumber,
+                    MomentCirculatingCount = model.MomentCirculatingCount,
                     MomentTier = model.MomentTier,
                     MomentMint = model.MomentMint,
                     PurchasedInPack = model.PurchasedInPack,
@@ -91,6 +92,7 @@ namespace CAT.Services.Moment_Service
                             MomentSet = e.MomentSet,
                             MomentSeries = e.MomentSeries,
                             MomentSerialNumber = e.MomentSerialNumber,
+                            MomentCirculatingCount = e.MomentCirculatingCount,
                             AmountInPack = e.AmountInPack,
                             MomentMint = e.MomentMint
                         }

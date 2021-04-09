@@ -1,6 +1,7 @@
 ﻿using CAT.Data.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,6 @@ namespace CAT.Models.Moment_Models
 {
     public class MomentCreate
     {
-        [Required]
         [Display(Name = "Player ID")]
         public int? PlayerId { get; set; }
 
@@ -35,6 +35,10 @@ namespace CAT.Models.Moment_Models
         public int MomentSerialNumber { get; set; }
 
         [Required]
+        [Display(Name = "Circulating Count")]
+        public int MomentCirculatingCount { get; set; }
+
+        [Required]
         [Display(Name = "Tier")]
         public Tier MomentTier { get; set; }
 
@@ -42,12 +46,11 @@ namespace CAT.Models.Moment_Models
         [Display(Name = "Mint")]
         public Mint MomentMint { get; set; }
 
-        [Required]
         [Display(Name = "Purchased in Pack?")]
         public bool PurchasedInPack { get; set; }
 
         [Display(Name = "Quantity in Pack")]
-        public int AmountInPack { get; set; }
+        public decimal AmountInPack { get; set; }
 
         [Required]
         [Display(Name = "Purchase Price")]

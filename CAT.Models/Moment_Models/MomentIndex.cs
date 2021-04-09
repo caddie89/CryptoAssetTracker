@@ -34,6 +34,9 @@ namespace CAT.Models.Moment_Models
         [Display(Name = "Serial")]
         public int MomentSerialNumber { get; set; }
 
+        [Display(Name = "Circulating Count")]
+        public int MomentCirculatingCount { get; set; }
+
         [Display(Name = "Tier")]
         public Tier MomentTier { get; set; }
 
@@ -44,7 +47,7 @@ namespace CAT.Models.Moment_Models
         public bool PurchasedInPack { get; set; }
 
         [Display(Name = "Quantity in Pack")]
-        public int AmountInPack { get; set; }
+        public decimal AmountInPack { get; set; }
 
         [Display(Name = "Purchase Price")]
         public decimal PurchasedForPrice { get; set; }
@@ -54,33 +57,34 @@ namespace CAT.Models.Moment_Models
         {
             get
             {
+               if (PurchasedInPack is false)
+                {
+                    return PurchasedForPrice;
+                }
+                
                 decimal actualPrice = PurchasedForPrice / AmountInPack;
                 actualPrice = Math.Truncate(100 * actualPrice) / 100;
                 return actualPrice; 
             }
         }
 
-        [Display(Name = "Sold Price")]
-        public decimal SoldForPrice { get; set; }
-
-        [Display(Name = "Profit/Loss")]
-        public decimal ProfitLossMargin
+        [Display(Name = "Moment")]
+        public string MomentComplete
         {
             get
             {
-                decimal profitLossMargin = ActualPurchasedForPrice - SoldForPrice;
-                profitLossMargin = Math.Truncate(100 * profitLossMargin) / 100;
-                return profitLossMargin;
+                var momentFullName = $"{MomentCategory} - {DisplayDateOfMoment} - {MomentSet} (Series {MomentSeries})";
+                return momentFullName;
             }
         }
 
-        [Display(Name = "Moment")]
-        public string MomentFullName
+        [Display(Name = "Serial")]
+        public string SerialComplete
         {
             get
             {
-                string momentFullName = $"{MomentCategory} - {DisplayDateOfMoment} - {MomentSet} (Series {MomentSeries})";
-                return momentFullName;
+                var serialComplete = $"{MomentSerialNumber}/{MomentCirculatingCount}";
+                return serialComplete;
             }
         }
 
