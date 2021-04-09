@@ -26,12 +26,13 @@ namespace CAT.Services.Player_Service
                 new Player()
                 {
                     OwnerId = _userId,
+                    PlayerId = model.PlayerId,
                     PlayerFirstName = model.PlayerFirstName,
                     PlayerLastName = model.PlayerLastName,
                     PositionOfPlayer = model.PositionOfPlayer,
                     PlayerTeam = model.PlayerTeam
                 };
-
+            
             using (var ctx = new ApplicationDbContext())
             {
                 ctx.Players.Add(entity);

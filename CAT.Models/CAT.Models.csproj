@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Moment_Models\MomentCreate.cs" />
+    <Compile Include="Moment_Models\MomentIndex.cs" />
     <Compile Include="Player_Models\PlayerCreate.cs" />
     <Compile Include="Player_Models\PlayerDetail.cs" />
     <Compile Include="Player_Models\PlayerEdit.cs" />

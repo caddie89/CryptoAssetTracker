@@ -14,7 +14,6 @@ namespace CAT.Data.Entities
         [Display(Name ="Moment ID")]
         public int MomentId { get; set; }
 
-        
         [ForeignKey(nameof(Player))]
         [Display(Name = "Player ID")]
         public int? PlayerId { get; set; }

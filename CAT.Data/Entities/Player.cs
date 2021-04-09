@@ -33,6 +33,16 @@ namespace CAT.Data.Entities
         [Display(Name = "Team")]
         public string PlayerTeam { get; set; }
 
+        [Display(Name = "Full Name")]
+        public string PlayerFullName
+        {
+            get
+            {
+                var playerFullName = $"{PlayerFirstName} {PlayerLastName}";
+                return playerFullName;
+            }
+        }
+
         public virtual ICollection<Moment> Moments { get; set; } = new List<Moment>();
     }
 

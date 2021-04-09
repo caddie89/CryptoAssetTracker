@@ -1,0 +1,76 @@
+﻿@model IEnumerable<CAT.Models.Moment_Models.MomentIndex>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MomentId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PlayerFullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ActualPurchasedForPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MomentFullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MomentCategory)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MomentSet)
+        </th>
+        <th>
+        <th>
+            @Html.DisplayNameFor(model => model.MomentSerialNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mint)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.MomentId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PlayerFullName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ActualPurchasedForPrice)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.MomentFullName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.MomentCategory)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.MomentSet)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Mint)
+    </td>
+    <th>
+        @Html.DisplayNameFor(model => model.MomentSerialNumber)
+    </th>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.MomentId }) |
+        @Html.ActionLink("Details", "Details", new { id = item.MomentId }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.MomentId })
+    </td>
+</tr>
+}
+
+</table>
