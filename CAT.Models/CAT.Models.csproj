@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Player_Models\PlayerCreate.cs" />
     <Compile Include="Player_Models\PlayerDetail.cs" />
+    <Compile Include="Player_Models\PlayerEdit.cs" />
     <Compile Include="Player_Models\PlayerIndex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
