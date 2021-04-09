@@ -57,6 +57,70 @@ namespace CAT.WebMVC.Controllers.Player
             return View(model);
         }
 
+        // GET: Player/Edit/{id}
+        public ActionResult Edit(int id)
+        {
+            var service = CreatePlayerService();
+            var detail = service.GetPlayerDetail(id);
+            var model =
+                new PlayerEdit
+                {
+                    PlayerId = detail.PlayerId,
+                    PlayerFirstName = detail.PlayerFirstName,
+                    PlayerLastName = detail.PlayerLastName,
+                    PositionOfPlayer = detail.PositionOfPlayer,
+                    PlayerTeam = detail.PlayerTeam
+                };
+            return View(model);
+        }
+
+        // POST: Player/Edit/{id}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, PlayerEdit model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            if (model.PlayerId != id)
+                ModelState.AddModelError("", "IDs do not match.");
+
+            var service = CreatePlayerService();
+
+            if (service.EditPlayer(model))
+            {
+                TempData["SaveResult"] = "Player was successfully updated.";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Player could not be updated. Please make sure that all required input fields are populated.");
+            return View(model);            
+        }
+
+        // GET: Player/Delete/{id}
+        [ActionName("Delete")]
+        public ActionResult Delete(int id)
+        {
+            var service = CreatePlayerService();
+            var model = service.GetPlayerDetail(id);
+            return View(model);
+        }
+
+        // POST: Player/Delete/{id}
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePost(int id)
+        {
+            var service = CreatePlayerService();
+
+            service.DeletePlayer(id);
+
+            TempData["SaveResult"] = "Player was successfully delete.";
+
+            return RedirectToAction("Index");
+        }
+
         // Helper Method - CreateService()
         private PlayerService CreatePlayerService()
         {

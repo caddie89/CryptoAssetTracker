@@ -78,12 +78,45 @@ namespace CAT.Services.Player_Service
                         PlayerFirstName = entity.PlayerFirstName,
                         PlayerLastName = entity.PlayerLastName,
                         PositionOfPlayer = entity.PositionOfPlayer,
-                        PlayerTeam = entity.PlayerTeam
+                        PlayerTeam = entity.PlayerTeam,
+                        Moments = entity.Moments
                     };
             }
         }
 
         // Edit a Player
+        public bool EditPlayer(PlayerEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Players
+                    .Single(e => e.PlayerId == model.PlayerId && e.OwnerId == _userId);
+
+                entity.PlayerFirstName = model.PlayerFirstName;
+                entity.PlayerLastName = model.PlayerLastName;
+                entity.PositionOfPlayer = model.PositionOfPlayer;
+                entity.PlayerTeam = model.PlayerTeam;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
+        // Delete a Player
+        public bool DeletePlayer(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx.
+                    Players.Single(e => e.PlayerId == id && e.OwnerId == _userId);
+
+                ctx.Players.Remove(entity);
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
 
     }
 }
