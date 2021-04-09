@@ -30,7 +30,6 @@
             @Html.DisplayNameFor(model => model.MomentSet)
         </th>
         <th>
-        <th>
             @Html.DisplayNameFor(model => model.MomentSerialNumber)
         </th>
         <th>
@@ -60,11 +59,11 @@
         @Html.DisplayFor(modelItem => item.MomentSet)
     </td>
     <td>
+        @Html.DisplayFor(modelItem => item.MomentSerialNumber)
+    </td>
+    <td>
         @Html.DisplayFor(modelItem => item.Mint)
     </td>
-    <th>
-        @Html.DisplayNameFor(model => model.MomentSerialNumber)
-    </th>
     <td>
         @Html.ActionLink("Edit", "Edit", new { id = item.MomentId }) |
         @Html.ActionLink("Details", "Details", new { id = item.MomentId }) |

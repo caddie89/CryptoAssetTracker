@@ -11,10 +11,6 @@ namespace CAT.Models.Moment_Models
     public class MomentCreate
     {
         [Required]
-        [Display(Name = "Moment ID")]
-        public int MomentId { get; set; }
-
-        [Required]
         [Display(Name = "Player ID")]
         public int? PlayerId { get; set; }
 
@@ -47,7 +43,7 @@ namespace CAT.Models.Moment_Models
         public Mint MomentMint { get; set; }
 
         [Required]
-        [Display(Name = "Purchase in Pack?")]
+        [Display(Name = "Purchased in Pack?")]
         public bool PurchasedInPack { get; set; }
 
         [Display(Name = "Quantity in Pack")]

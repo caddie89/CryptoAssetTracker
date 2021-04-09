@@ -13,8 +13,11 @@ namespace CAT.Models.Moment_Models
         [Display(Name = "Moment ID")]
         public int MomentId { get; set; }
 
-        [Display(Name = "Player")]
-        public string PlayerFullName { get; set; }
+        [Display(Name = "First Name")]
+        public string PlayerFirstName { get; set; }
+
+        [Display(Name = "Last Name")]
+        public string PlayerLastName { get; set; }
 
         [Display(Name = "Category")]
         public string MomentCategory { get; set; }
@@ -37,7 +40,7 @@ namespace CAT.Models.Moment_Models
         [Display(Name = "Mint")]
         public Mint MomentMint { get; set; }
 
-        [Display(Name = "Purchase in Pack?")]
+        [Display(Name = "Purchased in Pack?")]
         public bool PurchasedInPack { get; set; }
 
         [Display(Name = "Quantity in Pack")]
@@ -46,14 +49,14 @@ namespace CAT.Models.Moment_Models
         [Display(Name = "Purchase Price")]
         public decimal PurchasedForPrice { get; set; }
 
-        [Display(Name = "Actual Price")]
+        [Display(Name = "Price")]
         public decimal ActualPurchasedForPrice
         {
             get
             {
                 decimal actualPrice = PurchasedForPrice / AmountInPack;
-                return actualPrice = System.Math.Round
-                (actualPrice, 2);
+                actualPrice = Math.Truncate(100 * actualPrice) / 100;
+                return actualPrice; 
             }
         }
 
@@ -65,8 +68,9 @@ namespace CAT.Models.Moment_Models
         {
             get
             {
-                decimal returnOnInvestment = ActualPurchasedForPrice - SoldForPrice;
-                return returnOnInvestment = System.Math.Round(returnOnInvestment, 2);
+                decimal profitLossMargin = ActualPurchasedForPrice - SoldForPrice;
+                profitLossMargin = Math.Truncate(100 * profitLossMargin) / 100;
+                return profitLossMargin;
             }
         }
 
@@ -88,6 +92,16 @@ namespace CAT.Models.Moment_Models
                 string fmt = "MMMM dd yyyy";
                 var displayDate = date.Date.ToString(fmt);
                 return displayDate;
+            }
+        }
+
+        [Display(Name = "Player")]
+        public string PlayerFullName
+        {
+            get
+            {
+                var playerFullName = $"{PlayerFirstName} {PlayerLastName}";
+                return playerFullName;
             }
         }
 

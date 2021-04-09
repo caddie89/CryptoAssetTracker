@@ -26,7 +26,6 @@ namespace CAT.Services.Moment_Service
                 new Moment()
                 {
                     OwnerId = _userId,
-                    MomentId = model.MomentId,
                     PlayerId = model.PlayerId,
                     MomentCategory = model.MomentCategory,
                     DateOfMoment = model.DateOfMoment,
@@ -59,7 +58,7 @@ namespace CAT.Services.Moment_Service
                      p =>
                      new SelectListItem
                      {
-                         Text = p.PlayerLastName,
+                         Text = p.PlayerFirstName + " " + p.PlayerLastName,
                          Value = p.PlayerId.ToString()
                      });
                 
@@ -84,13 +83,16 @@ namespace CAT.Services.Moment_Service
                         new MomentIndex
                         {
                             MomentId = e.MomentId,
-                            PlayerFullName = e.Player.PlayerFullName,
+                            PlayerFirstName = e.Player.PlayerFirstName,
+                            PlayerLastName = e.Player.PlayerLastName,
                             PurchasedForPrice = e.PurchasedForPrice,
                             MomentCategory = e.MomentCategory,
                             DateOfMoment = e.DateOfMoment,
                             MomentSet = e.MomentSet,
                             MomentSeries = e.MomentSeries,
                             MomentSerialNumber = e.MomentSerialNumber,
+                            AmountInPack = e.AmountInPack,
+                            MomentMint = e.MomentMint
                         }
                     );
                 return query.ToArray();

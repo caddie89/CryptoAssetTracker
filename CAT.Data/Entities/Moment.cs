@@ -53,7 +53,7 @@ namespace CAT.Data.Entities
         public Mint MomentMint { get; set; }
 
         [Required]
-        [Display(Name = "Purchase in Pack?")]
+        [Display(Name = "Purchased in Pack?")]
         public bool PurchasedInPack { get; set; }
 
         [Display(Name = "Quantity in Pack")]
@@ -63,14 +63,14 @@ namespace CAT.Data.Entities
         [Display(Name = "Purchase Price")]
         public decimal PurchasedForPrice { get; set; }
 
-        [Display(Name = "Actual Price")]
+        [Display(Name = "Price")]
         public decimal ActualPurchasedForPrice
         {
             get
             {
                 decimal actualPrice = PurchasedForPrice / AmountInPack;
-                return actualPrice = System.Math.Round
-                (actualPrice, 2);
+                actualPrice = Math.Truncate(100 * actualPrice) / 100;
+                return actualPrice;
             }
         }
 
@@ -82,8 +82,9 @@ namespace CAT.Data.Entities
         {
             get
             {
-                decimal returnOnInvestment = ActualPurchasedForPrice - SoldForPrice;
-                return returnOnInvestment = System.Math.Round(returnOnInvestment, 2);
+                decimal profitLossMargin = ActualPurchasedForPrice - SoldForPrice;
+                profitLossMargin = Math.Truncate(100 * profitLossMargin) / 100;
+                return profitLossMargin;
             }
         }
 
