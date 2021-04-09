@@ -14,7 +14,7 @@ namespace CAT.Data.Entities
         public int PlayerId { get; set; }
 
         [Required]
-        [Display(Name = "User")]
+        [Display(Name = "Username")]
         public Guid OwnerId { get; set; }
 
         [Required]
