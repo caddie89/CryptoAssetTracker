@@ -43,9 +43,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Moment_Models\MomentCreate.cs" />
+    <Compile Include="Moment_Models\MomentDetails.cs" />
     <Compile Include="Moment_Models\MomentIndex.cs" />
     <Compile Include="Player_Models\PlayerCreate.cs" />
-    <Compile Include="Player_Models\PlayerDetail.cs" />
+    <Compile Include="Player_Models\PlayerDetails.cs" />
     <Compile Include="Player_Models\PlayerEdit.cs" />
     <Compile Include="Player_Models\PlayerIndex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -19,7 +19,7 @@ namespace CAT.Services.Moment_Service
             _userId = userId;
         }
 
-        // Create a Moment
+        // Create Moment
         public bool CreateMoment(MomentCreate model)
         {
             var entity =
@@ -70,7 +70,7 @@ namespace CAT.Services.Moment_Service
             }
         }
 
-        // Get all Moments
+        // Get All Moments
         public IEnumerable<MomentIndex> GetMomentIndex()
         {
             using (var ctx = new ApplicationDbContext())
@@ -100,6 +100,37 @@ namespace CAT.Services.Moment_Service
                 return query.ToArray();
             }
         }
+
+        // Get Moment Details
+        public MomentDetails GetMomentDetails(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Moments
+                    .Single(e => e.MomentId == id && e.OwnerId == _userId);
+                return
+                    new MomentDetails
+                    {
+                        MomentId = entity.MomentId,
+                        PlayerFirstName = entity.Player.PlayerFirstName,
+                        PlayerLastName = entity.Player.PlayerLastName,
+                        PurchasedForPrice = entity.PurchasedForPrice,
+                        MomentCategory = entity.MomentCategory,
+                        DateOfMoment = entity.DateOfMoment,
+                        MomentSet = entity.MomentSet,
+                        MomentSeries = entity.MomentSeries,
+                        MomentSerialNumber = entity.MomentSerialNumber,
+                        MomentCirculatingCount = entity.MomentCirculatingCount,
+                        AmountInPack = entity.AmountInPack,
+                        MomentMint = entity.MomentMint,
+                        Showcases = entity.Showcases 
+                    };
+            }
+        }
+
+        // Edit Moment
 
     }
 }

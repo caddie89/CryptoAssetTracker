@@ -64,7 +64,7 @@ namespace CAT.Services.Player_Service
         }
 
         // Get Player Details
-        public PlayerDetail GetPlayerDetail(int id)
+        public PlayerDetails GetPlayerDetails(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -73,7 +73,7 @@ namespace CAT.Services.Player_Service
                     .Players
                     .Single(e => e.PlayerId == id && e.OwnerId == _userId);
                 return
-                    new PlayerDetail
+                    new PlayerDetails
                     {
                         PlayerId = entity.PlayerId,
                         PlayerFirstName = entity.PlayerFirstName,

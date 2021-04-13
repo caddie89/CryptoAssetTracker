@@ -1,58 +1,58 @@
-﻿using System;
+﻿using CAT.Data.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CAT.Data.Entities
+namespace CAT.Models.Moment_Models
 {
-    public class Moment
+    public class MomentDetails
     {
-        [Key]
+        [Display(Name = "Moment ID")]
         public int MomentId { get; set; }
 
-        [ForeignKey(nameof(Player))]
-        public int? PlayerId { get; set; }
-        public virtual Player Player { get; set; }
+        [Display(Name = "First Name")]
+        public string PlayerFirstName { get; set; }
 
-        [Required]
-        public Guid OwnerId { get; set; }
+        [Display(Name = "Last Name")]
+        public string PlayerLastName { get; set; }
 
-        [Required]
+        [Display(Name = "Category")]
         public string MomentCategory { get; set; }
 
-        [Required]
+        [Display(Name = "Date of Moment")]
         public DateTimeOffset DateOfMoment { get; set; }
 
-        [Required]
+        [Display(Name = "Set")]
         public string MomentSet { get; set; }
 
-        [Required]
+        [Display(Name = "Series")]
         public int MomentSeries { get; set; }
 
-        [Required]
+        [Display(Name = "Serial")]
         public int MomentSerialNumber { get; set; }
 
-        [Required]
+        [Display(Name = "Circulating Count")]
         public int MomentCirculatingCount { get; set; }
 
-        [Required]
+        [Display(Name = "Tier")]
         public Tier MomentTier { get; set; }
 
-        [Required]
+        [Display(Name = "Mint")]
         public Mint MomentMint { get; set; }
 
-        [Required]
-        public decimal PurchasedForPrice { get; set; }
-
+        [Display(Name = "Purchased in Pack?")]
         public bool PurchasedInPack { get; set; }
 
+        [Display(Name = "Quantity in Pack")]
         public decimal AmountInPack { get; set; }
 
-        public decimal SoldForPrice { get; set; }
+        [Display(Name = "Purchase Price")]
+        public decimal PurchasedForPrice { get; set; }
 
+        [Display(Name = "Price")]
         public decimal ActualPurchasedForPrice
         {
             get
@@ -68,6 +68,7 @@ namespace CAT.Data.Entities
             }
         }
 
+        [Display(Name = "Moment")]
         public string MomentComplete
         {
             get
@@ -77,6 +78,7 @@ namespace CAT.Data.Entities
             }
         }
 
+        [Display(Name = "Serial")]
         public string SerialComplete
         {
             get
@@ -94,6 +96,16 @@ namespace CAT.Data.Entities
                 string fmt = "MMMM dd yyyy";
                 var displayDate = date.Date.ToString(fmt);
                 return displayDate;
+            }
+        }
+
+        [Display(Name = "Player")]
+        public string PlayerFullName
+        {
+            get
+            {
+                var playerFullName = $"{PlayerFirstName} {PlayerLastName}";
+                return playerFullName;
             }
         }
 
@@ -119,21 +131,4 @@ namespace CAT.Data.Entities
 
         public virtual ICollection<Showcase> Showcases { get; set; } = new List<Showcase>();
     }
-
-    public enum Tier
-    {
-        Common = 1,
-        Rare,
-        Legendary,
-        Ultimate
-    }
-
-    public enum Mint
-    {
-        [Display(Name = "Limited Edition")]
-        LimitedEdition = 1,
-        [Display(Name = "Circulating Count")]
-        CirculatingCount,
-    }
 }
-

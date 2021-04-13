@@ -50,6 +50,16 @@ namespace CAT.WebMVC.Controllers.Moment
             return View(model);
         }
 
+        // GET: Moment/Details/{id}
+        public ActionResult Details(int id)
+        {
+            var service = CreateMomentService();
+            var model = service.GetMomentDetails(id);
+            return View(model);
+        }
+
+        // GET: Moment/Edit/{id}
+
         // Helper Method
         private MomentService CreateMomentService()
         {

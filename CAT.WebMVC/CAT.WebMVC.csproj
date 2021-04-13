@@ -243,6 +243,7 @@
     <Content Include="Views\Player\Delete.cshtml" />
     <Content Include="Views\Moment\Index.cshtml" />
     <Content Include="Views\Moment\Create.cshtml" />
+    <Content Include="Views\Moment\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

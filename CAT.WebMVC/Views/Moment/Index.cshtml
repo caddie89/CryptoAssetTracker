@@ -25,9 +25,6 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.MomentId)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.PlayerFullName)
         </th>
         <th>
@@ -45,18 +42,12 @@
         <th>
             @Html.DisplayNameFor(model => model.MomentSerialNumber)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MomentMint)
-        </th>
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MomentId)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PlayerFullName)
             </td>
