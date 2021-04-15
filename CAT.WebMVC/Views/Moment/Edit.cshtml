@@ -85,7 +85,6 @@
             @Html.LabelFor(model => model.PurchasedInPack, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.RadioButtonFor(model => model.PurchasedInPack, true, new { id = "purchasedPack", onclick = "ShowHideDiv(this)" }) Yes
-                <br />
                 @Html.RadioButtonFor(model => model.PurchasedInPack, false, new { id = "didNotPurchasePack", onclick = "InsertValue(this)" }) No
             </div>
         </div>

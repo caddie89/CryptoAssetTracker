@@ -114,7 +114,29 @@ namespace CAT.WebMVC.Controllers.Moment
             return View(model);
         }
 
-        // GET
+        // GET: Moment/Delete/{id}
+        [ActionName("Delete")]
+        public ActionResult Delete(int id)
+        {
+            var service = CreateMomentService();
+            var model = service.GetMomentDetails(id);
+            return View(model);
+        }
+
+        // POST: Moment/Delete/{id}
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteMoment(int id)
+        {
+            var service = CreateMomentService();
+
+            service.DeleteMoment(id);
+
+            TempData["SaveResult"] = "Moment was successfully deleted.";
+
+            return RedirectToAction("Index");
+        }
 
         // Helper Method
         private MomentService CreateMomentService()

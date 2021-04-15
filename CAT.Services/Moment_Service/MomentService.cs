@@ -159,6 +159,20 @@ namespace CAT.Services.Moment_Service
         }
 
         // Delete Moment
+        public bool DeleteMoment(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Moments
+                    .Single(e => e.MomentId == id && e.OwnerId == _userId);
+
+                ctx.Moments.Remove(entity);
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
 
         // Populate Drop-Down List
         public IEnumerable<SelectListItem> SelectPlayers()

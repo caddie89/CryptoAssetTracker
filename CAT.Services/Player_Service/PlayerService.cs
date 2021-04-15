@@ -115,7 +115,7 @@ namespace CAT.Services.Player_Service
 
                 ctx.Players.Remove(entity);
 
-                return ctx.SaveChanges() == 1;
+                return ctx.SaveChanges() > 0;
             }
         }
 
