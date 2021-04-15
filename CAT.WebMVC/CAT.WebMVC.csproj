@@ -246,6 +246,7 @@
     <Content Include="Views\Moment\Details.cshtml" />
     <Content Include="Views\Moment\Edit.cshtml" />
     <Content Include="Views\Moment\Delete.cshtml" />
+    <Content Include="Views\Moment\Sell.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

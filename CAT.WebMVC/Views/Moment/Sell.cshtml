@@ -1,0 +1,177 @@
+﻿@model CAT.Models.Moment_Models.MomentDetails
+
+@{
+    ViewBag.Title = "Sell";
+}
+
+<h2>Sell</h2>
+
+<div>
+    <h4>MomentDetails</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MomentId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomentId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlayerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlayerId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlayerFirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlayerFirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlayerLastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlayerLastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomentCategory)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomentCategory)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfMoment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfMoment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomentSet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomentSet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomentSeries)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomentSeries)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomentSerialNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomentSerialNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomentCirculatingCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomentCirculatingCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PurchasedInPack)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PurchasedInPack)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AmountInPack)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AmountInPack)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PurchasedForPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PurchasedForPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActualPurchasedForPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActualPurchasedForPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomentComplete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomentComplete)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SerialComplete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SerialComplete)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DisplayDateOfMoment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DisplayDateOfMoment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlayerFullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlayerFullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mint)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mint)
+        </dd>
+
+    </dl>
+</div>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Create" class="btn btn-default" />
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MomentId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
