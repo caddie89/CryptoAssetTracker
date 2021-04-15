@@ -23,5 +23,7 @@ namespace CAT.Data.Entities
         public string ShowcaseDescription { get; set; }
 
         public virtual ICollection<Moment> Moments { get; set; } = new List<Moment>();
+
+        public virtual ICollection<Moment> SoldMoments { get; set; } = new List<Moment>();
     }
 }

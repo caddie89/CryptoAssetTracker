@@ -118,6 +118,5 @@ namespace CAT.Services.Player_Service
                 return ctx.SaveChanges() > 0;
             }
         }
-
     }
 }
