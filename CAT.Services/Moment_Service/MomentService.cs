@@ -1,7 +1,6 @@
 ﻿using CAT.Contexts.Data;
 using CAT.Data.Entities;
 using CAT.Models.Moment_Models;
-using CAT.Models.SellMoment_Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
