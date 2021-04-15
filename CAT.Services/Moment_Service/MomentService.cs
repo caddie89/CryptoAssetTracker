@@ -47,29 +47,6 @@ namespace CAT.Services.Moment_Service
             }
         }
 
-        // Populate Player drop-down list
-        public IEnumerable<SelectListItem> SelectPlayers()
-        {
-            using (var ctx = new ApplicationDbContext())
-            {                    
-                var query =
-                    ctx
-                    .Players
-                    .Select(
-                     p =>
-                     new SelectListItem
-                     {
-                         Text = p.PlayerFirstName + " " + p.PlayerLastName,
-                         Value = p.PlayerId.ToString()
-                     });
-                
-                var playerList = query.ToList();
-                playerList.Insert(0, new SelectListItem { Text = "--Select Category--", Value = "" });
-                playerList.Add(new SelectListItem { Text = "No Player", Value = "" });
-                return playerList;
-            }
-        }
-
         // Get All Moments
         public IEnumerable<MomentIndex> GetMomentIndex()
         {
@@ -110,6 +87,28 @@ namespace CAT.Services.Moment_Service
                     ctx
                     .Moments
                     .Single(e => e.MomentId == id && e.OwnerId == _userId);
+                if (entity.PlayerId == null)
+                {
+                    return
+                    new MomentDetails
+                    {
+                        MomentId = entity.MomentId,
+                        PlayerFirstName = null,
+                        PlayerLastName = null,
+                        PurchasedForPrice = entity.PurchasedForPrice,
+                        MomentCategory = entity.MomentCategory,
+                        DateOfMoment = entity.DateOfMoment,
+                        MomentSet = entity.MomentSet,
+                        MomentSeries = entity.MomentSeries,
+                        MomentSerialNumber = entity.MomentSerialNumber,
+                        MomentCirculatingCount = entity.MomentCirculatingCount,
+                        PurchasedInPack = entity.PurchasedInPack,
+                        AmountInPack = entity.AmountInPack,
+                        MomentTier = entity.MomentTier,
+                        MomentMint = entity.MomentMint,
+                        Showcases = entity.Showcases
+                    };
+                }
                 return
                     new MomentDetails
                     {
@@ -123,14 +122,66 @@ namespace CAT.Services.Moment_Service
                         MomentSeries = entity.MomentSeries,
                         MomentSerialNumber = entity.MomentSerialNumber,
                         MomentCirculatingCount = entity.MomentCirculatingCount,
+                        PurchasedInPack = entity.PurchasedInPack,
                         AmountInPack = entity.AmountInPack,
+                        MomentTier = entity.MomentTier,
                         MomentMint = entity.MomentMint,
-                        Showcases = entity.Showcases 
+                        Showcases = entity.Showcases
                     };
             }
         }
 
         // Edit Moment
+        public bool EditMoment(MomentEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Moments
+                    .Single(e => e.MomentId == model.MomentId && e.OwnerId == _userId);
 
+                entity.PlayerId = model.PlayerId;
+                entity.MomentCategory = model.MomentCategory;
+                entity.DateOfMoment = model.DateOfMoment;
+                entity.MomentSet = model.MomentSet;
+                entity.MomentSeries = model.MomentSeries;
+                entity.MomentSerialNumber = model.MomentSerialNumber;
+                entity.MomentCirculatingCount = model.MomentCirculatingCount;
+                entity.MomentTier = model.MomentTier;
+                entity.MomentMint = model.MomentMint;
+                entity.PurchasedInPack = model.PurchasedInPack;
+                entity.AmountInPack = model.AmountInPack;
+                entity.PurchasedForPrice = model.PurchasedForPrice;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
+        // Delete Moment
+
+        // Populate Drop-Down List
+        public IEnumerable<SelectListItem> SelectPlayers()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query =
+                    ctx
+                    .Players
+                    .Select(
+                     p =>
+                     new SelectListItem
+                     {
+                         Text = p.PlayerFirstName + " " + p.PlayerLastName,
+                         Value = p.PlayerId.ToString()
+                     });
+
+                var playerList = query.ToList();
+
+                playerList.Add(new SelectListItem { Text = "Unknown", Value = "" });
+                playerList.Insert(0, new SelectListItem { Text = "--Select--", Value = "" });
+                return playerList;
+            }
+        }
     }
 }

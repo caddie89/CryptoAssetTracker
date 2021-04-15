@@ -59,6 +59,62 @@ namespace CAT.WebMVC.Controllers.Moment
         }
 
         // GET: Moment/Edit/{id}
+        public ActionResult Edit(int id)
+        {
+            var service = CreateMomentService();
+            var detail = service.GetMomentDetails(id);
+            var playerList = service.SelectPlayers();
+            ViewData["Players"] = playerList;
+
+            var model =
+                new MomentEdit
+                {
+                    MomentId = detail.MomentId,
+                    PlayerId = detail.PlayerId,
+                    MomentCategory = detail.MomentCategory,
+                    DateOfMoment = detail.DateOfMoment,
+                    MomentSet = detail.MomentSet,
+                    MomentSeries = detail.MomentSeries,
+                    MomentSerialNumber = detail.MomentSerialNumber,
+                    MomentCirculatingCount = detail.MomentCirculatingCount,
+                    MomentTier = detail.MomentTier,
+                    MomentMint = detail.MomentMint,
+                    PurchasedInPack = detail.PurchasedInPack,
+                    AmountInPack = detail.AmountInPack,
+                    PurchasedForPrice = detail.PurchasedForPrice
+                };
+
+            return View(model);
+        }
+
+        // POST: Moment/Edit/{id}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, MomentEdit model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            if (model.MomentId != id)
+            {
+                ModelState.AddModelError("", "ID Mismatch");
+                return View(model);
+            }
+
+            var service = CreateMomentService();
+
+            if (service.EditMoment(model))
+            {
+                TempData["SaveResult"] = "Moment was successfully updated.";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Moment could not be updated. Please make sure that all required input fields are populated.");
+
+            return View(model);
+        }
+
+        // GET
 
         // Helper Method
         private MomentService CreateMomentService()

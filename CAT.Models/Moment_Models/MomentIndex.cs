@@ -57,14 +57,16 @@ namespace CAT.Models.Moment_Models
         {
             get
             {
-               if (PurchasedInPack is false)
+               if (AmountInPack < 1)
                 {
                     return PurchasedForPrice;
                 }
-                
-                decimal actualPrice = PurchasedForPrice / AmountInPack;
-                actualPrice = Math.Truncate(100 * actualPrice) / 100;
-                return actualPrice; 
+                else
+                {
+                    decimal actualPrice = PurchasedForPrice / AmountInPack;
+                    actualPrice = Math.Truncate(100 * actualPrice) / 100;
+                    return actualPrice;
+                }
             }
         }
 
