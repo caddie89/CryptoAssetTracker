@@ -91,6 +91,7 @@ namespace CAT.Models.Moment_Models
             }
         }
 
+        [Display(Name = "Date")]
         public string DisplayDateOfMoment
         {
             get

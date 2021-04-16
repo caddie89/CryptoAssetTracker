@@ -193,8 +193,9 @@ namespace CAT.Services.Moment_Service
 
                 var playerList = query.ToList();
 
-                playerList.Add(new SelectListItem { Text = "Unknown", Value = "" });
-                playerList.Insert(0, new SelectListItem { Text = "--Select--", Value = "" });
+                playerList.Add(new SelectListItem() { Value = query.FirstOrDefault().Value.ToString(), Text = query.FirstOrDefault().Text });
+                playerList.Add(new SelectListItem() { Text = "Unknown", Value = "" });
+                playerList.Insert(0, new SelectListItem() { Text = "--Select--", Value = "" });
                 return playerList;
             }
         }
