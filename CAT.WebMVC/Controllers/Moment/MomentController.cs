@@ -146,17 +146,5 @@ namespace CAT.WebMVC.Controllers.Moment
             var service = new MomentService(userId);
             return service;
         }
-
-        //// Populate Player Drop-Down List(Edit)
-        //private void PopulatePlayerList(object selectedPlayer = null)
-        //{
-        //    using (var ctx = new ApplicationDbContext())
-        //    {
-        //        var query = from d in ctx.Players
-        //                    orderby d.PlayerLastName
-        //                    select d;
-        //        ViewBag.PlayerId = new SelectList(query, "PlayerId", "PlayerLastName", selectedPlayer);
-        //    }
-        //}
     }
 }
