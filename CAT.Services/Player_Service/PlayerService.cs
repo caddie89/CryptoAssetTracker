@@ -26,12 +26,13 @@ namespace CAT.Services.Player_Service
                 new Player()
                 {
                     OwnerId = _userId,
+                    PlayerId = model.PlayerId,
                     PlayerFirstName = model.PlayerFirstName,
                     PlayerLastName = model.PlayerLastName,
                     PositionOfPlayer = model.PositionOfPlayer,
                     PlayerTeam = model.PlayerTeam
                 };
-
+            
             using (var ctx = new ApplicationDbContext())
             {
                 ctx.Players.Add(entity);
@@ -63,7 +64,7 @@ namespace CAT.Services.Player_Service
         }
 
         // Get Player Details
-        public PlayerDetail GetPlayerDetail(int id)
+        public PlayerDetails GetPlayerDetails(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -72,7 +73,7 @@ namespace CAT.Services.Player_Service
                     .Players
                     .Single(e => e.PlayerId == id && e.OwnerId == _userId);
                 return
-                    new PlayerDetail
+                    new PlayerDetails
                     {
                         PlayerId = entity.PlayerId,
                         PlayerFirstName = entity.PlayerFirstName,
@@ -114,7 +115,7 @@ namespace CAT.Services.Player_Service
 
                 ctx.Players.Remove(entity);
 
-                return ctx.SaveChanges() == 1;
+                return ctx.SaveChanges() > 0;
             }
         }
 

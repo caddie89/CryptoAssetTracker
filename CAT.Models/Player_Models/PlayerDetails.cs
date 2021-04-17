@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CAT.Models.Player_Models
 {
-    public class PlayerDetail
+    public class PlayerDetails
     {
         [Display(Name = "Player ID")]
         public int PlayerId { get; set; }

@@ -48,11 +48,11 @@ namespace CAT.WebMVC.Controllers.Player
             return View(model);
         }
 
-        // GET: Player/Details/{id}
+        // GET: Player/Detail/{id}
         public ActionResult Details(int id)
         {
             var service = CreatePlayerService();
-            var model = service.GetPlayerDetail(id);
+            var model = service.GetPlayerDetails(id);
 
             return View(model);
         }
@@ -61,7 +61,7 @@ namespace CAT.WebMVC.Controllers.Player
         public ActionResult Edit(int id)
         {
             var service = CreatePlayerService();
-            var detail = service.GetPlayerDetail(id);
+            var detail = service.GetPlayerDetails(id);
             var model =
                 new PlayerEdit
                 {
@@ -102,7 +102,7 @@ namespace CAT.WebMVC.Controllers.Player
         public ActionResult Delete(int id)
         {
             var service = CreatePlayerService();
-            var model = service.GetPlayerDetail(id);
+            var model = service.GetPlayerDetails(id);
             return View(model);
         }
 

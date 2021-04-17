@@ -1,0 +1,115 @@
+﻿@model CAT.Models.Moment_Models.MomentDetails
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MomentDetails</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MomentId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomentId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlayerFullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlayerFullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActualPurchasedForPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActualPurchasedForPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomentCategory)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomentCategory)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DisplayDateOfMoment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DisplayDateOfMoment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomentSet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomentSet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomentSeries)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomentSeries)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SerialComplete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SerialComplete)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomentTier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomentTier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mint)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mint)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Showcases)
+        </dt>
+
+        @foreach (var item in Model.Showcases)
+        {
+            <dd>
+                @Html.DisplayFor(modelItem => item.ShowcaseName)
+                @Html.ActionLink("View Showcase", "Details", "Showcase", new { id = item.ShowcaseId}, null)
+            </dd>
+        }
+    </dl>
+    <br />
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MomentId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

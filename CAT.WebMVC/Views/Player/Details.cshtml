@@ -1,4 +1,4 @@
-﻿@model CAT.Models.Player_Models.PlayerDetail
+﻿@model CAT.Models.Player_Models.PlayerDetails
 
 @{
     ViewBag.Title = "Details";
@@ -62,13 +62,18 @@
             @Html.DisplayNameFor(model => model.Moments)
         </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Moments)
-        </dd>
-
+        @foreach (var item in Model.Moments)
+        {
+            <dd>
+                @Html.DisplayFor(modelItem => item.MomentComplete) -
+                @Html.ActionLink("View Moment", "Details", "Moment", new { id = item.MomentId }, null)
+            </dd>
+        }
     </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.PlayerId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+
