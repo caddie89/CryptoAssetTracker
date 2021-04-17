@@ -20,7 +20,7 @@
         <div class="form-group">
             @Html.Label("Player", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.PlayerId, ViewData["Players"] as IEnumerable<SelectListItem>, htmlAttributes: new { @class = "form-control"})
+                @Html.DropDownList("PlayerId", (IEnumerable<SelectListItem>)ViewData["Players"], new { @class = "form-control", })
                 @Html.ValidationMessageFor(model => model.PlayerId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -84,8 +84,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.PurchasedInPack, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.RadioButtonFor(model => model.PurchasedInPack, true, new { id = "purchasedPack", onclick = "ShowHideDiv(this)" }) Yes
-                @Html.RadioButtonFor(model => model.PurchasedInPack, false, new { id = "didNotPurchasePack", onclick = "InsertValue(this)" }) No
+                @Html.RadioButtonFor(model => model.PurchasedInPack, true) Yes
+                @Html.RadioButtonFor(model => model.PurchasedInPack, false) No
             </div>
         </div>
 
@@ -120,18 +120,18 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
-    <script type="text/javascript">
-        function ShowHideDiv(purchasedPack) {
-            var packAmount = document.getElementById("packAmount");
-            packAmount.style.display = purchasedPack.checked ? "block" : "none";
-        }
-    </script>
+    @*<script type="text/javascript">
+            function ShowHideDiv(purchasedPack) {
+                var packAmount = document.getElementById("packAmount");
+                packAmount.style.display = purchasedPack.checked ? "block" : "none";
+            }
+        </script>
 
-    <script type="text/javascript">
-        function InsertValue(didNotPurchasePack) {
-            var populatePackAmount = document.getElementById("populatePackAmount").value = 0;
-            populatePackAmount.style.display = didNotPurchasePack.checked ? "block" : "none";
-        }
-    </script>
+        <script type="text/javascript">
+            function InsertValue(didNotPurchasePack) {
+                var populatePackAmount = document.getElementById("populatePackAmount").value = 0;
+                populatePackAmount.style.display = didNotPurchasePack.checked ? "block" : "none";
+            }
+        </script>*@
 
 }

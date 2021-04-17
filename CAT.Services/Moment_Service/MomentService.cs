@@ -155,7 +155,8 @@ namespace CAT.Services.Moment_Service
                 entity.AmountInPack = model.AmountInPack;
                 entity.PurchasedForPrice = model.PurchasedForPrice;
 
-                return ctx.SaveChanges() == 1;
+                return ctx.SaveChanges() >= 0;
+
             }
         }
 
@@ -175,7 +176,7 @@ namespace CAT.Services.Moment_Service
             }
         }
 
-        // Populate Drop-Down List
+        // Populate Player Drop-Down List (Create)
         public IEnumerable<SelectListItem> SelectPlayers()
         {
             using (var ctx = new ApplicationDbContext())
@@ -183,6 +184,7 @@ namespace CAT.Services.Moment_Service
                 var query =
                     ctx
                     .Players
+                    .OrderBy(p => p.PlayerLastName)
                     .Select(
                      p =>
                      new SelectListItem
@@ -193,9 +195,32 @@ namespace CAT.Services.Moment_Service
 
                 var playerList = query.ToList();
 
-                playerList.Add(new SelectListItem() { Value = query.FirstOrDefault().Value.ToString(), Text = query.FirstOrDefault().Text });
-                playerList.Add(new SelectListItem() { Text = "Unknown", Value = "" });
-                playerList.Insert(0, new SelectListItem() { Text = "--Select--", Value = "" });
+                playerList.Add(new SelectListItem { Text = "Unknown", Value = "" });
+                playerList.Insert(0, new SelectListItem { Text = "--Select--", Value = "" });
+                return playerList;
+            }
+        }
+
+        // Populate Player Drop-Down List (Edit)
+        public List<SelectListItem> PlayersList()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query =
+                    ctx
+                    .Players
+                    .OrderBy(p => p.PlayerLastName)
+                    .Select(
+                     p =>
+                     new SelectListItem
+                     {
+                         Text = p.PlayerFirstName + " " + p.PlayerLastName,
+                         Value = p.PlayerId.ToString()
+                     });
+
+                var playerList = query.ToList();
+                playerList.Add(new SelectListItem { Text = "Unknown", Value = "" });
+                playerList.Insert(0, new SelectListItem { Text = "--Select--", Value = "" });
                 return playerList;
             }
         }

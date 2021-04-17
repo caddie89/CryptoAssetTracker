@@ -1,4 +1,5 @@
-﻿using CAT.Models.Moment_Models;
+﻿using CAT.Contexts.Data;
+using CAT.Models.Moment_Models;
 using CAT.Services.Moment_Service;
 using Microsoft.AspNet.Identity;
 using System;
@@ -63,7 +64,7 @@ namespace CAT.WebMVC.Controllers.Moment
         {
             var service = CreateMomentService();
             var detail = service.GetMomentDetails(id);
-            var playerList = service.SelectPlayers();
+            var playerList = service.PlayersList();
             ViewData["Players"] = playerList;
 
             var model =
@@ -145,5 +146,17 @@ namespace CAT.WebMVC.Controllers.Moment
             var service = new MomentService(userId);
             return service;
         }
+
+        //// Populate Player Drop-Down List(Edit)
+        //private void PopulatePlayerList(object selectedPlayer = null)
+        //{
+        //    using (var ctx = new ApplicationDbContext())
+        //    {
+        //        var query = from d in ctx.Players
+        //                    orderby d.PlayerLastName
+        //                    select d;
+        //        ViewBag.PlayerId = new SelectList(query, "PlayerId", "PlayerLastName", selectedPlayer);
+        //    }
+        //}
     }
 }

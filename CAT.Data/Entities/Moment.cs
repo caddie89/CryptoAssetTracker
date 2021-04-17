@@ -47,8 +47,10 @@ namespace CAT.Data.Entities
         [Required]
         public decimal PurchasedForPrice { get; set; }
 
-        public bool PurchasedInPack { get; set; }
+        //[Required]
+        public bool PurchasedInPack { get; set; } 
 
+        //[Required]
         public decimal AmountInPack { get; set; }
 
         public decimal SoldForPrice { get; set; }
