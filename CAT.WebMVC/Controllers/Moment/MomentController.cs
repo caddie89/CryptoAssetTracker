@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace CAT.WebMVC.Controllers.Moment
 {
+    [Authorize]
     public class MomentController : Controller
     {
         // GET: Moment/Index

@@ -72,6 +72,7 @@
     <Compile Include="Player_Models\PlayerEdit.cs" />
     <Compile Include="Player_Models\PlayerIndex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Showcase_Models\ShowcaseIndex.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CAT.Data\CAT.Data.csproj">

@@ -172,6 +172,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\Moment\MomentController.cs" />
     <Compile Include="Controllers\Player\PlayerController.cs" />
+    <Compile Include="Controllers\Showcase\ShowcaseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -246,6 +247,7 @@
     <Content Include="Views\Moment\Details.cshtml" />
     <Content Include="Views\Moment\Edit.cshtml" />
     <Content Include="Views\Moment\Delete.cshtml" />
+    <Content Include="Views\Showcase\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

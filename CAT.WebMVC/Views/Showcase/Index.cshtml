@@ -1,0 +1,39 @@
+﻿@model IEnumerable<CAT.Models.Showcase_Models.ShowcaseIndex>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ShowcaseName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShowcaseDescription)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShowcaseName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShowcaseDescription)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.ShowcaseId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ShowcaseId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ShowcaseId })
+        </td>
+    </tr>
+}
+
+</table>
