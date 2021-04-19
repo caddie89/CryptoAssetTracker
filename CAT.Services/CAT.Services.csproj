@@ -75,6 +75,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MomentShowcase_Service\MomentShowcaseService.cs" />
     <Compile Include="Moment_Service\MomentService.cs" />
     <Compile Include="Player_Service\PlayerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

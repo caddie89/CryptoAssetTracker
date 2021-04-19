@@ -129,7 +129,7 @@ namespace CAT.WebMVC.Controllers.Moment
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteMoment(int id)
+        public ActionResult MomentDelete(int id)
         {
             var service = CreateMomentService();
 

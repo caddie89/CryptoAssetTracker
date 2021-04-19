@@ -170,6 +170,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MomentShowcase\MomentShowcaseController.cs" />
     <Compile Include="Controllers\Moment\MomentController.cs" />
     <Compile Include="Controllers\Player\PlayerController.cs" />
     <Compile Include="Controllers\Showcase\ShowcaseController.cs" />
@@ -248,9 +249,14 @@
     <Content Include="Views\Moment\Edit.cshtml" />
     <Content Include="Views\Moment\Delete.cshtml" />
     <Content Include="Views\Showcase\Index.cshtml" />
+    <Content Include="Views\Showcase\Create.cshtml" />
+    <Content Include="Views\Showcase\Details.cshtml" />
+    <Content Include="Views\Showcase\Edit.cshtml" />
+    <Content Include="Views\Showcase\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\MomentShowcase\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

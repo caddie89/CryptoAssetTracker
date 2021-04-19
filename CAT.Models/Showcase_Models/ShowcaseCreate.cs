@@ -8,17 +8,16 @@ using System.Threading.Tasks;
 
 namespace CAT.Models.Showcase_Models
 {
-    public class ShowcaseIndex
+    public class ShowcaseCreate
     {
-        [Display(Name = "Showcase ID")]
-        public int ShowcaseId { get; set; }
-
+        [Required]
         [Display(Name = "Showcase")]
+        [MaxLength(50)]
         public string ShowcaseName { get; set; }
 
+        [Required]
         [Display(Name = "Description")]
+        [MaxLength(100)]
         public string ShowcaseDescription { get; set; }
-
-        public ICollection<int> MomentIds { get; set; }
     }
 }

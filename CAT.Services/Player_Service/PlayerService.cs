@@ -26,7 +26,6 @@ namespace CAT.Services.Player_Service
                 new Player()
                 {
                     OwnerId = _userId,
-                    PlayerId = model.PlayerId,
                     PlayerFirstName = model.PlayerFirstName,
                     PlayerLastName = model.PlayerLastName,
                     PositionOfPlayer = model.PositionOfPlayer,

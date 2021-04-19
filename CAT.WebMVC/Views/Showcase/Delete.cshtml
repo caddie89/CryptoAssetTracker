@@ -1,0 +1,60 @@
+﻿@model CAT.Models.Showcase_Models.ShowcaseDetails
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ShowcaseDetails</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ShowcaseId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShowcaseId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShowcaseName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShowcaseName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShowcaseDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShowcaseDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Moments)
+        </dt>
+
+        @foreach (var item in Model.Moments)
+        {
+            <dd>
+                @Html.DisplayFor(modelItem => item.MomentComplete)
+                @Html.ActionLink("View Moment", "Details", "Moment", new { id = item.MomentId }, null)
+            </dd>
+        }
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

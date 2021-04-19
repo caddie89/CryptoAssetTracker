@@ -1,6 +1,7 @@
 ﻿using CAT.Contexts.Data;
 using CAT.Data.Entities;
 using CAT.Models.Moment_Models;
+using CAT.Models.Showcase_Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -62,6 +63,7 @@ namespace CAT.Services.Moment_Service
                         new MomentIndex
                         {
                             MomentId = e.MomentId,
+                            PlayerId = e.Player.PlayerId,
                             PlayerFirstName = e.Player.PlayerFirstName,
                             PlayerLastName = e.Player.PlayerLastName,
                             PurchasedForPrice = e.PurchasedForPrice,
@@ -108,6 +110,14 @@ namespace CAT.Services.Moment_Service
                         MomentTier = entity.MomentTier,
                         MomentMint = entity.MomentMint,
                         Showcases = entity.Showcases
+                        .Select(
+                            e =>
+                            new ShowcaseIndex()
+                            {
+                                ShowcaseId = e.Showcase.ShowcaseId,
+                                ShowcaseName = e.Showcase.ShowcaseName,
+                                ShowcaseDescription = e.Showcase.ShowcaseDescription
+                            }).ToList()
                     };
                 }
                 return
@@ -128,6 +138,14 @@ namespace CAT.Services.Moment_Service
                         MomentTier = entity.MomentTier,
                         MomentMint = entity.MomentMint,
                         Showcases = entity.Showcases
+                        .Select(
+                            e =>
+                            new ShowcaseIndex()
+                            {
+                                ShowcaseId = e.Showcase.ShowcaseId,
+                                ShowcaseName = e.Showcase.ShowcaseName,
+                                ShowcaseDescription = e.Showcase.ShowcaseDescription
+                            }).ToList()
                     };
             }
         }

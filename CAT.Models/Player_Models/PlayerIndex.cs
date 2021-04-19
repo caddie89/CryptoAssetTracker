@@ -64,5 +64,7 @@ namespace CAT.Models
                 return positionType;
             }
         }
+
+        public ICollection<Moment> Moments { get; set; }
     }
 }

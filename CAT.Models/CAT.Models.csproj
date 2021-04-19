@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MomentShowcase_Models\MomentShowcaseCreate.cs" />
     <Compile Include="Moment_Models\MomentCreate.cs" />
     <Compile Include="Moment_Models\MomentDetails.cs" />
     <Compile Include="Moment_Models\MomentEdit.cs" />
@@ -72,6 +73,9 @@
     <Compile Include="Player_Models\PlayerEdit.cs" />
     <Compile Include="Player_Models\PlayerIndex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Showcase_Models\ShowcaseCreate.cs" />
+    <Compile Include="Showcase_Models\ShowcaseDetails.cs" />
+    <Compile Include="Showcase_Models\ShowcaseEdit.cs" />
     <Compile Include="Showcase_Models\ShowcaseIndex.cs" />
   </ItemGroup>
   <ItemGroup>
