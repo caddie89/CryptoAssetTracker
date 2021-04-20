@@ -253,10 +253,12 @@
     <Content Include="Views\Showcase\Details.cshtml" />
     <Content Include="Views\Showcase\Edit.cshtml" />
     <Content Include="Views\Showcase\Delete.cshtml" />
+    <Content Include="Views\MomentShowcase\Create.cshtml" />
+    <Content Include="Views\MomentShowcase\Details.cshtml" />
+    <Content Include="Views\MomentShowcase\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\MomentShowcase\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -19,5 +19,8 @@ namespace CAT.Data.Entities
         [ForeignKey(nameof(Showcase))]
         public int ShowcaseId { get; set; }
         public virtual Showcase Showcase { get; set; }
+
+        [Required]
+        public Guid OwnerId { get; set; }
     }
 }

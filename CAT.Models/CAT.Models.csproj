@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MomentShowcase_Models\MomentShowcaseCreate.cs" />
+    <Compile Include="MomentShowcase_Models\MomentShowcaseDetails.cs" />
     <Compile Include="Moment_Models\MomentCreate.cs" />
     <Compile Include="Moment_Models\MomentDetails.cs" />
     <Compile Include="Moment_Models\MomentEdit.cs" />

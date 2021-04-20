@@ -17,6 +17,9 @@
         <th>
             @Html.DisplayNameFor(model => model.ShowcaseDescription)
         </th>
+        <th>
+            @Html.Label("Moments")
+        </th>
         <th></th>
     </tr>
 
@@ -29,9 +32,13 @@
             @Html.DisplayFor(modelItem => item.ShowcaseDescription)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.MomentIds)
+        </td>
+        <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.ShowcaseId }) |
             @Html.ActionLink("Details", "Details", new { id = item.ShowcaseId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ShowcaseId })
+            @Html.ActionLink("Delete", "Delete", new { id = item.ShowcaseId }) |
+            @Html.ActionLink("Add Moments", "Create", "MomentShowcase/Create")
         </td>
     </tr>
 }

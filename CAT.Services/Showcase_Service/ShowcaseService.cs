@@ -73,34 +73,32 @@ namespace CAT.Services.Showcase_Service
                     .Showcases
                     .Single(e => e.ShowcaseId == id && e.OwnerId == _userId);
 
+                return
+                new ShowcaseDetails
                 {
-                    return
-                    new ShowcaseDetails
-                    {
-                        ShowcaseId = entity.ShowcaseId,
-                        ShowcaseName = entity.ShowcaseName,
-                        ShowcaseDescription = entity.ShowcaseDescription,
-                        Moments = entity.Moments
-                        .Select(
-                            m =>
-                            new MomentIndex()
-                            {
-                                MomentId = m.MomentId,
-                                PlayerId = m.Moment.PlayerId,
-                                PurchasedForPrice = m.Moment.PurchasedForPrice,
-                                MomentCategory = m.Moment.MomentCategory,
-                                DateOfMoment = m.Moment.DateOfMoment,
-                                MomentSet = m.Moment.MomentSet,
-                                MomentSeries = m.Moment.MomentSeries,
-                                MomentSerialNumber = m.Moment.MomentSerialNumber,
-                                MomentCirculatingCount = m.Moment.MomentCirculatingCount,
-                                PurchasedInPack = m.Moment.PurchasedInPack,
-                                AmountInPack = m.Moment.AmountInPack,
-                                MomentTier = m.Moment.MomentTier,
-                                MomentMint = m.Moment.MomentMint,
-                            }).ToList()
-                    };
-                }
+                    ShowcaseId = entity.ShowcaseId,
+                    ShowcaseName = entity.ShowcaseName,
+                    ShowcaseDescription = entity.ShowcaseDescription,
+                    Moments = entity.Moments
+                    .Select(
+                        m =>
+                        new MomentIndex()
+                        {
+                            MomentId = m.MomentId,
+                            PlayerId = m.Moment.PlayerId,
+                            PurchasedForPrice = m.Moment.PurchasedForPrice,
+                            MomentCategory = m.Moment.MomentCategory,
+                            DateOfMoment = m.Moment.DateOfMoment,
+                            MomentSet = m.Moment.MomentSet,
+                            MomentSeries = m.Moment.MomentSeries,
+                            MomentSerialNumber = m.Moment.MomentSerialNumber,
+                            MomentCirculatingCount = m.Moment.MomentCirculatingCount,
+                            PurchasedInPack = m.Moment.PurchasedInPack,
+                            AmountInPack = m.Moment.AmountInPack,
+                            MomentTier = m.Moment.MomentTier,
+                            MomentMint = m.Moment.MomentMint,
+                        }).ToList()
+                };
             }
         }
 
@@ -132,7 +130,6 @@ namespace CAT.Services.Showcase_Service
                     .Single(e => e.ShowcaseId == id && e.OwnerId == _userId);
 
                 ctx.Showcases.Remove(entity);
-
                 return ctx.SaveChanges() == 1;
             }
         }

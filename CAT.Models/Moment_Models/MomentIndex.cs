@@ -134,6 +134,6 @@ namespace CAT.Models.Moment_Models
             }
         }
 
-        public ICollection<int> ShowcaseIds { get; set; }
+        public List<int> ShowcaseIds { get; set; }
     }
 }

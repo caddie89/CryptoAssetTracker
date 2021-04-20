@@ -12,15 +12,15 @@ namespace CAT.WebMVC.Controllers.MomentShowcase
     [Authorize]
     public class MomentShowcaseController : Controller
     {
-        // GET: MomentShowcase/Index
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         // GET: MomentShowcase/Create
         public ActionResult Create()
         {
+            var service = CreateMomentShowcaseService();
+            var momentList = service.SelectMoments();
+            var showcaseList = service.SelectShowcases();
+            ViewData["Moments"] = momentList;
+            ViewData["Showcases"] = showcaseList;
+
             return View();
         }
 
@@ -37,7 +37,7 @@ namespace CAT.WebMVC.Controllers.MomentShowcase
             if (service.CreateMomentShowcase(model))
             {
                 TempData["SaveResult"] = "Showcase was added to Moment.";
-                return RedirectToAction("Index");
+                return RedirectToAction("Home");
             }
 
             ModelState.AddModelError("", "Showcase could not be added to Moment.");
@@ -45,7 +45,36 @@ namespace CAT.WebMVC.Controllers.MomentShowcase
             return View(model);
         }
 
-        // GET: MomentShowcase/Details
+        // GET: MomentShowcase/Details/{id}/{id}
+        public ActionResult Details(int momentId, int showcaseId)
+        {
+            var service = CreateMomentShowcaseService();
+            var model = service.GetMomentShowcaseDetails(momentId, showcaseId);
+            return View(model);
+        }
+
+        // GET: MomentShowcase/Delete/{id}/{id}
+        [ActionName("Delete")]
+        public ActionResult Delete(int momentId, int showcaseId)
+        {
+            var service = CreateMomentShowcaseService();
+            var model = service.GetMomentShowcaseDetails(momentId, showcaseId);
+            return View(model);
+        }
+
+        // POST: MomentShowcase/Delete/{id}/{id}
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult ShowcaseDelete(int momentId, int showcaseId)
+        {
+            var service = CreateMomentShowcaseService();
+            service.DeleteMomentShowcase(momentId, showcaseId);
+
+            TempData["SaveResult"] = "MomentShowcase was successfully deleted.";
+
+            return RedirectToAction("Home");
+        }
 
         // Helper Method
         private MomentShowcaseService CreateMomentShowcaseService()

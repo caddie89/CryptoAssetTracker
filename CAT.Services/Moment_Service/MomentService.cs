@@ -74,7 +74,11 @@ namespace CAT.Services.Moment_Service
                             MomentSerialNumber = e.MomentSerialNumber,
                             MomentCirculatingCount = e.MomentCirculatingCount,
                             AmountInPack = e.AmountInPack,
-                            MomentMint = e.MomentMint
+                            MomentMint = e.MomentMint,
+                            ShowcaseIds = e.Showcases
+                            .Select(
+                                s =>
+                                s.Showcase.ShowcaseId).ToList()
                         }
                     );
                 return query.ToArray();
