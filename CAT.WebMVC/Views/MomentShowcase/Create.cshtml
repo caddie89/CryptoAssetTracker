@@ -6,7 +6,6 @@
 
 <h2>Create</h2>
 
-
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
@@ -16,13 +15,13 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.MomentId, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.MomentId, ViewData["Moments"] as IEnumerable<SelectListItem>, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.MomentId, "", new { @class = "text-danger" })
-        </div>
-    </div>
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.MomentId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("MomentId", (MultiSelectList)ViewBag.Moments, new { @class = "form-control", multiple = "multiple" })
+                @Html.ValidationMessageFor(model => model.SelectedMomentIds, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
 
     <div class="form-group">
         @Html.LabelFor(model => model.ShowcaseId, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -33,6 +32,16 @@
     </div>
 
     <div class="form-group">
+        @Html.LabelFor(model => model.MomentId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.MomentId, ViewData["Moments"] as IEnumerable<SelectListItem>, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.MomentId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Create" class="btn btn-default" />
         </div>
@@ -41,7 +50,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Home")
+    @Html.ActionLink("Back to Showcases", "Index", "Showcase")
 </div>
 
 @section Scripts {

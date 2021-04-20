@@ -38,13 +38,16 @@
             @Html.DisplayNameFor(model => model.Moments)
         </dt>
 
-        @foreach (var item in Model.Moments)
-        {
-            <dd>
-                @Html.DisplayFor(modelItem => item.MomentComplete)
-                @Html.ActionLink("View Moment", "Details", "Moment", new { id = item.MomentId }, null)
-            </dd>
-        }
+        <dd>
+            @foreach (var item in Model.Moments)
+            {
+                <div>
+                    @Html.DisplayFor(modelItem => item.MomentComplete)
+                    @Html.ActionLink("View Moment", "Details", "Moment", new { id = item.MomentId }, null) |
+                    @Html.ActionLink("Remove from Showcase", "Delete", "MomentShowcase", new { item.MomentId, Model.ShowcaseId }, null)
+                </div>
+            }
+        </dd>
 
     </dl>
 </div>

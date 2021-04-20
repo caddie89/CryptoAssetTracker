@@ -21,13 +21,13 @@ namespace CAT.WebMVC
 
             routes.MapRoute(
                 name: "MomentShowcaseDetails",
-                url: "{controller}/{action}/{momentId}/{showcaseId}",
+                url: "{controller}/{action}/{moment}/{showcase}",
                 defaults: new { controller = "Home", action = "Details", moment = UrlParameter.Optional, showcase = UrlParameter.Optional }
                 );
 
             routes.MapRoute(
                 name: "MomentShowcaseDelete",
-                url: "{controller}/{action}/{momentId}/{showcaseId}",
+                url: "{controller}/{action}/{moment}/{showcase}",
                 defaults: new { controller = "Home", action = "Delete", moment = UrlParameter.Optional, showcase = UrlParameter.Optional }
                 );
         }

@@ -16,10 +16,13 @@ namespace CAT.WebMVC.Controllers.MomentShowcase
         public ActionResult Create()
         {
             var service = CreateMomentShowcaseService();
-            var momentList = service.SelectMoments();
-            var showcaseList = service.SelectShowcases();
+            var momentList = service.SelectMoment();
             ViewData["Moments"] = momentList;
+            var showcaseList = service.SelectShowcase();
             ViewData["Showcases"] = showcaseList;
+
+            //var momentList = service.SelectMoments();
+            //ViewBag.Moments = momentList;
 
             return View();
         }
@@ -37,7 +40,7 @@ namespace CAT.WebMVC.Controllers.MomentShowcase
             if (service.CreateMomentShowcase(model))
             {
                 TempData["SaveResult"] = "Showcase was added to Moment.";
-                return RedirectToAction("Home");
+                return RedirectToAction("Index", "Showcase");
             }
 
             ModelState.AddModelError("", "Showcase could not be added to Moment.");
@@ -73,7 +76,7 @@ namespace CAT.WebMVC.Controllers.MomentShowcase
 
             TempData["SaveResult"] = "MomentShowcase was successfully deleted.";
 
-            return RedirectToAction("Home");
+            return RedirectToAction("Index", "Showcase");
         }
 
         // Helper Method
