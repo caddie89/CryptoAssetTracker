@@ -8,20 +8,19 @@ using System.Threading.Tasks;
 
 namespace CAT.Data.Entities
 {
-    public class Showcase
+    public class MomentShowcase
     {
-        [Key]
+        [Key, Column(Order = 0)]
+        [ForeignKey(nameof(Moment))]
+        public int MomentId { get; set; }
+        public virtual Moment Moment { get; set; }
+
+        [Key, Column(Order = 1)]
+        [ForeignKey(nameof(Showcase))]
         public int ShowcaseId { get; set; }
+        public virtual Showcase Showcase { get; set; }
 
         [Required]
         public Guid OwnerId { get; set; }
-
-        [Required]
-        public string ShowcaseName { get; set; }
-
-        [Required]
-        public string ShowcaseDescription { get; set; }
-
-        public virtual ICollection<MomentShowcase> Moments { get; set; } = new List<MomentShowcase>();
     }
 }

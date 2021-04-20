@@ -1,0 +1,57 @@
+﻿@model CAT.Models.Showcase_Models.ShowcaseDetails
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ShowcaseDetails</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ShowcaseId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShowcaseId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShowcaseName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShowcaseName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShowcaseDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShowcaseDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Moments)
+        </dt>
+
+        <dd>
+            @foreach (var item in Model.Moments)
+            {
+                <div>
+                    @Html.DisplayFor(modelItem => item.MomentComplete)
+                    @Html.ActionLink("View Moment", "Details", "Moment", new { id = item.MomentId }, null) |
+                    @Html.ActionLink("Remove from Showcase", "Delete", "MomentShowcase", new { item.MomentId, Model.ShowcaseId }, null)
+                </div>
+            }
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ShowcaseId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,4 +1,4 @@
-﻿using CAT.Data.Entities;
+﻿using CAT.Models.Moment_Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CAT.Models.Showcase_Models
 {
-    public class ShowcaseIndex
+    public class ShowcaseDetails
     {
         [Display(Name = "Showcase ID")]
         public int ShowcaseId { get; set; }
@@ -17,8 +17,8 @@ namespace CAT.Models.Showcase_Models
         public string ShowcaseName { get; set; }
 
         [Display(Name = "Description")]
-        public string ShowcaseDescription { get; set; }
+        public string ShowcaseDescription{ get; set; }
 
-        public List<int> MomentIds { get; set; }
+        public virtual ICollection<MomentIndex> Moments { get; set; }
     }
 }

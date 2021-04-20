@@ -1,4 +1,5 @@
 ﻿using CAT.Data.Entities;
+using CAT.Models.Showcase_Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -133,6 +134,6 @@ namespace CAT.Models.Moment_Models
             }
         }
 
-        public virtual ICollection<Showcase> Showcases { get; set; } = new List<Showcase>();
+        public virtual ICollection<ShowcaseIndex> Showcases { get; set; }
     }
 }

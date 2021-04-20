@@ -119,7 +119,7 @@ namespace CAT.Data.Entities
             }
         }
 
-        public virtual ICollection<Showcase> Showcases { get; set; } = new List<Showcase>();
+        public virtual ICollection<MomentShowcase> Showcases { get; set; } = new List<MomentShowcase>();
     }
 
     public enum Tier

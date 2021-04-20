@@ -1,0 +1,96 @@
+﻿@model CAT.Models.MomentShowcase_Models.MomentShowcaseDetails
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>MomentShowcaseDetails</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MomentId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomentId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShowcaseId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShowcaseId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShowcaseName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShowcaseName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomentCategory)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomentCategory)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfMoment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfMoment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomentSet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomentSet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomentSeries)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomentSeries)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomentComplete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomentComplete)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DisplayDateOfMoment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DisplayDateOfMoment)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("View Showcase", "Details", "Showcase", new { id = Model.ShowcaseId }, null)
+        </div>
+    }
+</div>

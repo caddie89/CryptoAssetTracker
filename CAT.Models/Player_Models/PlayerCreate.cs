@@ -11,10 +11,6 @@ namespace CAT.Models.Player_Models
     public class PlayerCreate
     {
         [Required]
-        [Display(Name = "Player ID")]
-        public int PlayerId { get; set; }
-
-        [Required]
         [Display(Name = "First Name")]
         public string PlayerFirstName { get; set; }
 

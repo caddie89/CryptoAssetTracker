@@ -17,6 +17,7 @@ namespace CAT.Contexts.Data
         public DbSet<Player> Players { get; set; }
         public DbSet<Moment> Moments { get; set; }
         public DbSet<Showcase> Showcases { get; set; }
+        public DbSet<MomentShowcase> MomentsShowcases { get; set; }
 
         public static ApplicationDbContext Create()
         {

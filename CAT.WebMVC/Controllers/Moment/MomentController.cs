@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace CAT.WebMVC.Controllers.Moment
 {
+    [Authorize]
     public class MomentController : Controller
     {
         // GET: Moment/Index
@@ -128,7 +129,7 @@ namespace CAT.WebMVC.Controllers.Moment
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteMoment(int id)
+        public ActionResult MomentDelete(int id)
         {
             var service = CreateMomentService();
 

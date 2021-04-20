@@ -19,14 +19,13 @@ namespace CAT.Services.Player_Service
             _userId = userId;
         }
 
-        // Create a Player
+        // Create Player
         public bool CreatePlayer(PlayerCreate model)
         {
             var entity =
                 new Player()
                 {
                     OwnerId = _userId,
-                    PlayerId = model.PlayerId,
                     PlayerFirstName = model.PlayerFirstName,
                     PlayerLastName = model.PlayerLastName,
                     PositionOfPlayer = model.PositionOfPlayer,
@@ -40,7 +39,7 @@ namespace CAT.Services.Player_Service
             }
         }
 
-        // Get all Players
+        // Get Player Index
         public IEnumerable<PlayerIndex> GetPlayerIndex()
         {
             using (var ctx = new ApplicationDbContext())
@@ -85,7 +84,7 @@ namespace CAT.Services.Player_Service
             }
         }
 
-        // Edit a Player
+        // Edit Player
         public bool EditPlayer(PlayerEdit model)
         {
             using (var ctx = new ApplicationDbContext())
@@ -104,7 +103,7 @@ namespace CAT.Services.Player_Service
             }
         }
 
-        // Delete a Player
+        // Delete Player
         public bool DeletePlayer(int id)
         {
             using (var ctx = new ApplicationDbContext())
