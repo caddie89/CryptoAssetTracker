@@ -83,29 +83,55 @@ namespace CAT.Services.SoldMoment_Service
             }
         }
 
-        // Populate Player Drop-Down List (Create)
-        //public IEnumerable<SelectListItem> SelectPlayers()
-        //{
-        //    using (var ctx = new ApplicationDbContext())
-        //    {
-        //        var query =
-        //            ctx
-        //            .Players
-        //            .OrderBy(p => p.PlayerLastName)
-        //            .Select(
-        //             p =>
-        //             new SelectListItem
-        //             {
-        //                 Text = p.PlayerFirstName + " " + p.PlayerLastName,
-        //                 Value = p.PlayerId.ToString()
-        //             });
+        // Get Sold Moment Details
+        public SoldMomentDetails GetSoldMomentDetails(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .SoldMoments
+                    .Single(e => e.SoldMomentId == id && e.OwnerId == _userId);
+                if (entity.PlayerId == null)
+                {
+                    return
+                    new SoldMomentDetails
+                    {
+                        SoldMomentId = entity.SoldMomentId,
+                        PlayerFirstName = null,
+                        PlayerLastName = null,
+                        IndividualMomentPrice = entity.IndividualMomentPrice,
+                        MomentCategory = entity.MomentCategory,
+                        DateOfMoment = entity.DateOfMoment,
+                        MomentSet = entity.MomentSet,
+                        MomentSeries = entity.MomentSeries,
+                        MomentSerialNumber = entity.MomentSerialNumber,
+                        MomentCirculatingCount = entity.MomentCirculatingCount,
+                        MomentTier = entity.MomentTier,
+                        MomentMint = entity.MomentMint,
+                        SoldForAmount = entity.SoldForAmount
+                    };
+                }
 
-        //        var playerList = query.ToList();
-
-        //        playerList.Add(new SelectListItem { Text = "Unknown", Value = "" });
-        //        playerList.Insert(0, new SelectListItem { Text = "--Select Player--", Value = "" });
-        //        return playerList;
-        //    }
-        //}
+                return
+                    new SoldMomentDetails
+                    {
+                        SoldMomentId = entity.SoldMomentId,
+                        PlayerId = entity.PlayerId,
+                        PlayerFirstName = entity.Player.PlayerFirstName,
+                        PlayerLastName = entity.Player.PlayerLastName,
+                        IndividualMomentPrice = entity.IndividualMomentPrice,
+                        MomentCategory = entity.MomentCategory,
+                        DateOfMoment = entity.DateOfMoment,
+                        MomentSet = entity.MomentSet,
+                        MomentSeries = entity.MomentSeries,
+                        MomentSerialNumber = entity.MomentSerialNumber,
+                        MomentCirculatingCount = entity.MomentCirculatingCount,
+                        MomentTier = entity.MomentTier,
+                        MomentMint = entity.MomentMint,
+                        SoldForAmount = entity.SoldForAmount
+                    };
+            }
+        }
     }
 }

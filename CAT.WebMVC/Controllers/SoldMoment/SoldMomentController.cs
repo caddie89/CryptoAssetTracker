@@ -20,7 +20,7 @@ namespace CAT.WebMVC.Controllers.SoldMoment
             return View(model);
         }
 
-        // GET: SoldMoment/Create
+        // GET: SoldMoment/Create/{id}
         public ActionResult Create(int id)
         {
             var momentService = CreateMomentService();
@@ -65,6 +65,14 @@ namespace CAT.WebMVC.Controllers.SoldMoment
 
             ModelState.AddModelError("", "Moment could not be added to Sold List. Please make sure that all required input fields are populated.");
 
+            return View(model);
+        }
+
+        // GET: SoldMoment/Details/{id}
+        public ActionResult Details(int id)
+        {
+            var service = CreateSoldMomentService();
+            var model = service.GetSoldMomentDetails(id);
             return View(model);
         }
 

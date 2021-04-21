@@ -1,0 +1,105 @@
+﻿@model CAT.Models.SoldMoment_Models.SoldMomentDetails
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SoldMomentDetails</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SoldMomentId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoldMomentId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlayerFullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlayerFullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IndividualMomentPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IndividualMomentPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomentCategory)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomentCategory)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DisplayDateOfMoment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DisplayDateOfMoment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomentSet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomentSet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomentSeries)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomentSeries)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SerialComplete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SerialComplete)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomentTier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomentTier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mint)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mint)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoldForAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoldForAmount)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to Sold Moments", "Index")
+</p>
