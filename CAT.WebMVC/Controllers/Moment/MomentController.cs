@@ -83,7 +83,8 @@ namespace CAT.WebMVC.Controllers.Moment
                     MomentMint = detail.MomentMint,
                     PurchasedInPack = detail.PurchasedInPack,
                     AmountInPack = detail.AmountInPack,
-                    PurchasedForPrice = detail.PurchasedForPrice
+                    PackPrice = detail.PackPrice,
+                    IndividualMomentPrice = detail.IndividualMomentPrice
                 };
 
             return View(model);

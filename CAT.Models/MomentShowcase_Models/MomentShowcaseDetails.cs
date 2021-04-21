@@ -30,6 +30,9 @@ namespace CAT.Models.MomentShowcase_Models
         [Display(Name = "Series")]
         public int MomentSeries { get; set; }
 
+        [Display(Name = "Individual Price")]
+        public decimal IndividualMomentPrice { get; set; }
+
         [Display(Name = "Moment")]
         public string MomentComplete
         {

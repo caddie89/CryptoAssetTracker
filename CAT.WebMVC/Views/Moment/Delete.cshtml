@@ -20,27 +20,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PlayerId)
+            @Html.DisplayNameFor(model => model.PlayerFullName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PlayerId)
+            @Html.DisplayFor(model => model.PlayerFullName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PlayerFirstName)
+            @Html.DisplayNameFor(model => model.IndividualMomentPrice)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PlayerFirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PlayerLastName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PlayerLastName)
+            @Html.DisplayFor(model => model.IndividualMomentPrice)
         </dd>
 
         <dt>
@@ -52,11 +44,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DateOfMoment)
+            @Html.DisplayNameFor(model => model.DisplayDateOfMoment)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DateOfMoment)
+            @Html.DisplayFor(model => model.DisplayDateOfMoment)
         </dd>
 
         <dt>
@@ -76,63 +68,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.MomentSerialNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MomentSerialNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MomentCirculatingCount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MomentCirculatingCount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PurchasedInPack)
-        </dt>
-
-        <dd>
-            @Html.RadioButtonFor(model => model.PurchasedInPack, true) Yes
-            @Html.RadioButtonFor(model => model.PurchasedInPack, false) No
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AmountInPack)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AmountInPack)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PurchasedForPrice)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PurchasedForPrice)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ActualPurchasedForPrice)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ActualPurchasedForPrice)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MomentComplete)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MomentComplete)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.SerialComplete)
         </dt>
 
@@ -141,19 +76,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DisplayDateOfMoment)
+            @Html.DisplayNameFor(model => model.MomentTier)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DisplayDateOfMoment)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PlayerFullName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PlayerFullName)
+            @Html.DisplayFor(model => model.MomentTier)
         </dd>
 
         <dt>
@@ -164,6 +91,17 @@
             @Html.DisplayFor(model => model.Mint)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Showcases)
+        </dt>
+
+        @foreach (var item in Model.Showcases)
+        {
+            <dd>
+                @Html.DisplayFor(modelItem => item.ShowcaseName)
+                @Html.ActionLink("View Showcase", "Details", "Showcase", new { id = item.ShowcaseId }, null)
+            </dd>
+        }
     </dl>
 
     @using (Html.BeginForm())

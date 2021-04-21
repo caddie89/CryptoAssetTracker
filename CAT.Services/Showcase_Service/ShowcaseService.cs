@@ -86,17 +86,10 @@ namespace CAT.Services.Showcase_Service
                         {
                             MomentId = m.MomentId,
                             PlayerId = m.Moment.PlayerId,
-                            PurchasedForPrice = m.Moment.PurchasedForPrice,
                             MomentCategory = m.Moment.MomentCategory,
                             DateOfMoment = m.Moment.DateOfMoment,
                             MomentSet = m.Moment.MomentSet,
                             MomentSeries = m.Moment.MomentSeries,
-                            MomentSerialNumber = m.Moment.MomentSerialNumber,
-                            MomentCirculatingCount = m.Moment.MomentCirculatingCount,
-                            PurchasedInPack = m.Moment.PurchasedInPack,
-                            AmountInPack = m.Moment.AmountInPack,
-                            MomentTier = m.Moment.MomentTier,
-                            MomentMint = m.Moment.MomentMint,
                         }).ToList()
                 };
             }

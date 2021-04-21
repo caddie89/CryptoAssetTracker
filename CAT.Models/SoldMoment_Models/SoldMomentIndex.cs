@@ -1,5 +1,4 @@
 ﻿using CAT.Data.Entities;
-using CAT.Models.Showcase_Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,15 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CAT.Models.Moment_Models
+namespace CAT.Models.SoldMoment_Models
 {
-    public class MomentDetails
+    public class SoldMomentIndex
     {
         [Display(Name = "Moment ID")]
         public int MomentId { get; set; }
 
         [Display(Name = "Player ID")]
-        public int PlayerId { get; set; }
+        public int? PlayerId { get; set; }
 
         [Display(Name = "First Name")]
         public string PlayerFirstName { get; set; }
@@ -50,14 +49,43 @@ namespace CAT.Models.Moment_Models
         [Display(Name = "Purchased in Pack?")]
         public bool PurchasedInPack { get; set; }
 
-        [Display(Name = "Pack Price")]
-        public decimal PackPrice { get; set; }
-
-        [Display(Name = "Amount in Pack")]
+        [Display(Name = "Quantity in Pack")]
         public decimal AmountInPack { get; set; }
 
-        [Display(Name = "Individual Price")]
-        public decimal IndividualMomentPrice { get; set; }
+        [Display(Name = "Purchase Price")]
+        public decimal PurchasedForPrice { get; set; }
+
+        [Display(Name = "Sold For Amount")]
+        public decimal SoldForAmount { get; set; }
+
+        [Display(Name = "Profit/Loss")]
+        public decimal ProfitLoss
+        {
+            get
+            {
+                decimal profitLoss = SoldForAmount - ActualPurchasedForPrice;
+                profitLoss = Math.Truncate(100 * profitLoss) / 100;
+                return profitLoss;
+            }
+        }
+
+        [Display(Name = "Price")]
+        public decimal ActualPurchasedForPrice
+        {
+            get
+            {
+                if (AmountInPack < 1)
+                {
+                    return PurchasedForPrice;
+                }
+                else
+                {
+                    decimal actualPrice = PurchasedForPrice / AmountInPack;
+                    actualPrice = Math.Truncate(100 * actualPrice) / 100;
+                    return actualPrice;
+                }
+            }
+        }
 
         [Display(Name = "Moment")]
         public string MomentComplete
@@ -79,7 +107,6 @@ namespace CAT.Models.Moment_Models
             }
         }
 
-        [Display(Name = "Date")]
         public string DisplayDateOfMoment
         {
             get
@@ -120,7 +147,5 @@ namespace CAT.Models.Moment_Models
                 return mintType;
             }
         }
-
-        public virtual ICollection<ShowcaseIndex> Showcases { get; set; }
     }
 }

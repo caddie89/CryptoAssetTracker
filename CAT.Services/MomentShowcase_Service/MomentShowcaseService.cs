@@ -117,16 +117,17 @@ namespace CAT.Services.MomentShowcase_Service
                 var query =
                     ctx
                     .Moments
-                    .OrderBy(p => p.Player.PlayerLastName)
+                    .OrderBy(p => p.IndividualMomentPrice)
                     .Select(
                      p =>
                      new SelectListItem
                      {
                          Text =
+                         p.IndividualMomentPrice + " - " +
                          p.Player.PlayerFirstName + " " +
-                         p.Player.PlayerLastName + "-" +
-                         p.MomentCategory + "-" +
-                         p.MomentSet + "-Series " +
+                         p.Player.PlayerLastName + " - " +
+                         p.MomentCategory + " - " +
+                         p.MomentSet + " - Series " +
                          p.MomentSeries.ToString(),
                          Value = p.MomentId.ToString()
                      });

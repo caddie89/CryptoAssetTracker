@@ -1,4 +1,5 @@
-﻿using CAT.Data.Entities;
+﻿using CAT.Contexts.Data;
+using CAT.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -46,32 +47,14 @@ namespace CAT.Models.Moment_Models
         [Display(Name = "Mint")]
         public Mint MomentMint { get; set; }
 
-        [Display(Name = "Purchased in Pack?")]
-        public bool PurchasedInPack { get; set; }
+        [Display(Name = "Individual Price")]
+        public decimal IndividualMomentPrice { get; set; }
 
-        [Display(Name = "Quantity in Pack")]
-        public decimal AmountInPack { get; set; }
+        [Display(Name = "Moment Value")]
+        public decimal MomentTotalValue { get; set; }
 
-        [Display(Name = "Purchase Price")]
-        public decimal PurchasedForPrice { get; set; }
-
-        [Display(Name = "Price")]
-        public decimal ActualPurchasedForPrice
-        {
-            get
-            {
-               if (AmountInPack < 1)
-                {
-                    return PurchasedForPrice;
-                }
-                else
-                {
-                    decimal actualPrice = PurchasedForPrice / AmountInPack;
-                    actualPrice = Math.Truncate(100 * actualPrice) / 100;
-                    return actualPrice;
-                }
-            }
-        }
+        [Display(Name = "Moment Count")]
+        public int MomentCount { get; set; }
 
         [Display(Name = "Moment")]
         public string MomentComplete
@@ -93,6 +76,7 @@ namespace CAT.Models.Moment_Models
             }
         }
 
+        [Display(Name = "Date")]
         public string DisplayDateOfMoment
         {
             get

@@ -38,8 +38,9 @@ namespace CAT.Services.Moment_Service
                     MomentTier = model.MomentTier,
                     MomentMint = model.MomentMint,
                     PurchasedInPack = model.PurchasedInPack,
+                    PackPrice = model.PackPrice,
                     AmountInPack = model.AmountInPack,
-                    PurchasedForPrice = model.PurchasedForPrice
+                    IndividualMomentPrice = model.IndividualMomentPrice,
                 };
 
             using (var ctx = new ApplicationDbContext())
@@ -66,14 +67,15 @@ namespace CAT.Services.Moment_Service
                             PlayerId = e.Player.PlayerId,
                             PlayerFirstName = e.Player.PlayerFirstName,
                             PlayerLastName = e.Player.PlayerLastName,
-                            PurchasedForPrice = e.PurchasedForPrice,
+                            IndividualMomentPrice = e.IndividualMomentPrice,
                             MomentCategory = e.MomentCategory,
                             DateOfMoment = e.DateOfMoment,
                             MomentSet = e.MomentSet,
                             MomentSeries = e.MomentSeries,
                             MomentSerialNumber = e.MomentSerialNumber,
                             MomentCirculatingCount = e.MomentCirculatingCount,
-                            AmountInPack = e.AmountInPack,
+                            MomentTotalValue = ctx.Moments.Sum(v => v.IndividualMomentPrice),
+                            MomentCount = ctx.Moments.Count(),
                             MomentMint = e.MomentMint,
                             ShowcaseIds = e.Showcases
                             .Select(
@@ -81,6 +83,7 @@ namespace CAT.Services.Moment_Service
                                 s.Showcase.ShowcaseId).ToList()
                         }
                     );
+
                 return query.ToArray();
             }
         }
@@ -102,15 +105,13 @@ namespace CAT.Services.Moment_Service
                         MomentId = entity.MomentId,
                         PlayerFirstName = null,
                         PlayerLastName = null,
-                        PurchasedForPrice = entity.PurchasedForPrice,
+                        IndividualMomentPrice = entity.IndividualMomentPrice,
                         MomentCategory = entity.MomentCategory,
                         DateOfMoment = entity.DateOfMoment,
                         MomentSet = entity.MomentSet,
                         MomentSeries = entity.MomentSeries,
                         MomentSerialNumber = entity.MomentSerialNumber,
                         MomentCirculatingCount = entity.MomentCirculatingCount,
-                        PurchasedInPack = entity.PurchasedInPack,
-                        AmountInPack = entity.AmountInPack,
                         MomentTier = entity.MomentTier,
                         MomentMint = entity.MomentMint,
                         Showcases = entity.Showcases
@@ -124,21 +125,20 @@ namespace CAT.Services.Moment_Service
                             }).ToList()
                     };
                 }
+
                 return
                     new MomentDetails
                     {
                         MomentId = entity.MomentId,
                         PlayerFirstName = entity.Player.PlayerFirstName,
                         PlayerLastName = entity.Player.PlayerLastName,
-                        PurchasedForPrice = entity.PurchasedForPrice,
+                        IndividualMomentPrice = entity.IndividualMomentPrice,
                         MomentCategory = entity.MomentCategory,
                         DateOfMoment = entity.DateOfMoment,
                         MomentSet = entity.MomentSet,
                         MomentSeries = entity.MomentSeries,
                         MomentSerialNumber = entity.MomentSerialNumber,
                         MomentCirculatingCount = entity.MomentCirculatingCount,
-                        PurchasedInPack = entity.PurchasedInPack,
-                        AmountInPack = entity.AmountInPack,
                         MomentTier = entity.MomentTier,
                         MomentMint = entity.MomentMint,
                         Showcases = entity.Showcases
@@ -175,7 +175,8 @@ namespace CAT.Services.Moment_Service
                 entity.MomentMint = model.MomentMint;
                 entity.PurchasedInPack = model.PurchasedInPack;
                 entity.AmountInPack = model.AmountInPack;
-                entity.PurchasedForPrice = model.PurchasedForPrice;
+                entity.PackPrice = model.PackPrice;
+                entity.IndividualMomentPrice = model.IndividualMomentPrice;
 
                 return ctx.SaveChanges() >= 0;
 
@@ -218,7 +219,7 @@ namespace CAT.Services.Moment_Service
                 var playerList = query.ToList();
 
                 playerList.Add(new SelectListItem { Text = "Unknown", Value = "" });
-                playerList.Insert(0, new SelectListItem { Text = "--Select--", Value = "" });
+                playerList.Insert(0, new SelectListItem { Text = "--Select Player--", Value = "" });
                 return playerList;
             }
         }
@@ -242,7 +243,7 @@ namespace CAT.Services.Moment_Service
 
                 var playerList = query.ToList();
                 playerList.Add(new SelectListItem { Text = "Unknown", Value = "" });
-                playerList.Insert(0, new SelectListItem { Text = "--Select--", Value = "" });
+                playerList.Insert(0, new SelectListItem { Text = "--Select Player--", Value = "" });
                 return playerList;
             }
         }
