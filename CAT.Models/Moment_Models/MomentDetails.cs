@@ -15,7 +15,7 @@ namespace CAT.Models.Moment_Models
         public int MomentId { get; set; }
 
         [Display(Name = "Player ID")]
-        public int PlayerId { get; set; }
+        public int? PlayerId { get; set; }
 
         [Display(Name = "First Name")]
         public string PlayerFirstName { get; set; }

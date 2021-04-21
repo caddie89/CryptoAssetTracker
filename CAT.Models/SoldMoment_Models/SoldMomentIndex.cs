@@ -10,8 +10,8 @@ namespace CAT.Models.SoldMoment_Models
 {
     public class SoldMomentIndex
     {
-        [Display(Name = "Moment ID")]
-        public int MomentId { get; set; }
+        [Display(Name = "Sold Moment ID")]
+        public int SoldMomentId { get; set; }
 
         [Display(Name = "Player ID")]
         public int? PlayerId { get; set; }
@@ -52,8 +52,14 @@ namespace CAT.Models.SoldMoment_Models
         [Display(Name = "Quantity in Pack")]
         public decimal AmountInPack { get; set; }
 
-        [Display(Name = "Purchase Price")]
-        public decimal PurchasedForPrice { get; set; }
+        [Display(Name = "Individual Price")]
+        public decimal IndividualMomentPrice { get; set; }
+
+        [Display(Name = "Moment Value")]
+        public decimal MomentTotalValue { get; set; }
+
+        [Display(Name = "Moment Count")]
+        public int MomentCount { get; set; }
 
         [Display(Name = "Sold For Amount")]
         public decimal SoldForAmount { get; set; }
@@ -63,27 +69,9 @@ namespace CAT.Models.SoldMoment_Models
         {
             get
             {
-                decimal profitLoss = SoldForAmount - ActualPurchasedForPrice;
+                decimal profitLoss = SoldForAmount - IndividualMomentPrice;
                 profitLoss = Math.Truncate(100 * profitLoss) / 100;
                 return profitLoss;
-            }
-        }
-
-        [Display(Name = "Price")]
-        public decimal ActualPurchasedForPrice
-        {
-            get
-            {
-                if (AmountInPack < 1)
-                {
-                    return PurchasedForPrice;
-                }
-                else
-                {
-                    decimal actualPrice = PurchasedForPrice / AmountInPack;
-                    actualPrice = Math.Truncate(100 * actualPrice) / 100;
-                    return actualPrice;
-                }
             }
         }
 

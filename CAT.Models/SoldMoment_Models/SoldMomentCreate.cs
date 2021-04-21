@@ -1,76 +1,66 @@
-﻿using System;
+﻿using CAT.Data.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CAT.Data.Entities
+namespace CAT.Services.SoldMoment_Service
 {
-    public class Moment
+    public class SoldMomentCreate
     {
-        [Key]
-        public int MomentId { get; set; }
-
-        [ForeignKey(nameof(Player))]
+        [Display(Name = "Player ID")]
         public int? PlayerId { get; set; }
-        public virtual Player Player { get; set; }
 
         [Required]
-        public Guid OwnerId { get; set; }
-
-        [Required]
+        [Display(Name = "Category")]
         public string MomentCategory { get; set; }
 
         [Required]
+        [Display(Name = "Date of Moment")]
         public DateTimeOffset DateOfMoment { get; set; }
 
         [Required]
+        [Display(Name = "Set")]
         public string MomentSet { get; set; }
 
         [Required]
+        [Display(Name = "Series")]
         public int MomentSeries { get; set; }
 
         [Required]
+        [Display(Name = "Serial")]
         public int MomentSerialNumber { get; set; }
 
         [Required]
+        [Display(Name = "Circulating Count")]
         public int MomentCirculatingCount { get; set; }
 
         [Required]
+        [Display(Name = "Tier")]
         public Tier MomentTier { get; set; }
 
         [Required]
+        [Display(Name = "Mint")]
         public Mint MomentMint { get; set; }
 
         [Required]
+        [Display(Name = "Purchased in Pack?")]
         public bool PurchasedInPack { get; set; }
 
+        [Display(Name = "Pack Price")]
         public decimal? PackPrice { get; set; }
 
+        [Display(Name = "Amount in Pack")]
         public decimal? AmountInPack { get; set; }
 
         [Required]
+        [Display(Name = "Individual Price")]
         public decimal IndividualMomentPrice { get; set; }
 
-        public virtual ICollection<MomentShowcase> Showcases { get; set; } = new List<MomentShowcase>();
-    }
-
-    public enum Tier
-    {
-        Common = 1,
-        Rare,
-        Legendary,
-        Ultimate
-    }
-
-    public enum Mint
-    {
-        [Display(Name = "Limited Edition")]
-        LimitedEdition = 1,
-        [Display(Name = "Circulating Count")]
-        CirculatingCount,
+        [Required]
+        [Display(Name = "Sold For Amount")]
+        public decimal SoldForAmount { get; set; }
     }
 }
-

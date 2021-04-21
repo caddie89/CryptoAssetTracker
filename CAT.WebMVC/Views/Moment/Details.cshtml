@@ -19,6 +19,14 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.PlayerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlayerId)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.PlayerFullName)
         </dt>
 
@@ -98,7 +106,7 @@
         {
             <dd>
                 @Html.DisplayFor(modelItem => item.ShowcaseName)
-                @Html.ActionLink("View Showcase", "Details", "Showcase", new { id = item.ShowcaseId}, null)
+                @Html.ActionLink("View Showcase", "Details", "Showcase", new { id = item.ShowcaseId }, null)
             </dd>
         }
     </dl>
@@ -106,7 +114,8 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.MomentId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index") |
+    @Html.ActionLink("Sell Moment", "Create", "SoldMoment", new { id = Model.MomentId }, null)
 </p>
 
 @section Scripts {

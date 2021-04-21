@@ -83,7 +83,6 @@ namespace CAT.Services.Moment_Service
                                 s.Showcase.ShowcaseId).ToList()
                         }
                     );
-
                 return query.ToArray();
             }
         }
@@ -130,6 +129,7 @@ namespace CAT.Services.Moment_Service
                     new MomentDetails
                     {
                         MomentId = entity.MomentId,
+                        PlayerId = entity.PlayerId,
                         PlayerFirstName = entity.Player.PlayerFirstName,
                         PlayerLastName = entity.Player.PlayerLastName,
                         IndividualMomentPrice = entity.IndividualMomentPrice,
