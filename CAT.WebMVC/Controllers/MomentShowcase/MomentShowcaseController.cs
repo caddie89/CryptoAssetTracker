@@ -21,8 +21,8 @@ namespace CAT.WebMVC.Controllers.MomentShowcase
             var showcaseList = service.SelectShowcase();
             ViewData["Showcases"] = showcaseList;
 
-            //var momentList = service.SelectMoments();
-            //ViewBag.Moments = momentList;
+            //var moments = service.SelectMoments();
+            //ViewBag.Moments = moments;
 
             return View();
         }
@@ -44,6 +44,8 @@ namespace CAT.WebMVC.Controllers.MomentShowcase
             }
 
             ModelState.AddModelError("", "Showcase could not be added to Moment.");
+
+            // service.CreateMomentShowcase(model);
 
             return View(model);
         }

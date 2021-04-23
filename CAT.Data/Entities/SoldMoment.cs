@@ -13,6 +13,10 @@ namespace CAT.Data.Entities
         [Key]
         public int SoldMomentId { get; set; }
 
+        [ForeignKey(nameof(Moment))]
+        public int? MomentId { get; set; }
+        public virtual Moment Moment { get; set; }
+
         [ForeignKey(nameof(Player))]
         public int? PlayerId { get; set; }
         public virtual Player Player { get; set; }

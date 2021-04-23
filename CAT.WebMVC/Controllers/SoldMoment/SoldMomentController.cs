@@ -29,6 +29,7 @@ namespace CAT.WebMVC.Controllers.SoldMoment
             var model =
                 new SoldMomentCreate
                 {
+                    MomentId = detail.MomentId,
                     PlayerId = detail.PlayerId,
                     MomentCategory = detail.MomentCategory,
                     DateOfMoment = detail.DateOfMoment,
@@ -59,8 +60,8 @@ namespace CAT.WebMVC.Controllers.SoldMoment
 
             if (service.CreateSoldMoment(model))
             {
-                TempData["SaveResult"] = "Moment added to Sold List.";
-                return RedirectToAction("Index");
+                TempData["SaveResult"] = "Success! Asset sale has been recorded. Recommended that Asset be removed from Asset List.";
+                return RedirectToAction("Delete", "Moment", new { id = model.MomentId });
             }
 
             ModelState.AddModelError("", "Moment could not be added to Sold List. Please make sure that all required input fields are populated.");

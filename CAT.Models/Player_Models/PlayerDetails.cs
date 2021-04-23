@@ -1,4 +1,5 @@
 ﻿using CAT.Data.Entities;
+using CAT.Models.Moment_Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -64,6 +65,6 @@ namespace CAT.Models.Player_Models
             }
         }
 
-        public ICollection<Moment> Moments { get; set; }
+        public ICollection<MomentIndex> Moments { get; set; }
     }
 }

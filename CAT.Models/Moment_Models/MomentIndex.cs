@@ -3,6 +3,7 @@ using CAT.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,11 +51,76 @@ namespace CAT.Models.Moment_Models
         [Display(Name = "Individual Price")]
         public decimal IndividualMomentPrice { get; set; }
 
-        [Display(Name = "Moment Value")]
+        [Display(Name = "Moment Total Value")]
         public decimal MomentTotalValue { get; set; }
+
+        [Display(Name = "Sold Moment Total Value")]
+        public decimal SoldMomentTotalValue { get; set; }
+
+        [Display(Name = "Original Moment Total Value")]
+        public decimal OriginalMomentTotalValue { get; set; }
 
         [Display(Name = "Moment Count")]
         public int MomentCount { get; set; }
+
+        [Display(Name = "Sold For Amount")]
+        public decimal SoldForAmount { get; set; }
+
+        public string IndividualMomentProfitLoss
+        {
+            get
+            {
+                decimal profitLoss = SoldForAmount - IndividualMomentPrice;
+                profitLoss = Math.Truncate(100 * profitLoss) / 100;
+                string pL = profitLoss.ToString("C", new CultureInfo("en-US"));
+                return pL;
+            }
+        }
+
+        public string TotalMomentProfitLoss
+        {
+            get
+            {
+                decimal profitLoss = SoldMomentTotalValue - OriginalMomentTotalValue;
+                profitLoss = Math.Truncate(100 * profitLoss) / 100;
+                string pL = profitLoss.ToString("C", new CultureInfo("en-US"));
+                return pL;
+            }
+        }
+
+        public string DisplayIndividualMomentPrice
+        {
+            get
+            {
+                decimal individualMomentPrice = IndividualMomentPrice;
+                var iMP = individualMomentPrice.ToString("C", new CultureInfo("en-US"));
+                return iMP;
+            }
+        }
+
+        public string DisplayMomentTotalValue
+        {
+            get
+            {
+                decimal momentTotalValue = MomentTotalValue;
+                var mTV = momentTotalValue.ToString("C", new CultureInfo("en-US"));
+                return mTV;
+            }
+        }
+
+        public string DisplayROI
+        {
+            get
+            {
+                if (SoldMomentTotalValue != 0)
+                {
+                    var ROI = (SoldMomentTotalValue - OriginalMomentTotalValue) / OriginalMomentTotalValue;
+                    var displayROI = $"{ROI:P}";
+                    return displayROI;
+                }
+                return null;
+            }
+        }
 
         [Display(Name = "Moment")]
         public string MomentComplete
@@ -117,7 +183,7 @@ namespace CAT.Models.Moment_Models
                 return mintType;
             }
         }
-
+        //public virtual List<ShowcaseIndex> Showcases { get; set; } needs list in 
         public List<int> ShowcaseIds { get; set; }
     }
 }

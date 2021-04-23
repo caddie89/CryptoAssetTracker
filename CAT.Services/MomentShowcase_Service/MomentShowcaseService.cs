@@ -38,6 +38,14 @@ namespace CAT.Services.MomentShowcase_Service
             }
         }
 
+        //foreach (int bookid in model.Moments)
+        //    {
+        //        var entity - new AuthorBook()
+        //{ AuthorId = model.AuthorId,
+        //BookId = bookId
+        //        }
+        //    }
+
         // Create MomentShowcase
         //public bool CreateMomentShowcase(MomentShowcaseCreate model)
         //{
@@ -192,5 +200,7 @@ namespace CAT.Services.MomentShowcase_Service
         //        return viewModel.MomentList;
         //    }
         //}
+
+        //public List<MomentIndex> GetMoments(){
     }
 }

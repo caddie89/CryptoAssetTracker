@@ -73,9 +73,10 @@ namespace CAT.Services.Moment_Service
                             MomentSet = e.MomentSet,
                             MomentSeries = e.MomentSeries,
                             MomentSerialNumber = e.MomentSerialNumber,
-                            MomentCirculatingCount = e.MomentCirculatingCount,
                             MomentTotalValue = ctx.Moments.Sum(v => v.IndividualMomentPrice),
                             MomentCount = ctx.Moments.Count(),
+                            SoldMomentTotalValue = ctx.SoldMoments.Sum(v => v.SoldForAmount),
+                            OriginalMomentTotalValue = ctx.SoldMoments.Sum(v => v.IndividualMomentPrice),
                             MomentMint = e.MomentMint,
                             ShowcaseIds = e.Showcases
                             .Select(

@@ -55,6 +55,8 @@ namespace CAT.Data.Entities
         public decimal IndividualMomentPrice { get; set; }
 
         public virtual ICollection<MomentShowcase> Showcases { get; set; } = new List<MomentShowcase>();
+
+        public virtual ICollection<SoldMoment> SoldMoments { get; set; } = new List<SoldMoment>();
     }
 
     public enum Tier

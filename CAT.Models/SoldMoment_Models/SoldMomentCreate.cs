@@ -11,6 +11,9 @@ namespace CAT.Services.SoldMoment_Service
     public class SoldMomentCreate
     {
         [Display(Name = "Player ID")]
+        public int? MomentId { get; set; }
+
+        [Display(Name = "Player ID")]
         public int? PlayerId { get; set; }
 
         [Required]

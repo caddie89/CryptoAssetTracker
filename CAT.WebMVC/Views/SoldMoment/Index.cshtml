@@ -17,36 +17,45 @@
         <button type="button" class="close" data-dismiss="alert">
             <span>&times;</span>
         </button>
-
         @TempData["SaveResult"]
     </div>
 }
 
 <div class="container bg-primary">
     <div class="row text-justify">
-        <section class="col-xs-4">
+        <section class="col-xs-3">
             <h3>
-                Moment Value:
+                Asset Value:
                 @if (Model.Any())
                 {
-                    @Html.DisplayFor(modelItem => Model.Last().MomentTotalValue)
+                    @Html.DisplayFor(modelItem => Model.Last().DisplayMomentTotalValue)
                 }
             </h3>
         </section>
 
-        <section class="col-xs-4">
+        <section class="col-xs-3">
             <h3>
                 Profit/Loss:
-                @*@if (Model.Any())
-                    {
-                        @Html.DisplayFor(modelItem => Model.Last().MomentTotalValue)
-                    }*@
+                @if (Model.Any())
+                {
+                    @Html.DisplayFor(modelItem => Model.Last().TotalMomentProfitLoss)
+                }
             </h3>
         </section>
 
-        <section class="col-xs-4">
+        <section class="col-xs-3">
             <h3>
-                Moment Count:
+                ROI:
+                @if (Model.Any())
+                {
+                    @Html.DisplayFor(modelItem => Model.Last().DisplayROI)
+                }
+            </h3>
+        </section>
+
+        <section class="col-xs-3">
+            <h3>
+                Asset Count:
                 @if (Model.Any())
                 {
                     @Html.DisplayFor(modelItem => Model.Last().MomentCount)
@@ -56,13 +65,21 @@
     </div>
 </div>
 
+<br />
+
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.PlayerFullName)
         </th>
         <th>
-            @Html.Label("Sold For (Purchased For)")
+            @Html.Label("Sold For")
+        </th>
+        <th>
+            @Html.Label("Purchased For")
+        </th>
+        <th>
+            @Html.Label("Profit/Loss")
         </th>
         <th>
             @Html.DisplayNameFor(model => model.MomentComplete)
@@ -85,8 +102,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.PlayerFullName)
             </td>
-            <td @*class="@(item.SoldForAmount > 0? "green" : item.SoldForAmount < 0? "red": "normal")"*@>
-                $@Html.DisplayFor(modelItem => item.SoldForAmount) ($@Html.DisplayFor(modelItem => item.IndividualMomentPrice))
+            <td>
+                @Html.DisplayFor(modelItem => item.DisplaySoldForAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IndividualMomentPrice)
+            </td>
+            <td @*class="@(item.SoldForAmount > 0? "red" : "green")"*@>
+                @Html.DisplayFor(modelItem => item.IndividualMomentProfitLoss)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.MomentComplete)

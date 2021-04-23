@@ -1,6 +1,7 @@
 ﻿using CAT.Contexts.Data;
 using CAT.Data.Entities;
 using CAT.Models;
+using CAT.Models.Moment_Models;
 using CAT.Models.Player_Models;
 using System;
 using System.Collections.Generic;
@@ -80,6 +81,17 @@ namespace CAT.Services.Player_Service
                         PositionOfPlayer = entity.PositionOfPlayer,
                         PlayerTeam = entity.PlayerTeam,
                         Moments = entity.Moments
+                        .Select(
+                        m =>
+                        new MomentIndex()
+                        {
+                            MomentId = m.MomentId,
+                            PlayerId = m.PlayerId,
+                            MomentCategory = m.MomentCategory,
+                            DateOfMoment = m.DateOfMoment,
+                            MomentSet = m.MomentSet,
+                            MomentSeries = m.MomentSeries,
+                        }).ToList()
                     };
             }
         }

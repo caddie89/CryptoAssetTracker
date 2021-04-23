@@ -16,8 +16,6 @@ namespace CAT.Models.MomentShowcase_Models
         [Required]
         public int ShowcaseId { get; set; }
 
-        //public MultiSelectList MomentList { get; set; }
-
-        //public int[] SelectedMomentIds { get; set; }
+        public int[] MomentIds { get; set; }
     }
 }

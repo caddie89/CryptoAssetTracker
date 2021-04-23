@@ -26,6 +26,7 @@ namespace CAT.Services.SoldMoment_Service
                 new SoldMoment()
                 {
                     OwnerId = _userId,
+                    MomentId = model.MomentId,
                     PlayerId = model.PlayerId,
                     MomentCategory = model.MomentCategory,
                     DateOfMoment = model.DateOfMoment,
@@ -75,6 +76,8 @@ namespace CAT.Services.SoldMoment_Service
                             MomentCirculatingCount = e.MomentCirculatingCount,
                             MomentTotalValue = ctx.Moments.Sum(v => v.IndividualMomentPrice),
                             MomentCount = ctx.Moments.Count(),
+                            SoldMomentTotalValue = ctx.SoldMoments.Sum(v => v.SoldForAmount),
+                            OriginalMomentTotalValue = ctx.SoldMoments.Sum(v => v.IndividualMomentPrice),
                             MomentMint = e.MomentMint,
                             SoldForAmount = e.SoldForAmount,
                         }

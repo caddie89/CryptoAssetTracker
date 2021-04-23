@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2 class="red">Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -17,36 +17,45 @@
         <button type="button" class="close" data-dismiss="alert">
             <span>&times;</span>
         </button>
-
         @TempData["SaveResult"]
     </div>
 }
 
 <div class="container bg-primary">
     <div class="row text-justify">
-        <section class="col-xs-4">
+        <section class="col-xs-3">
             <h3>
-                Moment Value:
+                Asset Value:
                 @if (Model.Any())
                 {
-                    @Html.DisplayFor(modelItem => Model.Last().MomentTotalValue)
+                    @Html.DisplayFor(modelItem => Model.Last().DisplayMomentTotalValue)
                 }
             </h3>
         </section>
 
-        <section class="col-xs-4">
+        <section class="col-xs-3">
             <h3>
                 Profit/Loss:
-                @*@if (Model.Any())
+                @if (Model.Any())
                 {
-                    @Html.DisplayFor(modelItem => Model.Last().MomentTotalValue)
-                }*@
+                    @Html.DisplayFor(modelItem => Model.Last().TotalMomentProfitLoss)
+                }
             </h3>
         </section>
 
-        <section class="col-xs-4">
+        <section class="col-xs-3">
             <h3>
-                Moment Count:
+                ROI:
+                @if (Model.Any())
+                {
+                    @Html.DisplayFor(modelItem => Model.Last().DisplayROI)
+                }
+            </h3>
+        </section>
+
+        <section class="col-xs-3">
+            <h3>
+                Asset Count:
                 @if (Model.Any())
                 {
                     @Html.DisplayFor(modelItem => Model.Last().MomentCount)
@@ -88,7 +97,7 @@
                 @Html.DisplayFor(modelItem => item.PlayerFullName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IndividualMomentPrice)
+                @Html.DisplayFor(modelItem => item.DisplayIndividualMomentPrice)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.MomentComplete)
@@ -114,4 +123,6 @@
     }
 
 </table>
+
+
 

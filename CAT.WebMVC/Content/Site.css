@@ -24,13 +24,13 @@ textarea {
 }
 
 .green {
-    text-decoration-color: green;
+    color: green;
 }
 
 .red {
-    background-color: red;
+    color: red;
 }
 
 .normal {
-    background-color: none;
+    color: none;
 }
