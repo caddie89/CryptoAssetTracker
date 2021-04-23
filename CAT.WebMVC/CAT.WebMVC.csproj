@@ -260,6 +260,8 @@
     <Content Include="Views\SoldMoment\Index.cshtml" />
     <Content Include="Views\SoldMoment\Create.cshtml" />
     <Content Include="Views\SoldMoment\Details.cshtml" />
+    <Content Include="Views\SoldMoment\Edit.cshtml" />
+    <Content Include="Views\SoldMoment\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

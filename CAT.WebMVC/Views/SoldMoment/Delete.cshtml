@@ -1,0 +1,200 @@
+﻿@model CAT.Models.SoldMoment_Models.SoldMomentDetails
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>SoldMomentDetails</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SoldMomentId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoldMomentId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomentId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomentId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlayerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlayerId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlayerFirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlayerFirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlayerLastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlayerLastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomentCategory)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomentCategory)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfMoment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfMoment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomentSet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomentSet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomentSeries)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomentSeries)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomentSerialNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomentSerialNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomentCirculatingCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomentCirculatingCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PurchasedInPack)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PurchasedInPack)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PackPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PackPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AmountInPack)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AmountInPack)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IndividualMomentPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IndividualMomentPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoldForAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoldForAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProfitLoss)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProfitLoss)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomentComplete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomentComplete)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SerialComplete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SerialComplete)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DisplayDateOfMoment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DisplayDateOfMoment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlayerFullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlayerFullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mint)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mint)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

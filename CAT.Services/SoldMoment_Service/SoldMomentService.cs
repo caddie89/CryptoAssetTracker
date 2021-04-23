@@ -74,10 +74,31 @@ namespace CAT.Services.SoldMoment_Service
                             MomentSeries = e.MomentSeries,
                             MomentSerialNumber = e.MomentSerialNumber,
                             MomentCirculatingCount = e.MomentCirculatingCount,
-                            MomentTotalValue = ctx.Moments.Sum(v => v.IndividualMomentPrice),
+                            MomentTotalValue =
+                            ctx
+                            .Moments
+                            .Select(
+                                i =>
+                                i.IndividualMomentPrice)
+                            .DefaultIfEmpty(0)
+                            .Sum(),
                             MomentCount = ctx.Moments.Count(),
-                            SoldMomentTotalValue = ctx.SoldMoments.Sum(v => v.SoldForAmount),
-                            OriginalMomentTotalValue = ctx.SoldMoments.Sum(v => v.IndividualMomentPrice),
+                            SoldMomentTotalValue =
+                            ctx
+                            .SoldMoments
+                            .Select(
+                                i =>
+                                i.SoldForAmount)
+                            .DefaultIfEmpty(0)
+                            .Sum(),
+                            OriginalMomentTotalValue =
+                            ctx
+                            .SoldMoments
+                            .Select(
+                                i =>
+                                i.IndividualMomentPrice)
+                            .DefaultIfEmpty(0)
+                            .Sum(),
                             MomentMint = e.MomentMint,
                             SoldForAmount = e.SoldForAmount,
                         }
@@ -101,6 +122,7 @@ namespace CAT.Services.SoldMoment_Service
                     new SoldMomentDetails
                     {
                         SoldMomentId = entity.SoldMomentId,
+                        MomentId = entity.MomentId,
                         PlayerFirstName = null,
                         PlayerLastName = null,
                         IndividualMomentPrice = entity.IndividualMomentPrice,
@@ -117,23 +139,70 @@ namespace CAT.Services.SoldMoment_Service
                 }
 
                 return
-                    new SoldMomentDetails
-                    {
-                        SoldMomentId = entity.SoldMomentId,
-                        PlayerId = entity.PlayerId,
-                        PlayerFirstName = entity.Player.PlayerFirstName,
-                        PlayerLastName = entity.Player.PlayerLastName,
-                        IndividualMomentPrice = entity.IndividualMomentPrice,
-                        MomentCategory = entity.MomentCategory,
-                        DateOfMoment = entity.DateOfMoment,
-                        MomentSet = entity.MomentSet,
-                        MomentSeries = entity.MomentSeries,
-                        MomentSerialNumber = entity.MomentSerialNumber,
-                        MomentCirculatingCount = entity.MomentCirculatingCount,
-                        MomentTier = entity.MomentTier,
-                        MomentMint = entity.MomentMint,
-                        SoldForAmount = entity.SoldForAmount
-                    };
+                new SoldMomentDetails
+                {
+                    SoldMomentId = entity.SoldMomentId,
+                    MomentId = entity.MomentId,
+                    PlayerId = entity.PlayerId,
+                    PlayerFirstName = entity.Player.PlayerFirstName,
+                    PlayerLastName = entity.Player.PlayerLastName,
+                    IndividualMomentPrice = entity.IndividualMomentPrice,
+                    MomentCategory = entity.MomentCategory,
+                    DateOfMoment = entity.DateOfMoment,
+                    MomentSet = entity.MomentSet,
+                    MomentSeries = entity.MomentSeries,
+                    MomentSerialNumber = entity.MomentSerialNumber,
+                    MomentCirculatingCount = entity.MomentCirculatingCount,
+                    MomentTier = entity.MomentTier,
+                    MomentMint = entity.MomentMint,
+                    SoldForAmount = entity.SoldForAmount
+                };
+            }
+        }
+
+        // Edit Sold Moment
+        public bool EditSoldMoment(SoldMomentEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .SoldMoments
+                    .Single(e => e.SoldMomentId == model.SoldMomentId && e.OwnerId == _userId);
+
+                entity.MomentId = model.MomentId;
+                entity.PlayerId = model.PlayerId;
+                entity.MomentCategory = model.MomentCategory;
+                entity.DateOfMoment = model.DateOfMoment;
+                entity.MomentSet = model.MomentSet;
+                entity.MomentSeries = model.MomentSeries;
+                entity.MomentSerialNumber = model.MomentSerialNumber;
+                entity.MomentCirculatingCount = model.MomentCirculatingCount;
+                entity.MomentTier = model.MomentTier;
+                entity.MomentMint = model.MomentMint;
+                entity.PurchasedInPack = model.PurchasedInPack;
+                entity.AmountInPack = model.AmountInPack;
+                entity.PackPrice = model.PackPrice;
+                entity.IndividualMomentPrice = model.IndividualMomentPrice;
+                entity.SoldForAmount = model.SoldForAmount;
+
+                return ctx.SaveChanges() >= 0;
+            }
+        }
+
+        // Delete Sold Moment
+        public bool DeleteSoldMoment(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .SoldMoments
+                    .Single(e => e.SoldMomentId == id && e.OwnerId == _userId);
+
+                ctx.SoldMoments.Remove(entity);
+
+                return ctx.SaveChanges() == 1;
             }
         }
     }

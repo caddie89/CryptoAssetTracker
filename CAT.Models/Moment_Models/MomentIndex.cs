@@ -98,16 +98,6 @@ namespace CAT.Models.Moment_Models
             }
         }
 
-        public string DisplayMomentTotalValue
-        {
-            get
-            {
-                decimal momentTotalValue = MomentTotalValue;
-                var mTV = momentTotalValue.ToString("C", new CultureInfo("en-US"));
-                return mTV;
-            }
-        }
-
         public string DisplayROI
         {
             get
@@ -118,7 +108,17 @@ namespace CAT.Models.Moment_Models
                     var displayROI = $"{ROI:P}";
                     return displayROI;
                 }
-                return null;
+                return "0.00%";
+            }
+        }
+
+        public string DisplayMomentTotalValue
+        {
+            get
+            {
+                var momentTotalValue = MomentTotalValue;
+                var mTV = momentTotalValue.ToString("C", new CultureInfo("en-US"));
+                return mTV;
             }
         }
 
@@ -183,6 +183,7 @@ namespace CAT.Models.Moment_Models
                 return mintType;
             }
         }
+
         //public virtual List<ShowcaseIndex> Showcases { get; set; } needs list in 
         public List<int> ShowcaseIds { get; set; }
     }

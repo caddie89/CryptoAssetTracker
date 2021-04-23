@@ -2,9 +2,12 @@
 using CAT.Data.Entities;
 using CAT.Models.Moment_Models;
 using CAT.Models.Showcase_Models;
+using CAT.Models.SoldMoment_Models;
+using LinqToDB.SqlQuery;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -73,10 +76,31 @@ namespace CAT.Services.Moment_Service
                             MomentSet = e.MomentSet,
                             MomentSeries = e.MomentSeries,
                             MomentSerialNumber = e.MomentSerialNumber,
-                            MomentTotalValue = ctx.Moments.Sum(v => v.IndividualMomentPrice),
+                            MomentTotalValue =
+                            ctx
+                            .Moments
+                            .Select(
+                                i =>
+                                i.IndividualMomentPrice)
+                            .DefaultIfEmpty(0)
+                            .Sum(),
                             MomentCount = ctx.Moments.Count(),
-                            SoldMomentTotalValue = ctx.SoldMoments.Sum(v => v.SoldForAmount),
-                            OriginalMomentTotalValue = ctx.SoldMoments.Sum(v => v.IndividualMomentPrice),
+                            SoldMomentTotalValue =
+                            ctx
+                            .SoldMoments
+                            .Select(
+                                s =>
+                                s.SoldForAmount)
+                            .DefaultIfEmpty(0)
+                            .Sum(),
+                            OriginalMomentTotalValue =
+                            ctx
+                            .SoldMoments
+                            .Select(
+                                s =>
+                                s.IndividualMomentPrice)
+                            .DefaultIfEmpty(0)
+                            .Sum(),
                             MomentMint = e.MomentMint,
                             ShowcaseIds = e.Showcases
                             .Select(
@@ -127,22 +151,22 @@ namespace CAT.Services.Moment_Service
                 }
 
                 return
-                    new MomentDetails
-                    {
-                        MomentId = entity.MomentId,
-                        PlayerId = entity.PlayerId,
-                        PlayerFirstName = entity.Player.PlayerFirstName,
-                        PlayerLastName = entity.Player.PlayerLastName,
-                        IndividualMomentPrice = entity.IndividualMomentPrice,
-                        MomentCategory = entity.MomentCategory,
-                        DateOfMoment = entity.DateOfMoment,
-                        MomentSet = entity.MomentSet,
-                        MomentSeries = entity.MomentSeries,
-                        MomentSerialNumber = entity.MomentSerialNumber,
-                        MomentCirculatingCount = entity.MomentCirculatingCount,
-                        MomentTier = entity.MomentTier,
-                        MomentMint = entity.MomentMint,
-                        Showcases = entity.Showcases
+                new MomentDetails
+                {
+                    MomentId = entity.MomentId,
+                    PlayerId = entity.PlayerId,
+                    PlayerFirstName = entity.Player.PlayerFirstName,
+                    PlayerLastName = entity.Player.PlayerLastName,
+                    IndividualMomentPrice = entity.IndividualMomentPrice,
+                    MomentCategory = entity.MomentCategory,
+                    DateOfMoment = entity.DateOfMoment,
+                    MomentSet = entity.MomentSet,
+                    MomentSeries = entity.MomentSeries,
+                    MomentSerialNumber = entity.MomentSerialNumber,
+                    MomentCirculatingCount = entity.MomentCirculatingCount,
+                    MomentTier = entity.MomentTier,
+                    MomentMint = entity.MomentMint,
+                    Showcases = entity.Showcases
                         .Select(
                             e =>
                             new ShowcaseIndex()
@@ -151,7 +175,7 @@ namespace CAT.Services.Moment_Service
                                 ShowcaseName = e.Showcase.ShowcaseName,
                                 ShowcaseDescription = e.Showcase.ShowcaseDescription
                             }).ToList()
-                    };
+                };
             }
         }
 

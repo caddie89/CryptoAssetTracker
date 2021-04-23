@@ -107,7 +107,7 @@ namespace CAT.Models.SoldMoment_Models
         {
             get
             {
-                decimal momentTotalValue = MomentTotalValue;
+                var momentTotalValue = MomentTotalValue;
                 var mTV = momentTotalValue.ToString("C", new CultureInfo("en-US"));
                 return mTV;
             }
@@ -117,9 +117,9 @@ namespace CAT.Models.SoldMoment_Models
         {
             get
             {
-                var ROI = (SoldMomentTotalValue - OriginalMomentTotalValue) / OriginalMomentTotalValue;
-                var displayROI = $"{ROI:P}";
-                return displayROI;
+                    var ROI = (SoldMomentTotalValue - OriginalMomentTotalValue) / OriginalMomentTotalValue;
+                    var displayROI = $"{ROI:P}";
+                    return displayROI;
             }
         }
 

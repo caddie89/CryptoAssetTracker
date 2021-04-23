@@ -80,6 +80,7 @@
     <Compile Include="Showcase_Models\ShowcaseIndex.cs" />
     <Compile Include="SoldMoment_Models\SoldMomentCreate.cs" />
     <Compile Include="SoldMoment_Models\SoldMomentDetails.cs" />
+    <Compile Include="SoldMoment_Models\SoldMomentEdit.cs" />
     <Compile Include="SoldMoment_Models\SoldMomentIndex.cs" />
   </ItemGroup>
   <ItemGroup>
