@@ -35,6 +35,6 @@ textarea {
     color: none;
 }
 
-.lighttodark {
-    background-image: linear-gradient(#ffffff, #000000);
+#lighttodark {
+    background: #ff6a00;
 }
