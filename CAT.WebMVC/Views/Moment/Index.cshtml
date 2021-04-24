@@ -4,11 +4,62 @@
     ViewBag.Title = "Index";
 }
 
+<div class="container">
+    <div class="row bg-primary align-items-center" style="height: 100vh">
+        <div class="col-xs-3">
+            <h3>
+                Asset Value:
+                <br />
+                @if (Model.Any())
+                {
+                    @Html.DisplayFor(modelItem => Model.Last().DisplayMomentTotalValue)
+                }
+            </h3>
+        </div>
+
+        <div class="col-xs-3">
+            <h3>
+                Profit/Loss:
+                <br />
+                @if (Model.Any())
+                {
+                    @Html.DisplayFor(modelItem => Model.Last().TotalMomentProfitLoss)
+                }
+            </h3>
+        </div>
+
+        <div class="col-xs-3">
+            <h3>
+                ROI:
+                <br />
+                @if (Model.Any())
+                {
+                    @Html.DisplayFor(modelItem => Model.Last().DisplayROI)
+                }
+            </h3>
+        </div>
+
+        <div class="col-xs-3">
+            <h3>
+                Asset Count:
+                <br />
+                @if (Model.Any())
+                {
+                    @Html.DisplayFor(modelItem => Model.Last().MomentCount)
+                }
+            </h3>
+        </div>
+    </div>  <!-- row -->
+</div>  <!-- container -->
+
+<br />
+
 <h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
 
 @if (TempData.ContainsKey("SaveResult"))
 {
@@ -20,52 +71,6 @@
         @TempData["SaveResult"]
     </div>
 }
-
-<div class="container bg-primary">
-    <div class="row text-justify">
-        <section class="col-xs-3">
-            <h3>
-                Asset Value:
-                @if (Model.Any())
-                {
-                    @Html.DisplayFor(modelItem => Model.Last().DisplayMomentTotalValue)
-                }
-            </h3>
-        </section>
-
-        <section class="col-xs-3">
-            <h3>
-                Profit/Loss:
-                @if (Model.Any())
-                {
-                    @Html.DisplayFor(modelItem => Model.Last().TotalMomentProfitLoss)
-                }
-            </h3>
-        </section>
-
-        <section class="col-xs-3">
-            <h3>
-                ROI:
-                @if (Model.Any())
-                {
-                    @Html.DisplayFor(modelItem => Model.Last().DisplayROI)
-                }
-            </h3>
-        </section>
-
-        <section class="col-xs-3">
-            <h3>
-                Asset Count:
-                @if (Model.Any())
-                {
-                    @Html.DisplayFor(modelItem => Model.Last().MomentCount)
-                }
-            </h3>
-        </section>
-    </div>
-</div>
-
-<br />
 
 <table class="table">
     <tr>
