@@ -18,6 +18,9 @@ namespace CAT.WebMVC.Controllers.Moment
         {
             var service = CreateMomentService();
             var model = service.GetMomentIndex();
+            var count = service.MomentCount();
+            ViewData["AssetCount"] = count;
+
             return View(model);
         }
 

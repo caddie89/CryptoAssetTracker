@@ -4,134 +4,171 @@
     ViewBag.Title = "Index";
 }
 
-<div class="container shadow p-3 mb-5 lighttodark rounded-sm">
-    <div class="row align-items-center" style="height: 100vh">
+<!--Display for Asset Value, Profit/Loss, ROI, & Asset Count-->
+<div class="container containerGradient">
+    <div class="row align-items-center text-center d-flex justify-content-center" style="min-height: 20vh">
         <div class="col">
-            <div class="row">
-                <section class="col">
-                    <h3>
-                        Asset Value:
-                        <br />
-                        @if (Model.Any())
-                        {
-                            @Html.DisplayFor(modelItem => Model.Last().DisplayMomentTotalValue)
-                        }
-                    </h3>
-                </section>
-
-                <section class="col">
-                    <h3>
-                        Profit/Loss:
-                        <br />
-                        @if (Model.Any())
-                        {
-                            @Html.DisplayFor(modelItem => Model.Last().TotalMomentProfitLoss)
-                        }
-                    </h3>
-                </section>
-
-                <section class="col">
-                    <h3>
-                        ROI:
-                        <br />
-                        @if (Model.Any())
-                        {
-                            @Html.DisplayFor(modelItem => Model.Last().DisplayROI)
-                        }
-                    </h3>
-                </section>
-
-                <section class="col">
-                    <h3>
-                        Asset Count:
-                        <br />
-                        @if (Model.Any())
-                        {
-                            @Html.DisplayFor(modelItem => Model.Last().MomentCount)
-                        }
-                    </h3>
-                </section>
-            </div>
+            <h3 class="font-weight-bold">
+                Asset Value:
+            </h3>
+            @if (Model.Any())
+            {
+                <h3 class="@(Model.Last().MomentTotalValue > 0 ? "greenbox" : "redbox")">
+                    @Html.DisplayFor(modelItem => Model.Last().DisplayMomentTotalValue)
+                </h3>
+            }
         </div>
-    </div>  <!-- row -->
-</div>  <!-- container -->
+        <div class="col-md">
+            <h3 class="font-weight-bold">
+                Profit/Loss:
+            </h3>
+            @if (Model.Any())
+            {
+                var profitLoss = Model.Last().SoldMomentTotalValue - Model.Last().OriginalMomentTotalValue;
+                profitLoss = Math.Truncate(100 * profitLoss) / 100;
+
+                <h3 class="@(profitLoss > 0 ? "greenbox" : "redbox")">
+                    @Html.DisplayFor(modelItem => Model.Last().TotalMomentProfitLoss)
+                </h3>
+            }
+        </div>
+        <section class="col">
+            <h3 class="font-weight-bold">
+                ROI:
+            </h3>
+            @if (Model.Any())
+            {
+                var ROI = Model.Last().DisplayROI;
+                var displayROI = $"{ROI:P}";
+
+                <h3 class="@(Model.Last().DisplayROI >= 0 ? "greenbox" : "redbox")">
+                    @Html.DisplayFor(modelItem => displayROI)
+                </h3>
+            }
+
+        </section>
+        <section class="col">
+            <h3 class="font-weight-bold">
+                Asset Count:
+            </h3>
+            <h3 class="@((int)ViewData["AssetCount"] >= 1 ? "bluebox" : "none")">
+                @ViewData["AssetCount"]
+            </h3>
+        </section>
+    </div><!--row-->
+</div><!--container-->
 
 <br />
 
-<h2>Index</h2>
+<!--Header information above table w/"add" button-->
+<div class="container text-info">
+    <div class="row" style="min-height: 8vh;">
+        <section class="col align-self-end">
+            <h1 style="font-weight: 500">
+                Assets
+            </h1>
+        </section>
+        <section class="col align-self-end text-right">
+            <a class="btn btn-outline-info" style="font-size: 20px;" href="@Url.Content("~/Moment/Create")">
+                <i class="fas fa-basketball-ball text-warning" style="font-size: 24px;"></i> Add Asset
+            </a>
+        </section>
+        <div class="w-100"></div>
+        <section class="col align-self-center">
+            <span style="font-weight: 200">
+                Below is a list of all Assets.
+            </span>
+        </section>
+    </div><!--row-->
+</div><!--container-->
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-
-
-@if (TempData.ContainsKey("SaveResult"))
-{
-    <div class="alert alert-success fade in" role="alert">
-        @ViewBag.SaveResult
-        <button type="button" class="close" data-dismiss="alert">
-            <span>&times;</span>
-        </button>
-        @TempData["SaveResult"]
-    </div>
-}
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PlayerFullName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IndividualMomentPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MomentComplete)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MomentCategory)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MomentSet)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MomentSerialNumber)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
+<div class="container containerGradient">
+    @if (TempData.ContainsKey("SaveResult"))
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PlayerFullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DisplayIndividualMomentPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MomentComplete)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MomentCategory)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MomentSet)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SerialComplete)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mint)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.MomentId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.MomentId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.MomentId })
-            </td>
-        </tr>
+        <div class="alert alert-success fade in" role="alert">
+            @ViewBag.SaveResult
+            <button type="button" class="close" data-dismiss="alert">
+                <span>&times;</span>
+            </button>
+            @TempData["SaveResult"]
+        </div>
     }
 
-</table>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PlayerFullName)
+            </th>
+            <th>
+                @Html.Label("Price")
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MomentComplete)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MomentCategory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MomentSet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MomentSerialNumber)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            var mint = (int)item.MomentMint;
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlayerFullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DisplayIndividualMomentPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MomentComplete)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MomentCategory)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MomentSet)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SerialComplete)
+                </td>
+                <td>
+                    <span class="@(mint == 1 ? "limited" : "common")">
+                        @Html.DisplayFor(modelItem => item.Mint)
+                    </span>
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.MomentId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.MomentId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MomentId })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+@section Scripts{
+
+    <script type="text/javascript">
+    $(document).ready(function () {
+      $('#btnMomentCreate').click(function (e)
+      {
+          location.href = '@Url.Content("~/Moment/Create")';
+      });
+    });
+    </script>
+
+}
+
 
 
 

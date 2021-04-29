@@ -4,7 +4,65 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<div class="container containerGradient card_container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-6">
+            <div class="card mx-auto" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                <img class="card-img-top p-3" src="~/Images/500x500_placeholder.png" alt="Card image cap">
+                <table class="text-info border">
+                    <tr>
+                        <th class="rotated">
+                            @Html.DisplayFor(model => model.DisplayDateOfMoment)
+                        </th>
+                        <th>
+                            @Html.DisplayFor(model => model.PlayerFirstName)
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+
+                        </th>
+                        <th>
+                            @Html.DisplayFor(model => model.PlayerLastName)
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+
+                        </th>
+                        <th>
+                            
+                        </th>
+                    </tr>
+                </table>
+                    @*<div class="card-body">
+                        <div class="row text-primary text-left">
+                            <div class="col border">
+
+                            </div>
+                            <div class="col border">
+                                <h1>Player First</h1>
+                                <h1>Player Last</h1>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col">
+                                <p>3</p>
+                            </div>
+                            <div class="col border">
+                                <p>4</p>
+                            </div>
+                        </div>
+                    </div>*@
+                    <h5 class="card-title">Card title</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                
+            </div>
+        </div>
+    </div>
+</div>
 
 <div>
     <h4>MomentDetails</h4>

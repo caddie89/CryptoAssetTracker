@@ -126,6 +126,7 @@ namespace CAT.Services.MomentShowcase_Service
                     ctx
                     .Moments
                     .OrderBy(p => p.IndividualMomentPrice)
+                    .Where(e => e.OwnerId == _userId)
                     .Select(
                      p =>
                      new SelectListItem
@@ -156,6 +157,7 @@ namespace CAT.Services.MomentShowcase_Service
                     ctx
                     .Showcases
                     .OrderBy(p => p.ShowcaseName)
+                    .Where(e => e.OwnerId == _userId)
                     .Select(
                      p =>
                      new SelectListItem

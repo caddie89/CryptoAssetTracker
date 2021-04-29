@@ -76,9 +76,11 @@ namespace CAT.Services.Moment_Service
                             MomentSet = e.MomentSet,
                             MomentSeries = e.MomentSeries,
                             MomentSerialNumber = e.MomentSerialNumber,
+                            MomentCirculatingCount = e.MomentCirculatingCount,
                             MomentTotalValue =
                             ctx
                             .Moments
+                            .Where(o => o.OwnerId == _userId)
                             .Select(
                                 i =>
                                 i.IndividualMomentPrice)
@@ -88,6 +90,7 @@ namespace CAT.Services.Moment_Service
                             SoldMomentTotalValue =
                             ctx
                             .SoldMoments
+                            .Where(o => o.OwnerId == _userId)
                             .Select(
                                 s =>
                                 s.SoldForAmount)
@@ -96,6 +99,7 @@ namespace CAT.Services.Moment_Service
                             OriginalMomentTotalValue =
                             ctx
                             .SoldMoments
+                            .Where(o => o.OwnerId == _userId)
                             .Select(
                                 s =>
                                 s.IndividualMomentPrice)
@@ -103,6 +107,7 @@ namespace CAT.Services.Moment_Service
                             .Sum(),
                             MomentMint = e.MomentMint,
                             ShowcaseIds = e.Showcases
+                            .Where(o => o.OwnerId == _userId)
                             .Select(
                                 s =>
                                 s.Showcase.ShowcaseId).ToList()
@@ -233,6 +238,7 @@ namespace CAT.Services.Moment_Service
                     ctx
                     .Players
                     .OrderBy(p => p.PlayerLastName)
+                    .Where(e => e.OwnerId == _userId)
                     .Select(
                      p =>
                      new SelectListItem
@@ -272,5 +278,23 @@ namespace CAT.Services.Moment_Service
                 return playerList;
             }
         }
+
+        // Moment Count
+        public int MomentCount()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query =
+                    ctx
+                    .Moments
+                    .Where(e => e.OwnerId == _userId)
+                    .Count();
+
+                var momentCount = query;
+
+                return momentCount;
+            }
+        }
     }
 }
+

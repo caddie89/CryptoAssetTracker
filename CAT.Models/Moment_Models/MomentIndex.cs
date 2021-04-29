@@ -98,17 +98,17 @@ namespace CAT.Models.Moment_Models
             }
         }
 
-        public string DisplayROI
+        public decimal DisplayROI
         {
             get
             {
                 if (SoldMomentTotalValue != 0)
                 {
                     var ROI = (SoldMomentTotalValue - OriginalMomentTotalValue) / OriginalMomentTotalValue;
-                    var displayROI = $"{ROI:P}";
-                    return displayROI;
+                    //var displayROI = $"{ROI:P}";
+                    return ROI;
                 }
-                return "0.00%";
+                return 0m;
             }
         }
 
