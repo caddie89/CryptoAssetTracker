@@ -8,8 +8,8 @@
 {
     @Html.AntiForgeryToken()
 
-    <!--Header information above table w/"add" button-->
-    <div class="container text-info">
+    <!--header information-->
+    <div class="container text-info p-3">
         <div class="row" style="min-height: 8vh;">
             <section class="col align-self-end">
                 <h1 style="font-weight: 500">
@@ -31,16 +31,23 @@
 
         <div class="container containerGradient">
             <div class="row align-items-center">
+                <!--col left-->
                 <div class="col-6">
-
+                    <!--player-->
                     <div class="form-group">
                         @Html.Label("Player", htmlAttributes: new { @class = "control-label col" })
-                        <div class="col-10">
+                        <div class="col">
                             @Html.DropDownListFor(model => model.PlayerId, ViewData["Players"] as IEnumerable<SelectListItem>, htmlAttributes: new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.PlayerId, "", new { @class = "text-danger" })
                         </div>
+                        <div class="col pt-3">
+                            <a class="btn btn-info" style="font-size: 20px;" href="@Url.Content("~/Player/Create")">
+                                <i class="fas fa-running text-warning" style="font-size: 24px;"></i> New Player
+                            </a>
+                            Don't see the Player you're looking for?
+                        </div>
                     </div>
-
+                    <!--category-->
                     <div class="form-group">
                         @Html.LabelFor(model => model.MomentCategory, htmlAttributes: new { @class = "control-label col" })
                         <div class="col-10">
@@ -48,15 +55,15 @@
                             @Html.ValidationMessageFor(model => model.MomentCategory, "", new { @class = "text-danger" })
                         </div>
                     </div>
-
+                    <!--date-->
                     <div class="form-group">
                         @Html.LabelFor(model => model.DateOfMoment, htmlAttributes: new { @class = "control-label col" })
                         <div class="col-10">
-                            @Html.EditorFor(model => model.DateOfMoment, new { htmlAttributes = new { @class = "form-control", placeholder = "Ex. \"Jan 8 2019\"" } })
+                            @Html.EditorFor(model => model.DateOfMoment, new { htmlAttributes = new { @class = "form-control", placeholder = "Ex. \"January 8 2019\"" } })
                             @Html.ValidationMessageFor(model => model.DateOfMoment, "", new { @class = "text-danger" })
                         </div>
                     </div>
-
+                    <!--set-->
                     <div class="form-group">
                         @Html.LabelFor(model => model.MomentSet, htmlAttributes: new { @class = "control-label col" })
                         <div class="col-10">
@@ -64,7 +71,7 @@
                             @Html.ValidationMessageFor(model => model.MomentSet, "", new { @class = "text-danger" })
                         </div>
                     </div>
-
+                    <!--series-->
                     <div class="form-group">
                         @Html.LabelFor(model => model.MomentSeries, htmlAttributes: new { @class = "control-label col" })
                         <div class="col-10">
@@ -72,18 +79,18 @@
                             @Html.ValidationMessageFor(model => model.MomentSeries, "", new { @class = "text-danger" })
                         </div>
                     </div>
-
+                    <!--serial-->
                     <div class="form-group">
                         @Html.LabelFor(model => model.MomentSerialNumber, htmlAttributes: new { @class = "control-label col" })
                         <div class="col-10">
                             <div class="row">
                                 <div class="col">
-                                    @Html.EditorFor(model => model.MomentSerialNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.MomentSerialNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "\"Serial Number\"" } })
                                     @Html.ValidationMessageFor(model => model.MomentSerialNumber, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="col-1"><h3>/</h3></div>
                                 <div class="col">
-                                    @Html.EditorFor(model => model.MomentCirculatingCount, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.MomentCirculatingCount, new { htmlAttributes = new { @class = "form-control", placeholder = "\"Edition Size\"" } })
                                     @Html.ValidationMessageFor(model => model.MomentCirculatingCount, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -91,8 +98,9 @@
                     </div>
                 </div><!--col-->
 
+                <!--col right-->
                 <div class="col-6">
-
+                    <!--tier-->
                     <div class="form-group">
                         @Html.LabelFor(model => model.MomentTier, htmlAttributes: new { @class = "control-label col" })
                         <div class="col-10">
@@ -100,7 +108,7 @@
                             @Html.ValidationMessageFor(model => model.MomentTier, "", new { @class = "text-danger" })
                         </div>
                     </div>
-
+                    <!--mint-->
                     <div class="form-group">
                         @Html.LabelFor(model => model.MomentMint, htmlAttributes: new { @class = "control-label col" })
                         <div class="col-10">
@@ -108,7 +116,7 @@
                             @Html.ValidationMessageFor(model => model.MomentMint, "", new { @class = "text-danger" })
                         </div>
                     </div>
-
+                    <!--pack purchase-->
                     <div class="form-group">
                         @Html.LabelFor(model => model.PurchasedInPack, htmlAttributes: new { @class = "control-label col" })
                         <div class="col-10">
@@ -117,23 +125,23 @@
                             @Html.ValidationMessageFor(model => model.PurchasedInPack, "", new { @class = "text-danger" })
                         </div>
                     </div>
-
+                    <!--pack amount-->
                     <div class="form-group">
                         @Html.LabelFor(model => model.AmountInPack, htmlAttributes: new { @class = "control-label col" })
                         <div class="col-10">
-                            @Html.EditorFor(model => model.AmountInPack, new { htmlAttributes = new { id = "denom", onkeyup = "quotient()", @class = "form-control", placeholder = "If \"No\", leave blank" } })
+                            @Html.EditorFor(model => model.AmountInPack, new { htmlAttributes = new { id = "denom", onkeyup = "quotient()", @class = "form-control", placeholder = "If \"No\" is selected, please leave blank." } })
                             @Html.ValidationMessageFor(model => model.AmountInPack, "", new { @class = "text-danger" })
                         </div>
                     </div>
-
+                    <!--pack price-->
                     <div class="form-group">
                         @Html.LabelFor(model => model.PackPrice, htmlAttributes: new { @class = "control-label col" })
                         <div class="col-10">
-                            @Html.EditorFor(model => model.PackPrice, new { htmlAttributes = new { id = "num", onkeyup = "quotient()", @class = "form-control", placeholder = "If \"No\", leave blank" } })
+                            @Html.EditorFor(model => model.PackPrice, new { htmlAttributes = new { id = "num", onkeyup = "quotient()", @class = "form-control", placeholder = "If \"No\" is selected, please leave blank." } })
                             @Html.ValidationMessageFor(model => model.PackPrice, "", new { @class = "text-danger" })
                         </div>
                     </div>
-
+                    <!--individual price-->
                     <div class="form-group">
                         @Html.LabelFor(model => model.IndividualMomentPrice, htmlAttributes: new { @class = "control-label col" })
                         <div class="col-10">
@@ -141,26 +149,26 @@
                             @Html.ValidationMessageFor(model => model.IndividualMomentPrice, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                </div>
-            </div>
+                </div><!--col-->
+            </div><!--row-->
         </div><!--container-->
-
+        
+    <!--submit/nav buttons-->
         <div class="container p-3">
-            <div class="row">
+            <div class="row text-right">
                 <div class="col form-group">
                     <button type="submit" class="btn btn-outline-info submit_button" style="font-size: 20px;">
                         <i class="fas fa-basketball-ball text-warning" style="font-size: 24px;"></i>
                         Add Asset
                     </button>
+                    <a class="btn btn-outline-info" style="font-size: 20px;" href="@Url.Content("~/Moment/Index")">
+                        <i class="fas fa-arrow-left text-warning" style="font-size: 24px;"></i> Back to Assets
+                    </a>
                 </div>
             </div>
         </div>
     </div><!--form-->
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
 

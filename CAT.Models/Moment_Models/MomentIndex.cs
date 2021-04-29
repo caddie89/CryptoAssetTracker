@@ -77,14 +77,14 @@ namespace CAT.Models.Moment_Models
             }
         }
 
-        public string TotalMomentProfitLoss
+        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
+        public decimal TotalMomentProfitLoss
         {
             get
             {
                 decimal profitLoss = SoldMomentTotalValue - OriginalMomentTotalValue;
                 profitLoss = Math.Truncate(100 * profitLoss) / 100;
-                string pL = profitLoss.ToString("C", new CultureInfo("en-US"));
-                return pL;
+                return profitLoss;
             }
         }
 
@@ -105,7 +105,6 @@ namespace CAT.Models.Moment_Models
                 if (SoldMomentTotalValue != 0)
                 {
                     var ROI = (SoldMomentTotalValue - OriginalMomentTotalValue) / OriginalMomentTotalValue;
-                    //var displayROI = $"{ROI:P}";
                     return ROI;
                 }
                 return 0m;

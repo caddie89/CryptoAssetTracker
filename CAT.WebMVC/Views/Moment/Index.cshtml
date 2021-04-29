@@ -24,8 +24,7 @@
             </h3>
             @if (Model.Any())
             {
-                var profitLoss = Model.Last().SoldMomentTotalValue - Model.Last().OriginalMomentTotalValue;
-                profitLoss = Math.Truncate(100 * profitLoss) / 100;
+                var profitLoss = Model.Last().TotalMomentProfitLoss;
 
                 <h3 class="@(profitLoss > 0 ? "greenbox" : "redbox")">
                     @Html.DisplayFor(modelItem => Model.Last().TotalMomentProfitLoss)
@@ -83,6 +82,7 @@
 </div><!--container-->
 
 <div class="container containerGradient">
+
     @if (TempData.ContainsKey("SaveResult"))
     {
         <div class="alert alert-success fade in" role="alert">
