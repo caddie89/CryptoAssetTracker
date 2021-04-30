@@ -52,5 +52,7 @@ namespace CAT.Models.Moment_Models
 
         [Display(Name = "Individual Price")]
         public decimal IndividualMomentPrice { get; set; }
+
+        //public IEnumerable<SelectListItem> PlayerList { get; set; }
     }
 }

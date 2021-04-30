@@ -13,7 +13,7 @@
             </h3>
             @if (Model.Any())
             {
-                <h3 class="@(Model.Last().MomentTotalValue > 0 ? "greenbox" : "redbox")">
+                <h3 class="@(Model.Last().MomentTotalValue >= 0 ? "greenbox" : "redbox")">
                     @Html.DisplayFor(modelItem => Model.Last().DisplayMomentTotalValue)
                 </h3>
             }
@@ -26,7 +26,7 @@
             {
                 var profitLoss = Model.Last().TotalMomentProfitLoss;
 
-                <h3 class="@(profitLoss > 0 ? "greenbox" : "redbox")">
+                <h3 class="@(profitLoss >= 0 ? "greenbox" : "redbox")">
                     @Html.DisplayFor(modelItem => Model.Last().TotalMomentProfitLoss)
                 </h3>
             }
@@ -44,7 +44,6 @@
                     @Html.DisplayFor(modelItem => displayROI)
                 </h3>
             }
-
         </section>
         <section class="col">
             <h3 class="font-weight-bold">
@@ -60,23 +59,23 @@
 <br />
 
 <!--Header information above table w/"add" button-->
-<div class="container text-info">
+<div class="container text-info p-2">
     <div class="row" style="min-height: 8vh;">
         <section class="col align-self-end">
             <h1 style="font-weight: 500">
                 Assets
             </h1>
         </section>
-        <section class="col align-self-end text-right">
-            <a class="btn btn-outline-info" style="font-size: 20px;" href="@Url.Content("~/Moment/Create")">
-                <i class="fas fa-basketball-ball text-warning" style="font-size: 24px;"></i> Add Asset
-            </a>
-        </section>
         <div class="w-100"></div>
         <section class="col align-self-center">
             <span style="font-weight: 200">
                 Below is a list of all Assets.
             </span>
+        </section>
+        <section class="col align-self-center text-right">
+            <a class="btn btn-outline-info" style="font-size: 20px;" href="@Url.Content("~/Moment/Create")">
+                <i class="fas fa-basketball-ball text-warning" style="font-size: 24px;"></i> New Asset
+            </a>
         </section>
     </div><!--row-->
 </div><!--container-->
@@ -115,40 +114,40 @@
                 @Html.DisplayNameFor(model => model.MomentSerialNumber)
             </th>
             <th></th>
+            <th></th>
         </tr>
 
         @foreach (var item in Model)
         {
             var mint = (int)item.MomentMint;
-
             <tr>
-                <td>
+                <td style="vertical-align: middle">
                     @Html.DisplayFor(modelItem => item.PlayerFullName)
                 </td>
-                <td>
+                <td style="vertical-align: middle">
                     @Html.DisplayFor(modelItem => item.DisplayIndividualMomentPrice)
                 </td>
-                <td>
+                <td style="vertical-align: middle">
                     @Html.DisplayFor(modelItem => item.MomentComplete)
                 </td>
-                <td>
+                <td style="vertical-align: middle">
                     @Html.DisplayFor(modelItem => item.MomentCategory)
                 </td>
-                <td>
+                <td style="vertical-align: middle">
                     @Html.DisplayFor(modelItem => item.MomentSet)
                 </td>
-                <td>
+                <td style="vertical-align: middle">
                     @Html.DisplayFor(modelItem => item.SerialComplete)
                 </td>
-                <td>
+                <td style="vertical-align: middle">
                     <span class="@(mint == 1 ? "limited" : "common")">
                         @Html.DisplayFor(modelItem => item.Mint)
                     </span>
                 </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.MomentId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.MomentId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.MomentId })
+                <td style="vertical-align: middle">
+                    @*@Html.ActionLink("Modify", "Edit", new { id = item.MomentId }, htmlAttributes: new { @class = "btn btn-info" }) |*@
+                    @Html.ActionLink("Inspect", "Details", new { id = item.MomentId }, htmlAttributes: new { @class = "btn btn-info" })
+                    @*@Html.ActionLink("Remove", "Delete", new { id = item.MomentId }, htmlAttributes: new { @class = "btn btn-info" })*@
                 </td>
             </tr>
         }

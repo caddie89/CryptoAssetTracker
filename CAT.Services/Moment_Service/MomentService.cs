@@ -208,8 +208,7 @@ namespace CAT.Services.Moment_Service
                 entity.PackPrice = model.PackPrice;
                 entity.IndividualMomentPrice = model.IndividualMomentPrice;
 
-                return ctx.SaveChanges() >= 0;
-
+                return ctx.SaveChanges() == 1;
             }
         }
 
@@ -229,7 +228,7 @@ namespace CAT.Services.Moment_Service
             }
         }
 
-        // Populate Player Drop-Down List (Create)
+        // Populate Player Drop-Down List
         public IEnumerable<SelectListItem> SelectPlayers()
         {
             using (var ctx = new ApplicationDbContext())
@@ -264,6 +263,7 @@ namespace CAT.Services.Moment_Service
                     ctx
                     .Players
                     .OrderBy(p => p.PlayerLastName)
+                    .Where(e => e.OwnerId == _userId)
                     .Select(
                      p =>
                      new SelectListItem
@@ -273,6 +273,7 @@ namespace CAT.Services.Moment_Service
                      });
 
                 var playerList = query.ToList();
+
                 playerList.Add(new SelectListItem { Text = "Unknown", Value = "" });
                 playerList.Insert(0, new SelectListItem { Text = "Select", Value = "" });
                 return playerList;

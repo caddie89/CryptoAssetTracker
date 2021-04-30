@@ -68,8 +68,8 @@ namespace CAT.WebMVC.Controllers.Moment
         {
             var service = CreateMomentService();
             var detail = service.GetMomentDetails(id);
-            var playerList = service.PlayersList();
-            ViewData["Players"] = playerList;
+            var playerList = service.SelectPlayers();
+            ViewBag.PlayerList = playerList;
 
             var model =
                 new MomentEdit
