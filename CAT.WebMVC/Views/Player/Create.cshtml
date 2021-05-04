@@ -9,7 +9,7 @@
     @Html.AntiForgeryToken()
 
     <!--header information-->
-    <div class="container text-info p-3">
+    <div class="container text-info p-3" style="min-width: 1000px;">
         <div class="row" style="min-height: 8vh;">
             <section class="col align-self-end">
                 <h1 style="font-weight: 500">
@@ -29,7 +29,7 @@
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="container containerGradient">
+        <div class="container containerGradient" style="min-width: 1000px;">
             <div class="row align-items-center d-flex justify-content-center p-4">
                 <div class="col-lg-4 col-lg-offset-4" bg-success">
 
@@ -69,7 +69,7 @@
         </div><!--container-->
 
         <!--submit/nav buttons-->
-        <div class="container p-3">
+        <div class="container p-3" style="min-width: 1000px;">
             <div class="row text-right">
                 <div class="col form-group">
                     <button type="submit" class="btn btn-outline-info submit_button" style="font-size: 20px;">

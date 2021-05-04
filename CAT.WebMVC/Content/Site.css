@@ -42,7 +42,7 @@ body {
 }
 
 .limited {
-    padding: 1px 5px 1px 5px;
+    padding: 1px 8px 1px 8px;
     background: rgba(33, 33, 33, 0.9);
     color: rgb(120, 225, 0);
     border: 2px solid rgba(120, 225, 0, 1);
@@ -88,7 +88,7 @@ body {
 }
 
 .topdiv {
-    height: 40vh;
+    height: 43vh;
     background-color: #212121;
     position: relative;
 }
@@ -100,6 +100,7 @@ body {
 }
 
 .containerGradient {
+    min-width: 1000px;
     border-radius: 15px;
     border: 2px solid #BDBDBD;
     background-image: linear-gradient(#EEEEEE, #BDBDBD);
@@ -119,18 +120,45 @@ h3 {
     text-align: right;
 }
 
-.card_container {
+.picture_container {
     position: relative;
     text-align: center;
     color: white;
 }
 
-.card_container_text {
+.bottom_right_text {
     position: absolute;
-    top: 8px;
-    left: 16px;
+    bottom: 0px;
+    right: 10px;
 }
 
-.rotated {
-    transform: rotate(270deg);
+.top_left_text {
+    position: absolute;
+    top: 0px;
+    left: 10px;
 }
+
+.tableHeadText {
+    font-size: 20px;
+}
+
+.playerHover:hover {
+    color: white !important;
+    text-decoration: none;
+}
+
+.playerText {
+    color: #17A2B8;
+    font-size: 18px;
+}
+
+.table-responsive {
+    overflow-x: visible !important;
+}
+
+
+
+
+
+
+

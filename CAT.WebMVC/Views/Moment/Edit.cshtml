@@ -9,16 +9,16 @@
     @Html.AntiForgeryToken()
 
     <!--header information-->
-    <div class="container text-info p-3">
+    <div class="container text-info p-3" style="min-width: 1000px;">
         <div class="row" style="min-height: 8vh;">
             <section class="col align-self-end">
-                <h1 style="font-weight: 500">
+                <h1 class="display-4" style="font-weight: 500">
                     Modify Asset
                 </h1>
             </section>
             <div class="w-100"></div>
             <section class="col align-self-center">
-                <span style="font-weight: 200">
+                <span style="font-weight: 200; font-size: 18px;">
                     To modify Asset, fill out the form below.
                 </span>
             </section>
@@ -30,7 +30,7 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.MomentId)
 
-        <div class="container containerGradient">
+        <div class="container containerGradient" style="min-width: 1000px;">
             <div class="row align-items-center p-3">
                 <!--col left-->
                 <div class="col-6">
@@ -38,8 +38,6 @@
                     <div class="form-group">
                         @Html.Label("Player", htmlAttributes: new { @class = "control-label col" })
                         <div class="col">
-                            @*@Html.DropDownList("Players")*@
-                            @*@Html.DropDownList("PlayerList", (IEnumerable<SelectListItem>)ViewData["PlayerList"])*@
                             @Html.DropDownListFor(model => model.PlayerId, (IEnumerable<SelectListItem>)ViewBag.PlayerList, htmlAttributes: new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.PlayerId, "", new { @class = "text-danger" })
                         </div>
@@ -155,11 +153,11 @@
             </div><!--row-->
         </div><!--container-->
         <!--submit/nav buttons-->
-        <div class="container p-3">
+        <div class="container p-3" style="min-width: 1000px;">
             <div class="row text-right">
                 <div class="col form-group">
                     <button type="submit" class="btn btn-outline-info submit_button" style="font-size: 20px;">
-                        <i class="fas fa-basketball-ball text-warning" style="font-size: 24px;"></i>
+                        <i class="fas fa-edit text-warning" style="font-size: 24px;"></i>
                         Modify Asset
                     </button>
                     <a class="btn btn-outline-info" style="font-size: 20px;" href="@Url.Content("~/Moment/Index")">
