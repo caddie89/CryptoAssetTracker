@@ -35,9 +35,13 @@ namespace CAT.Data.Entities
     public enum PlayerPosition
     {
         Center = 1,
+        [Display(Name = "Power Forward")]
         PowerForward,
+        [Display(Name = "Small Forward")]
         SmallForward,
+        [Display(Name = "Point Guard")]
         PointGuard,
+        [Display(Name = "Shooting Guard")]
         ShootingGuard
     }
 }

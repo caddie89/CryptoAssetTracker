@@ -41,6 +41,7 @@
                 var displayROI = $"{ROI:P}";
 
                 <h3 class="@(Model.Last().DisplayROI >= 0 ? "greenbox" : "redbox")">
+
                     @Html.DisplayFor(modelItem => displayROI)
                 </h3>
             }
@@ -69,25 +70,26 @@
         <div class="w-100"></div>
         <section class="col align-self-center">
             <span style="font-weight: 200; font-size: 18px;">
-                Below is a list of all assets.
+                Below is a list of all Assets.
             </span>
         </section>
     </div><!--row-->
 </div><!--container-->
 
+@if (TempData.ContainsKey("SaveResult"))
+{
+<div class="container" style="min-width: 1000px;">
+    <div class="alert alert-success carousel-fade" role="alert">
+        @ViewBag.SaveResult
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+        @TempData["SaveResult"]
+    </div>
+</div>
+}
+
 <div class="container containerGradient" style="min-width: 1000px;">
-
-    @if (TempData.ContainsKey("SaveResult"))
-    {
-        <div class="alert alert-success fade in" role="alert">
-            @ViewBag.SaveResult
-            <button type="button" class="close" data-dismiss="alert">
-                <span>&times;</span>
-            </button>
-            @TempData["SaveResult"]
-        </div>
-    }
-
     <table class="table">
         <tr>
             <th class="tableHeadText">
@@ -112,12 +114,12 @@
             <th></th>
         </tr>
 
-        @foreach (var item in Model)
-                {
-                    var playerName = @Html.DisplayFor(modelItem => item.PlayerFullName);
-                    var player = playerName.ToString();
+        @foreach (var item in Model.OrderBy(i => i.PlayerLastName))
+        {
+            var playerName = @Html.DisplayFor(modelItem => item.PlayerFullName);
+            var player = playerName.ToString();
 
-                    var mint = (int)item.MomentMint;
+            var mint = (int)item.MomentMint;
             <tr>
                 <td style="vertical-align: middle;">
                     @Html.ActionLink(player, "Details", "Player", new { id = item.PlayerId }, htmlAttributes: new { @class = "playerHover playerText" })
@@ -164,15 +166,14 @@
 @section Scripts{
 
     <!--save-->
-
     @*<script type="text/javascript">
-    $(document).ready(function () {
-      $('#btnMomentCreate').click(function (e)
-      {
-          location.href = '@Url.Content("~/Moment/Create")';
-      });
-    });
-    </script>*@
+        $(document).ready(function () {
+          $('#btnMomentCreate').click(function (e)
+          {
+              location.href = '@Url.Content("~/Moment/Create")';
+          });
+        });
+        </script>*@
 
 }
 

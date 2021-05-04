@@ -46,11 +46,11 @@ namespace CAT.WebMVC.Controllers.Moment
 
             if (service.CreateMoment(model))
             {
-                TempData["SaveResult"] = "Moment was successfully created.";
+                TempData["SaveResult"] = "Asset was successfully added!";
                 return RedirectToAction("Index");
             }
 
-            ModelState.AddModelError("", "Moment could not be created. Please make sure that all required input fields are populated.");
+            ModelState.AddModelError("", "Asset could not be created. Please make sure that all required input fields are populated.");
 
             return View(model);
         }
@@ -111,11 +111,11 @@ namespace CAT.WebMVC.Controllers.Moment
 
             if (service.EditMoment(model))
             {
-                TempData["SaveResult"] = "Moment was successfully updated.";
+                TempData["SaveResult"] = "Asset was successfully updated!";
                 return RedirectToAction("Index");
             }
 
-            ModelState.AddModelError("", "Moment could not be updated. Please make sure that all required input fields are populated.");
+            ModelState.AddModelError("", "Asset could not be updated. Please make sure that all required input fields are populated.");
 
             return View(model);
         }
@@ -139,7 +139,7 @@ namespace CAT.WebMVC.Controllers.Moment
 
             service.DeleteMoment(id);
 
-            TempData["SaveResult"] = "Moment was successfully deleted.";
+            TempData["SaveResult"] = "Asset was successfully removed!";
 
             return RedirectToAction("Index");
         }

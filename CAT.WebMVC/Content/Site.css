@@ -42,7 +42,7 @@ body {
 }
 
 .limited {
-    padding: 1px 8px 1px 8px;
+    padding: 1px 7px 1px 7px;
     background: rgba(33, 33, 33, 0.9);
     color: rgb(120, 225, 0);
     border: 2px solid rgba(120, 225, 0, 1);
@@ -50,7 +50,7 @@ body {
 }
 
 .common {
-    padding: 1px 5px 1px 5px;
+    padding: 1px 6px 1px 6px;
     background: rgba(33, 33, 33, .9);
     color: dodgerblue;
     border: 2px solid dodgerblue;
