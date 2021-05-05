@@ -3,6 +3,7 @@ using CAT.Data.Entities;
 using CAT.Models;
 using CAT.Models.Moment_Models;
 using CAT.Models.Player_Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace CAT.Services.Player_Service
                     PositionOfPlayer = model.PositionOfPlayer,
                     PlayerTeam = model.PlayerTeam
                 };
-            
+
             using (var ctx = new ApplicationDbContext())
             {
                 ctx.Players.Add(entity);
@@ -41,7 +42,7 @@ namespace CAT.Services.Player_Service
         }
 
         // Get Player Index
-        public IEnumerable<PlayerIndex> GetPlayerIndex()
+        public IEnumerable<PlayerIndex> GetPlayerIndex(int? page)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -59,7 +60,8 @@ namespace CAT.Services.Player_Service
                             PositionOfPlayer = e.PositionOfPlayer,
                             PlayerTeam = e.PlayerTeam
                         });
-                return query.ToArray();
+
+                    return query.ToArray().ToPagedList(page ?? 1, 6);
             }
         }
 

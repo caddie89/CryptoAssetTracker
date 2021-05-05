@@ -78,77 +78,83 @@
 
 @if (TempData.ContainsKey("SaveResult"))
 {
-<div class="container" style="min-width: 1000px;">
-    <div class="alert alert-success carousel-fade" role="alert">
-        @ViewBag.SaveResult
-        <button type="button" class="close" data-dismiss="alert">
-            <span>&times;</span>
-        </button>
-        @TempData["SaveResult"]
+    <div class="container" style="min-width: 1000px;">
+        <div class="alert alert-success carousel-fade" role="alert">
+            @ViewBag.SaveResult
+            <button type="button" class="close" data-dismiss="alert">
+                <span>&times;</span>
+            </button>
+            @TempData["SaveResult"]
+        </div>
     </div>
-</div>
 }
+
+
 
 <div class="container containerGradient" style="min-width: 1000px;">
     <table class="table">
-        <tr>
-            <th class="tableHeadText">
-                @Html.DisplayNameFor(model => model.PlayerFullName)
-            </th>
-            <th class="tableHeadText">
-                @Html.Label("Price")
-            </th>
-            <th class="tableHeadText">
-                @Html.DisplayNameFor(model => model.MomentComplete)
-            </th>
-            <th class="tableHeadText">
-                @Html.DisplayNameFor(model => model.MomentCategory)
-            </th>
-            <th class="tableHeadText">
-                @Html.DisplayNameFor(model => model.MomentSet)
-            </th>
-            <th class="tableHeadText">
-                @Html.DisplayNameFor(model => model.MomentSerialNumber)
-            </th>
-            <th></th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model.OrderBy(i => i.PlayerLastName))
-        {
-            var playerName = @Html.DisplayFor(modelItem => item.PlayerFullName);
-            var player = playerName.ToString();
-
-            var mint = (int)item.MomentMint;
+        <thead>
             <tr>
-                <td style="vertical-align: middle;">
-                    @Html.ActionLink(player, "Details", "Player", new { id = item.PlayerId }, htmlAttributes: new { @class = "playerHover playerText" })
-                </td>
-                <td style="vertical-align: middle">
-                    @Html.DisplayFor(modelItem => item.DisplayIndividualMomentPrice)
-                </td>
-                <td style="vertical-align: middle">
-                    @Html.DisplayFor(modelItem => item.MomentComplete)
-                </td>
-                <td style="vertical-align: middle">
-                    @Html.DisplayFor(modelItem => item.MomentCategory)
-                </td>
-                <td style="vertical-align: middle">
-                    @Html.DisplayFor(modelItem => item.MomentSet)
-                </td>
-                <td style="vertical-align: middle">
-                    @Html.DisplayFor(modelItem => item.SerialComplete)
-                </td>
-                <td style="vertical-align: middle">
-                    <span class="@(mint == 1 ? "limited" : "common")">
-                        @Html.DisplayFor(modelItem => item.Mint)
-                    </span>
-                </td>
-                <td style="vertical-align: middle">
-                    @Html.ActionLink("Inspect/Manage", "Details", new { id = item.MomentId }, htmlAttributes: new { @class = "btn btn-info" })
-                </td>
+                <th class="tableHeadText">
+                    @Html.DisplayNameFor(model => model.PlayerFullName)
+                </th>
+                <th class="tableHeadText">
+                    Price
+                </th>
+                <th class="tableHeadText">
+                    @Html.DisplayNameFor(model => model.MomentComplete)
+                </th>
+                <th class="tableHeadText">
+                    @Html.DisplayNameFor(model => model.MomentCategory)
+                </th>
+                <th class="tableHeadText">
+                    @Html.DisplayNameFor(model => model.MomentSet)
+                </th>
+                <th class="tableHeadText">
+                    @Html.DisplayNameFor(model => model.MomentSerialNumber)
+                </th>
+                <th></th>
+                <th></th>
             </tr>
-        }
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model.OrderBy(i => i.PlayerLastName))
+            {
+                var playerName = @Html.DisplayFor(modelItem => item.PlayerFullName);
+                var player = playerName.ToString();
+
+                var mint = (int)item.MomentMint;
+                <tr>
+                    <td style="vertical-align: middle;">
+                        @Html.ActionLink(player, "Details", "Player", new { id = item.PlayerId }, htmlAttributes: new { @class = "playerHover playerText" })
+                    </td>
+                    <td style="vertical-align: middle">
+                        @Html.DisplayFor(modelItem => item.DisplayIndividualMomentPrice)
+                    </td>
+                    <td style="vertical-align: middle">
+                        @Html.DisplayFor(modelItem => item.MomentComplete)
+                    </td>
+                    <td style="vertical-align: middle">
+                        @Html.DisplayFor(modelItem => item.MomentCategory)
+                    </td>
+                    <td style="vertical-align: middle">
+                        @Html.DisplayFor(modelItem => item.MomentSet)
+                    </td>
+                    <td style="vertical-align: middle">
+                        @Html.DisplayFor(modelItem => item.SerialComplete)
+                    </td>
+                    <td style="vertical-align: middle">
+                        <span class="@(mint == 1 ? "limited" : "common")">
+                            @Html.DisplayFor(modelItem => item.Mint)
+                        </span>
+                    </td>
+                    <td style="vertical-align: middle">
+                        @Html.ActionLink("Inspect/Manage", "Details", new { id = item.MomentId }, htmlAttributes: new { @class = "btn btn-info" })
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
 </div>
 
@@ -164,6 +170,18 @@
 </div>
 
 @section Scripts{
+
+    @*id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%"*@
+
+    @*<script type="text/javascript">
+            // Basic example
+            $(document).ready(function () {
+                $('#dtBasicExample').DataTable({
+                    "pagingType": "full_numbers" // "simple" option for 'Previous' and 'Next' buttons only
+                });
+                $('.dataTables_length').addClass('bs-select');
+            });
+        </script>*@
 
     <!--save-->
     @*<script type="text/javascript">

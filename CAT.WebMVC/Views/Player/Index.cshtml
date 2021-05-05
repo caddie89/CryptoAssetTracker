@@ -1,4 +1,7 @@
-﻿@model IEnumerable<CAT.Models.PlayerIndex>
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<CAT.Models.PlayerIndex>
 
 @{
     ViewBag.Title = "Index";
@@ -40,9 +43,9 @@
         @foreach (var item in Model.OrderBy(i => i.PlayerLastName))
         {
             <div class="col-4 pb-4">
-                <div class="card mx-auto">
+                <div class="card mx-auto box_shadow">
                     <div class="picture_container">
-                        <img class="card-img-top" src="~/Images/500x500_placeholder.png" alt="Player Picture Placeholder" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" />
+                        <img class="card-img-top box_shadow" src="~/Images/500x500_placeholder.png" alt="Player Picture Placeholder" />
                         <h2 class="top_left_text text-white">
                             @Html.DisplayFor(itemModel => item.PlayerFullName)
                         </h2>
@@ -51,7 +54,7 @@
                         <div class="row no-gutters d-flex justify-content-center">
                             <section class="col-5">
                                 <h5 class="text-info">
-                                    @Html.DisplayFor(modelItem => item.Position)
+                                    @Html.DisplayFor(itemModel => item.Position)
                                 </h5>
                                 <hr class="bg-dark" />
                             </section>
@@ -60,7 +63,7 @@
                             </section>
                             <section class="col-5">
                                 <h5 class="text-info">
-                                    @Html.DisplayFor(modelItem => item.PlayerTeam)
+                                    @Html.DisplayFor(itemModel => item.PlayerTeam)
                                 </h5>
                                 <hr class="bg-dark" />
                             </section>
@@ -85,15 +88,18 @@
             </div><!--col-->
         } <!--end foreach-->
     </div><!--row-->
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+        </div>
+    </div><!--page navigation-->
 </div><!--container-->
+
+<br />
+<br />
+
 @section Scripts {
 
-    <!--save-->
-    @*<script type="text/javascript">
-            $(document).ready(function () {
-                $('#myTable').DataTable();
-            });
-        </script>*@
 }
 
 

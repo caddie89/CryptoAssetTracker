@@ -1,6 +1,7 @@
 ﻿using CAT.Models.Player_Models;
 using CAT.Services.Player_Service;
 using Microsoft.AspNet.Identity;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace CAT.WebMVC.Controllers.Player
             return View();
         }
 
-        // PUT: Player/Create
+        // POST: Player/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(PlayerCreate model)
@@ -40,10 +41,10 @@ namespace CAT.WebMVC.Controllers.Player
         }
 
         // GET: Player/Index
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             var service = CreatePlayerService();
-            var model = service.GetPlayerIndex();
+            var model = service.GetPlayerIndex(page);
 
             return View(model);
         }
@@ -94,7 +95,7 @@ namespace CAT.WebMVC.Controllers.Player
             }
 
             ModelState.AddModelError("", "Player could not be updated. Please make sure that all required input fields are populated.");
-            return View(model);            
+            return View(model);
         }
 
         // GET: Player/Delete/{id}

@@ -29,8 +29,13 @@ textarea {
     max-height: 140px;
 }
 
-.nav-item:hover {
-    color: #FFC107 !important;
+.navlink_text {
+    font-size: 24px;
+}
+
+.navlink:hover {
+    font-size: 30px;
+    color: #ffc107 !important;
 }
 
 body {
@@ -154,6 +159,14 @@ h3 {
 
 .table-responsive {
     overflow-x: visible !important;
+}
+
+.box_shadow {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.search_box {
+    width: 200px;
 }
 
 
