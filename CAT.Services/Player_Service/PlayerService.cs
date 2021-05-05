@@ -113,7 +113,7 @@ namespace CAT.Services.Player_Service
                 entity.PositionOfPlayer = model.PositionOfPlayer;
                 entity.PlayerTeam = model.PlayerTeam;
 
-                return ctx.SaveChanges() == 1;
+                return ctx.SaveChanges() >= 0;
             }
         }
 

@@ -76,22 +76,19 @@
     </div><!--row-->
 </div><!--container-->
 
-@if (TempData.ContainsKey("SaveResult"))
-{
-    <div class="container" style="min-width: 1000px;">
-        <div class="alert alert-success carousel-fade" role="alert">
-            @ViewBag.SaveResult
-            <button type="button" class="close" data-dismiss="alert">
-                <span>&times;</span>
-            </button>
-            @TempData["SaveResult"]
+<div class="container containerGradient p-3" style="min-width: 1000px;">
+    @if (TempData.ContainsKey("SaveResult"))
+    {
+        <div class="container" style="min-width: 1000px;">
+            <div class="alert alert-success carousel-fade" role="alert">
+                @ViewBag.SaveResult
+                <button type="button" class="close" data-dismiss="alert">
+                    <span>&times;</span>
+                </button>
+                @TempData["SaveResult"]
+            </div>
         </div>
-    </div>
-}
-
-
-
-<div class="container containerGradient" style="min-width: 1000px;">
+    }
     <table class="table">
         <thead>
             <tr>
@@ -127,7 +124,7 @@
                 var mint = (int)item.MomentMint;
                 <tr>
                     <td style="vertical-align: middle;">
-                        @Html.ActionLink(player, "Details", "Player", new { id = item.PlayerId }, htmlAttributes: new { @class = "playerHover playerText" })
+                        @Html.ActionLink(player, "Details", "Player", new { id = item.PlayerId }, htmlAttributes: new { @class = "text-info text-decoration-none" })
                     </td>
                     <td style="vertical-align: middle">
                         @Html.DisplayFor(modelItem => item.DisplayIndividualMomentPrice)
@@ -170,28 +167,6 @@
 </div>
 
 @section Scripts{
-
-    @*id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%"*@
-
-    @*<script type="text/javascript">
-            // Basic example
-            $(document).ready(function () {
-                $('#dtBasicExample').DataTable({
-                    "pagingType": "full_numbers" // "simple" option for 'Previous' and 'Next' buttons only
-                });
-                $('.dataTables_length').addClass('bs-select');
-            });
-        </script>*@
-
-    <!--save-->
-    @*<script type="text/javascript">
-        $(document).ready(function () {
-          $('#btnMomentCreate').click(function (e)
-          {
-              location.href = '@Url.Content("~/Moment/Create")';
-          });
-        });
-        </script>*@
 
 }
 

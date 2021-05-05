@@ -4,16 +4,7 @@
     ViewBag.Title = "Delete";
 }
 
-@if (TempData.ContainsKey("SaveResult"))
-{
-    <div class="alert alert-success fade in" role="alert">
-        @ViewBag.SaveResult
-        <button type="button" class="close" data-dismiss="alert">
-            <span>&times;</span>
-        </button>
-        @TempData["SaveResult"]
-    </div>
-}
+
 
 <!--header information-->
 <div class="container text-danger p-3" style="min-width: 1000px;">
@@ -32,12 +23,22 @@
     </div><!--row-->
 </div><!--container-->
 
-<div class="container containerGradient card_container" style="min-width: 1000px">
+<div class="container containerGradient card_container p-3" style="min-width: 1000px">
+    @if (TempData.ContainsKey("SaveResult"))
+    {
+        <div class="alert alert-success fade in" role="alert">
+            @ViewBag.SaveResult
+            <button type="button" class="close" data-dismiss="alert">
+                <span>&times;</span>
+            </button>
+            @TempData["SaveResult"]
+        </div>
+    }
     <div class="row d-flex justify-content-center">
         <div class="col-6">
-            <div class="card mx-auto" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+            <div class="card mx-auto box_shadow">
                 <div class="picture_container">
-                    <img class="card-img-top" src="~/Images/500x500_placeholder.png" alt="Player Picture Placeholder" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                    <img class="card-img-top box_shadow" src="~/Images/500x500_placeholder.png" alt="Player Picture Placeholder">
                     @{var mint = (int)Model.MomentMint;}
                     <h1 class=" display-4 top_left_text text-white">
                         @Html.DisplayFor(model => model.MomentTier)

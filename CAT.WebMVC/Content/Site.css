@@ -147,13 +147,7 @@ h3 {
     font-size: 20px;
 }
 
-.playerHover:hover {
-    color: white !important;
-    text-decoration: none;
-}
-
 .playerText {
-    color: #17A2B8;
     font-size: 18px;
 }
 
@@ -168,6 +162,8 @@ h3 {
 .search_box {
     width: 200px;
 }
+
+
 
 
 

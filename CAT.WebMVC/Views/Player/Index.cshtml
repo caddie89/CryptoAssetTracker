@@ -24,21 +24,20 @@
     </div><!--row-->
 </div><!--container-->
 
-@if (TempData.ContainsKey("SaveResult"))
-{
-    <div class="container" style="min-width: 1000px;">
-        <div class="alert alert-success carousel-fade" role="alert">
-            @ViewBag.SaveResult
-            <button type="button" class="close" data-dismiss="alert">
-                <span>&times;</span>
-            </button>
-            @TempData["SaveResult"]
-        </div>
-    </div>
-}
-
 <!--container-->
 <div class="container containerGradient p-3" style="min-width: 1000px;">
+    @if (TempData.ContainsKey("SaveResult"))
+    {
+        <div class="container" style="min-width: 1000px;">
+            <div class="alert alert-success carousel-fade" role="alert">
+                @ViewBag.SaveResult
+                <button type="button" class="close" data-dismiss="alert">
+                    <span>&times;</span>
+                </button>
+                @TempData["SaveResult"]
+            </div>
+        </div>
+    }
     <div class="row d-flex justify-content-center">
         @foreach (var item in Model.OrderBy(i => i.PlayerLastName))
         {
@@ -72,7 +71,7 @@
                             <h6>Player Management</h6>
                             <a href="@Url.Action("Edit", "Player", new { id = item.PlayerId } )" class="btn btn-info" style="font-size: 16px;">
                                 <i class="fas fa-edit text-warning" style="font-size: 20px;"></i>
-                                Update
+                                Modify
                             </a>
                             <a href="@Url.Action("Details", "Player", new { id = item.PlayerId } )" class="btn btn-info" style="font-size: 16px;">
                                 <i class="fas fa-running text-warning" style="font-size: 20px;"></i>
@@ -94,6 +93,17 @@
         </div>
     </div><!--page navigation-->
 </div><!--container-->
+
+<!--add player-->
+<div class="container p-3" style="min-width: 1000px;">
+    <div class="row text-right">
+        <div class="col form-group">
+            <a class="btn btn-outline-info" style="font-size: 20px;" href="@Url.Content("~/Player/Create")">
+                <i class="fas fa-running text-warning" style="font-size: 24px;"></i> New Player
+            </a>
+        </div>
+    </div>
+</div>
 
 <br />
 <br />

@@ -117,7 +117,7 @@ namespace CAT.WebMVC.Controllers.Player
 
             service.DeletePlayer(id);
 
-            TempData["SaveResult"] = "Player was successfully delete.";
+            TempData["SaveResult"] = "Player was successfully removed.";
 
             return RedirectToAction("Index");
         }
