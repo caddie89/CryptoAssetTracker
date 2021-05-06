@@ -5,7 +5,7 @@
 }
 
 <div class="container containerGradient card_container p-3" style="min-width: 1000px">
-    <div class="row d-flex justify-content-center">
+    <div class="row d-flex justify-content-center pb-1">
         <div class="col-6">
             <div class="card mx-auto box_shadow">
                 <div class="picture_container">
@@ -35,7 +35,7 @@
                             <hr class="bg-dark" />
                         </section>
                     </div>
-                    
+
                     <h4 class="text-center mb-2">Collections</h4>
                     @foreach (var item in Model.Showcases)
                     {
@@ -46,27 +46,27 @@
                             @Html.ActionLink(showcase, "Details", "Showcase", new { id = item.ShowcaseId }, htmlAttributes: new { @class = "text-info text-decoration-none" })
                         </h5>
                     }
-                    <hr class="bg-dark" />
-                    <h3 class="text-center mb-2">Asset Management</h3>
-                    <p class="text-center text-muted">Manage Asset by selecting from one of the options below.</p>
-                    <div class="row text-center">
-                        <div class="col form-group">
-                            <a href="@Url.Action("Edit", "Moment", new { id = Model.MomentId } )" class="btn btn-info" style="font-size: 20px;">
-                                <i class="fas fa-edit text-warning" style="font-size: 24px;"></i>
-                                Modify
-                            </a>
-                            <a href="@Url.Action("Create", "SoldMoment", new { id = Model.MomentId } )" class="btn btn-info" style="font-size: 20px;">
-                                <i class="fas fa-coins text-warning" style="font-size: 24px;"></i>
-                                Sell
-                            </a>
-                            <a href="@Url.Action("Delete", "Moment", new { id = Model.MomentId } )" class="btn btn-info" style="font-size: 20px;">
-                                <i class="fas fa-trash text-warning" style="font-size: 24px;"></i>
-                                Remove
-                            </a>
-                        </div><!--col-->
-                    </div><!--row-->
                 </div><!--card text-->
             </div><!--card-->
+        </div><!--col-->
+    </div><!--row-->
+    <hr class="bg-dark" />
+    <h3 class="text-center mb-2">Asset Management</h3>
+    <p class="text-center text-muted">Manage Asset by selecting from one of the options below.</p>
+    <div class="row text-center">
+        <div class="col form-group">
+            <a href="@Url.Action("Edit", "Moment", new { id = Model.MomentId } )" class="btn btn-info" style="font-size: 20px;">
+                <i class="fas fa-edit text-warning" style="font-size: 24px;"></i>
+                Modify Asset
+            </a>
+            <a href="@Url.Action("Create", "SoldMoment", new { id = Model.MomentId } )" class="btn btn-info" style="font-size: 20px;">
+                <i class="fas fa-coins text-warning" style="font-size: 24px;"></i>
+                Sell Asset
+            </a>
+            <a href="@Url.Action("Delete", "Moment", new { id = Model.MomentId } )" class="btn btn-info" style="font-size: 20px;">
+                <i class="fas fa-trash text-warning" style="font-size: 24px;"></i>
+                Remove Asset
+            </a>
         </div><!--col-->
     </div><!--row-->
 </div><!--card container-->

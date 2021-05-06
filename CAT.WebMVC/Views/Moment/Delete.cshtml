@@ -67,11 +67,9 @@
                         var showcaseName = @Html.DisplayFor(modelItem => item.ShowcaseName);
                         var showcase = showcaseName.ToString();
 
-                        <h6 class="text-center">
-                            @Html.ActionLink(showcase, "Details", "Showcase", new { id = item.ShowcaseId }, htmlAttributes: new { @class = "playerHover playerText" })
-                            @Html.DisplayFor(modelItem => item.ShowcaseName)
-                            @Html.ActionLink("View Showcase", "Details", "Showcase", new { id = item.ShowcaseId }, null)
-                        </h6>
+                        <h5 class="text-center">
+                            @Html.ActionLink(showcase, "Details", "Showcase", new { id = item.ShowcaseId }, htmlAttributes: new { @class = "text-info text-decoration-none" })
+                        </h5>
                     }
                     <hr class="bg-dark" />
                     <h3 class="text-center mb-2">Are you sure you want to remove Asset?</h3>
