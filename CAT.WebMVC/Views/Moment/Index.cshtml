@@ -11,40 +11,25 @@
             <h3 class="font-weight-bold">
                 Asset Value:
             </h3>
-            @if (Model.Any())
-            {
-                <h3 class="@(Model.Last().MomentTotalValue >= 0 ? "greenbox" : "redbox")">
-                    @Html.DisplayFor(modelItem => Model.Last().DisplayMomentTotalValue)
-                </h3>
-            }
+            <h3 class="@((decimal)ViewData["AssetTotalValue"] >= 0 ? "greenbox" : "redbox")">
+                $@ViewData["AssetTotalValue"]
+            </h3>
         </div>
         <div class="col">
             <h3 class="font-weight-bold">
                 Profit/Loss:
             </h3>
-            @if (Model.Any())
-            {
-                var profitLoss = Model.Last().TotalMomentProfitLoss;
-
-                <h3 class="@(profitLoss >= 0 ? "greenbox" : "redbox")">
-                    @Html.DisplayFor(modelItem => Model.Last().TotalMomentProfitLoss)
-                </h3>
-            }
+            <h3 class="@((decimal)ViewData["ProfitLoss"] >= 0 ? "greenbox" : "redbox")">
+                $@ViewData["ProfitLoss"]
+            </h3>
         </div>
         <section class="col">
             <h3 class="font-weight-bold">
                 ROI:
             </h3>
-            @if (Model.Any())
-            {
-                var ROI = Model.Last().DisplayROI;
-                var displayROI = $"{ROI:P}";
-
-                <h3 class="@(Model.Last().DisplayROI >= 0 ? "greenbox" : "redbox")">
-
-                    @Html.DisplayFor(modelItem => displayROI)
-                </h3>
-            }
+            <h3 class="@((decimal)ViewData["ROI"] >= 0 ? "greenbox" : "redbox")">
+                @ViewData["ROI"]%
+            </h3>
         </section>
         <section class="col">
             <h3 class="font-weight-bold">
@@ -124,7 +109,7 @@
 
                 var mint = (int)item.MomentMint;
                 <tr>
-                    <td style="vertical-align: middle;">
+                    <td style="vertical-align: middle; font-size: 18px;">
                         @Html.ActionLink(player, "Details", "Player", new { id = item.PlayerId }, htmlAttributes: new { @class = "text-info text-decoration-none" })
                     </td>
                     <td style="vertical-align: middle">

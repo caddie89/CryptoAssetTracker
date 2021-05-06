@@ -50,13 +50,13 @@
             </div><!--card-->
         </div><!--col-->
     </div><!--row-->
-    <hr class="bg-dark" />
-    <h3 class="text-center mb-2">Asset Management</h3>
-    <p class="text-center text-muted">Manage Asset by selecting from one of the options below.</p>
-    <div class="row text-center">
+    <div class="row text-center pt-3">
+        <hr class="bg-dark" />
+        <h3 class="text-center mb-2">Asset Management</h3>
+        <p class="text-center text-muted">Manage Asset by selecting from one of the options below.</p>
         <div class="col form-group">
             <a href="@Url.Action("Edit", "Moment", new { id = Model.MomentId } )" class="btn btn-info" style="font-size: 20px;">
-                <i class="fas fa-edit text-warning" style="font-size: 24px;"></i>
+                <i class="far fa-edit text-warning" style="font-size: 24px;"></i>
                 Modify Asset
             </a>
             <a href="@Url.Action("Create", "SoldMoment", new { id = Model.MomentId } )" class="btn btn-info" style="font-size: 20px;">

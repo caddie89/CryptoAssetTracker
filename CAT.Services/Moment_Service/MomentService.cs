@@ -297,6 +297,92 @@ namespace CAT.Services.Moment_Service
                 return momentCount;
             }
         }
+
+        // Moment Total Value
+        public decimal MomentTotalValue()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query =
+                    ctx
+                    .Moments
+                    .Where(e => e.OwnerId == _userId)
+                    .Select(
+                        i =>
+                        i.IndividualMomentPrice)
+                        .DefaultIfEmpty(0)
+                        .Sum();
+
+                var momentTotalValue = query;
+
+                return momentTotalValue;
+            }
+        }
+
+        // Total Moment ProfitLoss
+        public decimal MomentTotalProfitLoss()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var soldMomentValue =
+                    ctx
+                    .SoldMoments
+                    .Where(e => e.OwnerId == _userId)
+                    .Select(
+                        i =>
+                        i.SoldForAmount)
+                        .DefaultIfEmpty(0)
+                        .Sum();
+
+                var originalMomentValue =
+                    ctx
+                    .SoldMoments
+                    .Where(o => o.OwnerId == _userId)
+                    .Select(
+                        i =>
+                        i.IndividualMomentPrice)
+                        .DefaultIfEmpty(0)
+                        .Sum();
+
+                decimal profitLoss = soldMomentValue - originalMomentValue;
+                profitLoss = Math.Truncate(100 * profitLoss) / 100;
+                return profitLoss;
+            }
+        }
+
+        // Moment ROI
+        public decimal MomentROI()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var soldMomentValue =
+                    ctx
+                    .SoldMoments
+                    .Where(e => e.OwnerId == _userId)
+                    .Select(
+                        i =>
+                        i.SoldForAmount)
+                        .DefaultIfEmpty(0)
+                        .Sum();
+
+                var originalMomentValue =
+                    ctx
+                    .SoldMoments
+                    .Where(o => o.OwnerId == _userId)
+                    .Select(
+                        i =>
+                        i.IndividualMomentPrice)
+                        .DefaultIfEmpty(0)
+                        .Sum();
+
+                if (soldMomentValue != 0)
+                {
+                    var ROI = (soldMomentValue - originalMomentValue) / originalMomentValue;
+                    return ROI;
+                }
+                return 0m;
+            }
+        }
     }
 }
 

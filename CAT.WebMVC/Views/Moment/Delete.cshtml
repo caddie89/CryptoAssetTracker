@@ -24,12 +24,14 @@
 <div class="container containerGradient card_container p-3" style="min-width: 1000px">
     @if (TempData.ContainsKey("SaveResult"))
     {
-        <div class="alert alert-success fade in" role="alert">
-            @ViewBag.SaveResult
-            <button type="button" class="close" data-dismiss="alert">
-                <span>&times;</span>
-            </button>
-            @TempData["SaveResult"]
+        <div class="container" style="min-width: 1000px;">
+            <div class="alert alert-success carousel-fade" role="alert">
+                @ViewBag.SaveResult
+                <button type="button" class="close" data-dismiss="alert">
+                    <span>&times;</span>
+                </button>
+                @TempData["SaveResult"]
+            </div>
         </div>
     }
     <div class="row d-flex justify-content-center">
@@ -71,27 +73,27 @@
                             @Html.ActionLink(showcase, "Details", "Showcase", new { id = item.ShowcaseId }, htmlAttributes: new { @class = "text-info text-decoration-none" })
                         </h5>
                     }
-                    <hr class="bg-dark" />
-                    <h3 class="text-center mb-2">Are you sure you want to remove Asset?</h3>
-                    <p class="text-center text-muted">Asset will be removed from any associated Collections.</p>
 
-                    <!--remove button-->
-                    <div class="row text-center">
-                        @using (Html.BeginForm())
-                        {
-                            @Html.AntiForgeryToken()
-
-                            <div class="col form-actions">
-                                <button type="submit" class="btn btn-danger" style="font-size: 20px;">
-                                    <i class="fas fa-trash text-white" style="font-size: 24px;"></i>
-                                    Remove Asset
-                                </button>
-                            </div><!--col-->
-                        }
-                    </div><!--row-->
                 </div><!--card text-->
             </div><!--card-->
         </div><!--col-->
+    </div><!--row-->
+    <!--remove button-->
+    <div class="row text-center pt-3">
+        <hr class="bg-dark" />
+        <h3 class="text-center mb-2">Are you sure you want to remove Asset?</h3>
+        <p class="text-center text-muted">Asset will be removed from any associated Collections.</p>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="col form-actions">
+                <button type="submit" class="btn btn-danger" style="font-size: 20px;">
+                    <i class="fas fa-trash text-white" style="font-size: 24px;"></i>
+                    Remove Asset
+                </button>
+            </div><!--col-->
+        }
     </div><!--row-->
 </div><!--card container-->
 

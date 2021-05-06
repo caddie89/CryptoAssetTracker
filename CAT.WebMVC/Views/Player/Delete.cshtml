@@ -70,30 +70,29 @@
                                 @Html.ActionLink(moment, "Details", "Moment", new { id = item.MomentId }, htmlAttributes: new { @class = "text-info text-decoration-none" })
                             </h5>
                         }
-                        <hr class="bg-dark" />
-                        <h3 class="text-center mb-2">Are you sure you want to remove Player?</h3>
-                        <p class="text-center text-muted">Player will be removed from any associated Assets.</p>
-
-                        <!--remove button-->
-                        <div class="row text-center">
-                            @using (Html.BeginForm())
-                            {
-                                @Html.AntiForgeryToken()
-
-                                <div class="col form-actions">
-                                    <button type="submit" class="btn btn-danger" style="font-size: 20px;">
-                                        <i class="fas fa-trash text-white" style="font-size: 24px;"></i>
-                                        Remove Player
-                                    </button>
-                                </div><!--col-->
-                            }
-                        </div><!--row-->
                     </div><!--card subtitle-->
                 </div><!--container-->
             </div><!--card-->
         </div><!--col-->
     </div><!--row-->
-</div>
+    <!--remove button-->
+    <div class="row text-center pt-3">
+        <hr class="bg-dark" />
+        <h3 class="text-center mb-2">Are you sure you want to remove Player?</h3>
+        <p class="text-center text-muted">Player will be removed from any associated Assets.</p>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="col form-actions">
+                <button type="submit" class="btn btn-danger" style="font-size: 20px;">
+                    <i class="fas fa-trash text-white" style="font-size: 24px;"></i>
+                    Remove Player
+                </button>
+            </div><!--col-->
+        }
+    </div><!--row-->
+</div><!--container-->
 
 <!--nav button-->
 <div class="container p-3" style="min-width: 1000px;">

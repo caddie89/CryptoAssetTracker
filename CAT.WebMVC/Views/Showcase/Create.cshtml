@@ -4,6 +4,7 @@
     ViewBag.Title = "Create";
 }
 
+<!--header-->
 <div class="container text-info p-2" style="min-width: 1000px;">
     <div class="row" style="min-height: 8vh;">
         <section class="col align-self-end">
@@ -25,9 +26,9 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <div class="container containerGradient" style="min-width: 1000px;">
+        <div class="container containerGradient p-3" style="min-width: 1000px;">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="row align-items-center d-flex justify-content-center p-4">
+            <div class="row align-items-center d-flex justify-content-center">
                 <div class="col-4">
                     <div class="form-group">
                         @Html.Label("Name", htmlAttributes: new { @class = "control-label col" })
@@ -45,8 +46,14 @@
                     </div>
                     <div class="form-group">
                         <div class="col">
-                            <p class="text-info" style="font-size: 20px;">That's it! Assets can be added to a Collection on the main Collections page.</p>
+                            <p style="font-size: 20px;">That's it! Assets can be added to a Collection on the main Collections page.</p>
                         </div>
+                    </div>
+                    <div class="col form-group">
+                        <button type="submit" class="btn btn-info" style="font-size: 20px;">
+                            <i class="far fa-clone text-warning" style="font-size: 24px;"></i>
+                            Add Collection
+                        </button>
                     </div>
                 </div><!--col-->
             </div><!--row-->
@@ -54,11 +61,7 @@
         <!--submit/nav buttons-->
         <div class="container p-3" style="min-width: 1000px;">
             <div class="row text-right">
-                <div class="col form-group">
-                    <button type="submit" class="btn btn-outline-info" style="font-size: 20px;">
-                        <i class="far fa-clone text-warning" style="font-size: 24px;"></i>
-                        Add Collection
-                    </button>
+                <div class="col">
                     <a class="btn btn-outline-info" style="font-size: 20px;" href="@Url.Content("~/Showcase/Index")">
                         <i class="fas fa-arrow-left text-warning" style="font-size: 24px;"></i> Back to Collections
                     </a>

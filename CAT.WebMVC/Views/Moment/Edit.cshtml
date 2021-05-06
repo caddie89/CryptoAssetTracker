@@ -149,17 +149,20 @@
                             @Html.ValidationMessageFor(model => model.IndividualMomentPrice, "", new { @class = "text-danger" })
                         </div>
                     </div>
+                    <!--submit-->
+                    <div class="col form-group">
+                        <button type="submit" class="btn btn-info" style="font-size: 20px;">
+                            <i class="far fa-edit text-warning" style="font-size: 24px;"></i>
+                            Modify Asset
+                        </button>
+                    </div>
                 </div><!--col-->
             </div><!--row-->
         </div><!--container-->
         <!--submit/nav buttons-->
         <div class="container p-3" style="min-width: 1000px;">
             <div class="row text-right">
-                <div class="col form-group">
-                    <button type="submit" class="btn btn-outline-info submit_button" style="font-size: 20px;">
-                        <i class="fas fa-edit text-warning" style="font-size: 24px;"></i>
-                        Modify Asset
-                    </button>
+                <div class="col">
                     <a class="btn btn-outline-info" style="font-size: 20px;" href="@Url.Content("~/Moment/Index")">
                         <i class="fas fa-arrow-left text-warning" style="font-size: 24px;"></i> Back to Assets
                     </a>

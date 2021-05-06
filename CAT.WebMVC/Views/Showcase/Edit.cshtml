@@ -26,10 +26,11 @@
     @Html.HiddenFor(model => model.ShowcaseId)
 
     <div class="form-horizontal">
-        <div class="container containerGradient" style="min-width: 1000px;">
+        <div class="container containerGradient p-3" style="min-width: 1000px;">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="row align-items-center d-flex justify-content-center p-4">
-                <div class="col offset-4">
+            <div class="row align-items-center d-flex justify-content-center">
+                <div class="col-lg-4 col-lg-offset-4">
+                    <!--Name-->
                     <div class="form-group">
                         @Html.Label("Name", htmlAttributes: new { @class = "control-label col" })
                         <div class="col-12">
@@ -37,7 +38,7 @@
                             @Html.ValidationMessageFor(model => model.ShowcaseName, "", new { @class = "text-danger" })
                         </div>
                     </div>
-
+                    <!--Description-->
                     <div class="form-group">
                         @Html.LabelFor(model => model.ShowcaseDescription, htmlAttributes: new { @class = "control-label col" })
                         <div class="col-12">
@@ -45,16 +46,20 @@
                             @Html.ValidationMessageFor(model => model.ShowcaseDescription, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="form-group">
-                        <p class="col" style="font-size: 20px;">Trying to add an Asset to this Collection?</p>
-                        <div class="col-12">
-                            <a class="btn btn-info" style="font-size: 20px;" href="@Url.Content("~/MomentShowcase/Create")">
-                                <i class="fas fa-basketball-ball text-warning" style="font-size: 24px;"></i>
-                                Add Asset to
-                                <i class="far fa-clone text-warning" style="font-size: 24px;"></i>
-                                Collection
-                            </a>
-                        </div>
+                    <div class="col form-group p-3">
+                        <button type="submit" class="btn btn-info" style="font-size: 20px;">
+                            <i class="far fa-clone text-warning" style="font-size: 24px;"></i>
+                            Modify Collection
+                        </button>
+                    </div>
+                    <div class="col form-group">
+                        <p style="font-size: 20px;">Trying to add an Asset to this Collection?</p>
+                        <a class="btn btn-info" style="font-size: 20px;" href="@Url.Content("~/MomentShowcase/Create")">
+                            <i class="fas fa-basketball-ball text-warning" style="font-size: 24px;"></i>
+                            Add Asset to
+                            <i class="far fa-clone text-warning" style="font-size: 24px;"></i>
+                            Collection
+                        </a>
                     </div>
                 </div><!--col-->
             </div><!--row-->
@@ -62,11 +67,7 @@
         <!--submit/nav buttons-->
         <div class="container p-3" style="min-width: 1000px;">
             <div class="row text-right">
-                <div class="col form-group">
-                    <button type="submit" class="btn btn-outline-info" style="font-size: 20px;">
-                        <i class="far fa-clone text-warning" style="font-size: 24px;"></i>
-                        Modify Collection
-                    </button>
+                <div class="col">
                     <a class="btn btn-outline-info" style="font-size: 20px;" href="@Url.Content("~/Showcase/Index")">
                         <i class="fas fa-arrow-left text-warning" style="font-size: 24px;"></i> Back to Collections
                     </a>

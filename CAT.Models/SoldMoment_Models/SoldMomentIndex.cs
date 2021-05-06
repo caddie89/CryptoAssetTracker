@@ -57,6 +57,7 @@ namespace CAT.Models.SoldMoment_Models
         public decimal IndividualMomentPrice { get; set; }
 
         [Display(Name = "Moment Total Value")]
+        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
         public decimal MomentTotalValue { get; set; }
 
         [Display(Name = "Sold Moment Total Value")]
@@ -82,14 +83,14 @@ namespace CAT.Models.SoldMoment_Models
             }
         }
 
-        public string TotalMomentProfitLoss
+        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
+        public decimal TotalMomentProfitLoss
         {
             get
             {
                 decimal profitLoss = SoldMomentTotalValue - OriginalMomentTotalValue;
                 profitLoss = Math.Truncate(100 * profitLoss) / 100;
-                string pL = profitLoss.ToString("C", new CultureInfo("en-US"));
-                return pL;
+                return profitLoss;
             }
         }
 
@@ -113,13 +114,16 @@ namespace CAT.Models.SoldMoment_Models
             }
         }
 
-        public string DisplayROI
+        public decimal DisplayROI
         {
             get
             {
+                if (SoldMomentTotalValue != 0)
+                {
                     var ROI = (SoldMomentTotalValue - OriginalMomentTotalValue) / OriginalMomentTotalValue;
-                    var displayROI = $"{ROI:P}";
-                    return displayROI;
+                    return ROI;
+                }
+                return 0m;
             }
         }
 

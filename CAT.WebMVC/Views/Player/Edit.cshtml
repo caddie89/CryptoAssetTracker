@@ -25,65 +25,62 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <div class="container containerGradient" style="min-width: 1000px;">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.PlayerId)
-        <div class="row align-items-center d-flex justify-content-center p-4">
-            <div class="col-lg-4 col-lg-offset-4">
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.PlayerFirstName, htmlAttributes: new { @class = "control-label col" })
-                    <div class="col-10">
-                        @Html.EditorFor(model => model.PlayerFirstName, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.PlayerFirstName, "", new { @class = "text-danger" })
+    <div class="form-horizontal">
+        <div class="container containerGradient p-3" style="min-width: 1000px;">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.PlayerId)
+            <div class="row align-items-center d-flex justify-content-center">
+                <div class="col-lg-4 col-lg-offset-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PlayerFirstName, htmlAttributes: new { @class = "control-label col" })
+                        <div class="col-12">
+                            @Html.EditorFor(model => model.PlayerFirstName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PlayerFirstName, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.PlayerLastName, htmlAttributes: new { @class = "control-label col" })
-                    <div class="col-10">
-                        @Html.EditorFor(model => model.PlayerLastName, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.PlayerLastName, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PlayerLastName, htmlAttributes: new { @class = "control-label col" })
+                        <div class="col-12">
+                            @Html.EditorFor(model => model.PlayerLastName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PlayerLastName, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.PositionOfPlayer, htmlAttributes: new { @class = "control-label col" })
-                    <div class="col-10">
-                        @Html.EnumDropDownListFor(model => model.PositionOfPlayer, "Select", new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.PositionOfPlayer, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PositionOfPlayer, htmlAttributes: new { @class = "control-label col" })
+                        <div class="col-12">
+                            @Html.EnumDropDownListFor(model => model.PositionOfPlayer, "Select", new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PositionOfPlayer, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.PlayerTeam, htmlAttributes: new { @class = "control-label col" })
-                    <div class="col-10">
-                        @Html.EditorFor(model => model.PlayerTeam, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.PlayerTeam, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PlayerTeam, htmlAttributes: new { @class = "control-label col" })
+                        <div class="col-12">
+                            @Html.EditorFor(model => model.PlayerTeam, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PlayerTeam, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
-            </div><!--col-->
-        </div><!--row-->
-    </div><!--container-->
-
-    <!--submit/nav buttons-->
-    <div class="container p-3" style="min-width: 1000px;">
-        <div class="row text-right">
-            <div class="col form-group">
-                <button type="submit" class="btn btn-outline-info submit_button" style="font-size: 20px;">
-                    <i class="fas fa-running text-warning" style="font-size: 24px;"></i>
-                    Modify Player
-                </button>
-                <a class="btn btn-outline-info" style="font-size: 20px;" href="@Url.Content("~/Player/Index")">
-                    <i class="fas fa-arrow-left text-warning" style="font-size: 24px;"></i> Back to Players
-                </a>
-            </div>
-        </div>
-    </div>
-</div><!--form-->
+                    <div class="col form-group pt-3">
+                        <button type="submit" class="btn btn-info submit_button" style="font-size: 20px;">
+                            <i class="far fa-edit text-warning" style="font-size: 24px;"></i>
+                            Modify Player
+                        </button>
+                    </div>
+                </div><!--col-->
+            </div><!--row-->
+        </div><!--container-->
+        <!--submit/nav buttons-->
+        <div class="container p-3" style="min-width: 1000px;">
+            <div class="row text-right">
+                <div class="col">
+                    <a class="btn btn-outline-info" style="font-size: 20px;" href="@Url.Content("~/Player/Index")">
+                        <i class="fas fa-arrow-left text-warning" style="font-size: 24px;"></i> Back to Players
+                    </a>
+                </div><!--col-->
+            </div><!--row-->
+        </div><!--container-->
+    </div><!--form-->
 }
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    
 }

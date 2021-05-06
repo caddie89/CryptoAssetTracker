@@ -12,7 +12,7 @@
     <div class="container text-info p-3" style="min-width: 1000px;">
         <div class="row" style="min-height: 8vh;">
             <section class="col align-self-end">
-                <h1 class="display-4"style="font-weight: 500">
+                <h1 class="display-4" style="font-weight: 500">
                     New Asset
                 </h1>
             </section>
@@ -97,7 +97,6 @@
                         </div>
                     </div>
                 </div><!--col-->
-
                 <!--col right-->
                 <div class="col-6">
                     <!--tier-->
@@ -149,18 +148,20 @@
                             @Html.ValidationMessageFor(model => model.IndividualMomentPrice, "", new { @class = "text-danger" })
                         </div>
                     </div>
+                    <!--submit-->
+                    <div class="col form-group">
+                        <button type="submit" class="btn btn-info" style="font-size: 20px;">
+                            <i class="fas fa-basketball-ball text-warning" style="font-size: 24px;"></i>
+                            Add Asset
+                        </button>
+                    </div>
                 </div><!--col-->
             </div><!--row-->
         </div><!--container-->
-        
-    <!--submit/nav buttons-->
+        <!--submit/nav buttons-->
         <div class="container p-3" style="min-width: 1000px;">
             <div class="row text-right">
-                <div class="col form-group">
-                    <button type="submit" class="btn btn-outline-info" style="font-size: 20px;">
-                        <i class="fas fa-basketball-ball text-warning" style="font-size: 24px;"></i>
-                        Add Asset
-                    </button>
+                <div class="col">
                     <a class="btn btn-outline-info" style="font-size: 20px;" href="@Url.Content("~/Moment/Index")">
                         <i class="fas fa-arrow-left text-warning" style="font-size: 24px;"></i> Back to Assets
                     </a>

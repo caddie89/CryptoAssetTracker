@@ -19,6 +19,16 @@ namespace CAT.WebMVC.Controllers.SoldMoment
         {
             var service = CreateSoldMomentService();
             var model = service.GetSoldMomentIndex();
+            var count = service.MomentCount();
+            var totalValue = service.MomentTotalValue();
+            var profitLoss = service.MomentTotalProfitLoss();
+            var ROI = service.MomentROI();
+
+            ViewData["AssetCount"] = count;
+            ViewData["AssetTotalValue"] = totalValue;
+            ViewData["ProfitLoss"] = profitLoss;
+            ViewData["ROI"] = ROI;
+
             return View(model);
         }
 
