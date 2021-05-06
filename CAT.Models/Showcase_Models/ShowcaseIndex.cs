@@ -19,6 +19,8 @@ namespace CAT.Models.Showcase_Models
         [Display(Name = "Description")]
         public string ShowcaseDescription { get; set; }
 
+        public int MomentIdsCount { get; set; }
+
         public List<int> MomentIds { get; set; }
     }
 }

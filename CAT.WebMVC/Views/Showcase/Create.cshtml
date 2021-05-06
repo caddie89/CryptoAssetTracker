@@ -4,45 +4,70 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<div class="container text-info p-2" style="min-width: 1000px;">
+    <div class="row" style="min-height: 8vh;">
+        <section class="col align-self-end">
+            <h1 class="display-4" style="font-weight: 500">
+                New Collection
+            </h1>
+        </section>
+        <div class="w-100"></div>
+        <section class="col align-self-center">
+            <span style="font-weight: 200; font-size: 18px;">
+                To add a new Collection, please fill out the form below.
+            </span>
+        </section>
+    </div><!--row-->
+</div><!--container-->
 
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>ShowcaseCreate</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.ShowcaseName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ShowcaseName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ShowcaseName, "", new { @class = "text-danger" })
+        <div class="container containerGradient" style="min-width: 1000px;">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row align-items-center d-flex justify-content-center p-4">
+                <div class="col-4">
+                    <div class="form-group">
+                        @Html.Label("Name", htmlAttributes: new { @class = "control-label col" })
+                        <div class="col-12">
+                            @Html.EditorFor(model => model.ShowcaseName, new { htmlAttributes = new { @class = "form-control", placeholder = "Name your Collection." } })
+                            @Html.ValidationMessageFor(model => model.ShowcaseName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ShowcaseDescription, htmlAttributes: new { @class = "control-label col" })
+                        <div class="col-12">
+                            @Html.EditorFor(model => model.ShowcaseDescription, new { htmlAttributes = new { @class = "form-control", placeholder = "Give your Collection a brief description." } })
+                            @Html.ValidationMessageFor(model => model.ShowcaseDescription, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col">
+                            <p class="text-info" style="font-size: 20px;">That's it! Assets can be added to a Collection on the main Collections page.</p>
+                        </div>
+                    </div>
+                </div><!--col-->
+            </div><!--row-->
+        </div><!--container-->
+        <!--submit/nav buttons-->
+        <div class="container p-3" style="min-width: 1000px;">
+            <div class="row text-right">
+                <div class="col form-group">
+                    <button type="submit" class="btn btn-outline-info" style="font-size: 20px;">
+                        <i class="far fa-clone text-warning" style="font-size: 24px;"></i>
+                        Add Collection
+                    </button>
+                    <a class="btn btn-outline-info" style="font-size: 20px;" href="@Url.Content("~/Showcase/Index")">
+                        <i class="fas fa-arrow-left text-warning" style="font-size: 24px;"></i> Back to Collections
+                    </a>
+                </div>
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ShowcaseDescription, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ShowcaseDescription, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ShowcaseDescription, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
+    </div><!--form-->
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+
 }

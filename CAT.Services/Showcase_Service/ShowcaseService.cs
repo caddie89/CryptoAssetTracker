@@ -2,6 +2,7 @@
 using CAT.Data.Entities;
 using CAT.Models.Moment_Models;
 using CAT.Models.Showcase_Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,9 +56,11 @@ namespace CAT.Services.Showcase_Service
                             ShowcaseName = e.ShowcaseName,
                             ShowcaseDescription = e.ShowcaseDescription,
                             MomentIds = e.Moments
+                            .Where(o => o.OwnerId == _userId)
                             .Select(
                                 s =>
-                                s.Moment.MomentId).ToList()
+                                s.Moment.MomentId).ToList(),
+                            MomentIdsCount = e.Moments.Count()
                         });
                 return query.ToArray();
             }
@@ -86,10 +89,17 @@ namespace CAT.Services.Showcase_Service
                         {
                             MomentId = m.MomentId,
                             PlayerId = m.Moment.PlayerId,
+                            PlayerFirstName = m.Moment.Player.PlayerFirstName,
+                            PlayerLastName = m.Moment.Player.PlayerLastName,
+                            IndividualMomentPrice = m.Moment.IndividualMomentPrice,
                             MomentCategory = m.Moment.MomentCategory,
                             DateOfMoment = m.Moment.DateOfMoment,
                             MomentSet = m.Moment.MomentSet,
                             MomentSeries = m.Moment.MomentSeries,
+                            MomentSerialNumber = m.Moment.MomentSerialNumber,
+                            MomentCirculatingCount = m.Moment.MomentCirculatingCount,
+                            MomentTier = m.Moment.MomentTier,
+                            MomentMint = m.Moment.MomentMint,
                         }).ToList()
                 };
             }
@@ -108,7 +118,7 @@ namespace CAT.Services.Showcase_Service
                 entity.ShowcaseName = model.ShowcaseName;
                 entity.ShowcaseDescription = model.ShowcaseDescription;
 
-                return ctx.SaveChanges() == 1;
+                return ctx.SaveChanges() >= 0;
             }
         }
 
@@ -123,6 +133,7 @@ namespace CAT.Services.Showcase_Service
                     .Single(e => e.ShowcaseId == id && e.OwnerId == _userId);
 
                 ctx.Showcases.Remove(entity);
+
                 return ctx.SaveChanges() == 1;
             }
         }

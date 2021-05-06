@@ -31,7 +31,7 @@ namespace CAT.WebMVC.Controllers.Player
 
             if (service.CreatePlayer(model))
             {
-                TempData["SaveResult"] = "Player successfully added.";
+                TempData["SaveResult"] = "Player successfully added!";
                 return RedirectToAction("Index");
             }
 
@@ -45,7 +45,6 @@ namespace CAT.WebMVC.Controllers.Player
         {
             var service = CreatePlayerService();
             var model = service.GetPlayerIndex(page);
-
             return View(model);
         }
 
@@ -90,7 +89,7 @@ namespace CAT.WebMVC.Controllers.Player
 
             if (service.EditPlayer(model))
             {
-                TempData["SaveResult"] = "Player was successfully updated.";
+                TempData["SaveResult"] = "Player successfully updated!";
                 return RedirectToAction("Index");
             }
 
@@ -117,7 +116,7 @@ namespace CAT.WebMVC.Controllers.Player
 
             service.DeletePlayer(id);
 
-            TempData["SaveResult"] = "Player was successfully removed.";
+            TempData["SaveResult"] = "Player successfully removed!";
 
             return RedirectToAction("Index");
         }

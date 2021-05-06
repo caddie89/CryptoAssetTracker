@@ -88,6 +88,8 @@ namespace CAT.Services.MomentShowcase_Service
                 new MomentShowcaseDetails
                 {
                     MomentId = entity.MomentId,
+                    PlayerFirstName = entity.Moment.Player.PlayerFirstName,
+                    PlayerLastName = entity.Moment.Player.PlayerLastName,
                     ShowcaseId = entity.ShowcaseId,
                     ShowcaseName = entity.Showcase.ShowcaseName,
                     MomentCategory = entity.Moment.MomentCategory,
@@ -143,7 +145,7 @@ namespace CAT.Services.MomentShowcase_Service
 
                 var momentList = query.ToList();
 
-                momentList.Insert(0, new SelectListItem { Text = "--Select Moment--", Value = "" });
+                momentList.Insert(0, new SelectListItem { Text = "Select Asset", Value = "" });
                 return momentList;
             }
         }
@@ -168,7 +170,7 @@ namespace CAT.Services.MomentShowcase_Service
 
                 var showcaseList = query.ToList();
 
-                showcaseList.Insert(0, new SelectListItem { Text = "--Select Showcase--", Value = "" });
+                showcaseList.Insert(0, new SelectListItem { Text = "Select Collection", Value = "" });
                 return showcaseList;
             }
         }

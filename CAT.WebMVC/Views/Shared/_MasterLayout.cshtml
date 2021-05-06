@@ -28,8 +28,8 @@
 
 <body class="backgroundGradient">
     <div class="topdiv">
-        <div class="container" style="min-width: 1030px;">
-            <nav class="navbar navbar-dark">
+        @*<div class="container" style="min-width: 1030px;">*@
+            <nav class="navbar navbar-dark container" style="min-width: 1030px;">
                 <!--brand-->
                 <div class="navbar-brand">
                     <img src="~/Images/CAT_logo_placeholder.png" class="img-fluid" alt="Crypto Asset Tracker" />
@@ -45,7 +45,7 @@
                     </button>
                 </div>
                 <!--nav links-->
-                <div class="collapse navbar-collapse float-right" id="navbarText">
+                <div class="collapse navbar-collapse float-right mr-3" id="navbarText">
                     <ul class="nav navbar-nav flex-row ml-auto float-right">
                         <li class="nav-item">
                             <a class="nav-link pr-5 navlink navlink_text" href="@Url.Content("~/Home")">
@@ -80,7 +80,7 @@
                     </ul><!--nav-items-->
                 </div><!--collapse-->
             </nav><!--nav-->
-        </div><!--container-->
+        <!--</div>--><!--container-->
         <!--content-->
         <div class="body-content">
             @RenderBody()

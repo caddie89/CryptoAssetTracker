@@ -126,6 +126,7 @@ namespace CAT.Services.Moment_Service
                     ctx
                     .Moments
                     .Single(e => e.MomentId == id && e.OwnerId == _userId);
+
                 if (entity.PlayerId == null)
                 {
                     return
@@ -208,7 +209,7 @@ namespace CAT.Services.Moment_Service
                 entity.PackPrice = model.PackPrice;
                 entity.IndividualMomentPrice = model.IndividualMomentPrice;
 
-                return ctx.SaveChanges() == 1;
+                return ctx.SaveChanges() >= 0;
             }
         }
 

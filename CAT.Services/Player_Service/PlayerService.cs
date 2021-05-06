@@ -60,7 +60,6 @@ namespace CAT.Services.Player_Service
                             PositionOfPlayer = e.PositionOfPlayer,
                             PlayerTeam = e.PlayerTeam
                         });
-
                     return query.ToArray().ToPagedList(page ?? 1, 6);
             }
         }
@@ -131,6 +130,5 @@ namespace CAT.Services.Player_Service
                 return ctx.SaveChanges() > 0;
             }
         }
-
     }
 }

@@ -4,43 +4,87 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="container text-info p-2" style="min-width: 1000px;">
+    <div class="row" style="min-height: 8vh;">
+        <section class="col align-self-end">
+            <h1 class="display-4" style="font-weight: 500">
+                Collections
+            </h1>
+        </section>
+        <div class="w-100"></div>
+        <section class="col align-self-center">
+            <span style="font-weight: 200; font-size: 18px;">
+                Below is a list of all Collections.
+            </span>
+        </section>
+    </div><!--row-->
+</div><!--container-->
+<!--table-->
+<div class="container containerGradient p-3" style="min-width: 1000px; min-height: 50vh;">
+    @if (TempData.ContainsKey("SaveResult"))
+    {
+        <div class="container" style="min-width: 1000px;">
+            <div class="alert alert-success carousel-fade" role="alert">
+                @ViewBag.SaveResult
+                <button type="button" class="close" data-dismiss="alert">
+                    <span>&times;</span>
+                </button>
+                @TempData["SaveResult"]
+            </div>
+        </div>
+    }
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="tableHeadText">
+                    Collection
+                </th>
+                <th class="tableHeadText">
+                    @Html.DisplayNameFor(model => model.ShowcaseDescription)
+                </th>
+                <th class="tableHeadText text-center">
+                    Asset Count
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderBy(i => i.ShowcaseName))
+            {
+                var showcaseName = @Html.DisplayFor(modelItem => item.ShowcaseName);
+                var showcase = showcaseName.ToString();
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ShowcaseName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ShowcaseDescription)
-        </th>
-        <th>
-            @Html.Label("Moments")
-        </th>
-        <th></th>
-    </tr>
+                <tr>
+                    <td style="vertical-align: middle;">
+                        @Html.ActionLink(showcase, "Details", "Showcase", new { id = item.ShowcaseId }, htmlAttributes: new { @class = "text-info text-decoration-none" })
+                    </td>
+                    <td style="vertical-align: middle">
+                        @Html.DisplayFor(modelItem => item.ShowcaseDescription)
+                    </td>
+                    <td class="text-center" style="vertical-align: middle">
+                        @Html.DisplayFor(modelItem => item.MomentIdsCount)
+                    </td>
+                    <td class="text-center" style="vertical-align: middle">
+                        <a class="btn btn-info" style="font-size: 18px;" href="@Url.Content("~/MomentShowcase/Create")">
+                            <i class="fas fa-basketball-ball text-warning"  style="font-size: 22px;"></i>
+                            Add Asset to 
+                            <i class="far fa-clone text-warning" style="font-size: 22px;"></i>
+                            Collection
+                        </a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+    </table>
+</div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShowcaseName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShowcaseDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MomentIds)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.ShowcaseId }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ShowcaseId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ShowcaseId }) |
-            @Html.ActionLink("Add Moments", "Create", "MomentShowcase/Create")
-        </td>
-    </tr>
-}
-
-</table>
+<!--new asset button-->
+<div class="container p-3" style="min-width: 1000px;">
+    <div class="row text-right">
+        <div class="col form-group">
+            <a class="btn btn-outline-info" style="font-size: 20px;" href="@Url.Content("~/Showcase/Create")">
+                <i class="far fa-clone text-warning" style="font-size: 24px;"></i> New Collection
+            </a>
+        </div>
+    </div>
+</div>

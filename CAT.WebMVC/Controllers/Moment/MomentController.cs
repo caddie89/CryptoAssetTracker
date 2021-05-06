@@ -46,7 +46,7 @@ namespace CAT.WebMVC.Controllers.Moment
 
             if (service.CreateMoment(model))
             {
-                TempData["SaveResult"] = "Asset was successfully added!";
+                TempData["SaveResult"] = "Asset successfully added!";
                 return RedirectToAction("Index");
             }
 
@@ -111,7 +111,7 @@ namespace CAT.WebMVC.Controllers.Moment
 
             if (service.EditMoment(model))
             {
-                TempData["SaveResult"] = "Asset was successfully updated!";
+                TempData["SaveResult"] = "Asset successfully updated!";
                 return RedirectToAction("Index");
             }
 
@@ -139,7 +139,7 @@ namespace CAT.WebMVC.Controllers.Moment
 
             service.DeleteMoment(id);
 
-            TempData["SaveResult"] = "Asset was successfully removed!";
+            TempData["SaveResult"] = "Asset successfully removed!";
 
             return RedirectToAction("Index");
         }
