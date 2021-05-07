@@ -42,14 +42,17 @@ namespace CAT.Services.Player_Service
         }
 
         // Get Player Index
-        public IEnumerable<PlayerIndex> GetPlayerIndex(int? page)
+        public IEnumerable<PlayerIndex> GetPlayerIndex(string search, int? page)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var query =
+                if (search != null)
+                {
+                    var searchPlayers =
                     ctx
                     .Players
-                    .Where(e => e.OwnerId == _userId)
+                    .Where(e => e.OwnerId == _userId && e.PlayerLastName.StartsWith(search))
+                    .OrderBy(p => p.PlayerLastName)
                     .Select(
                         e =>
                         new PlayerIndex
@@ -60,7 +63,29 @@ namespace CAT.Services.Player_Service
                             PositionOfPlayer = e.PositionOfPlayer,
                             PlayerTeam = e.PlayerTeam
                         });
-                    return query.ToArray().ToPagedList(page ?? 1, 6);
+
+                    return searchPlayers.ToArray().ToPagedList(page ?? 1, 6);
+                }
+                else
+                {
+                    var query =
+                    ctx
+                    .Players
+                    .Where(e => e.OwnerId == _userId)
+                    .OrderBy(p => p.PlayerLastName)
+                    .Select(
+                        e =>
+                        new PlayerIndex
+                        {
+                            PlayerId = e.PlayerId,
+                            PlayerFirstName = e.PlayerFirstName,
+                            PlayerLastName = e.PlayerLastName,
+                            PositionOfPlayer = e.PositionOfPlayer,
+                            PlayerTeam = e.PlayerTeam
+                        });
+
+                    return query.ToArray().ToPagedList(page ?? 1, 9);
+                }
             }
         }
 

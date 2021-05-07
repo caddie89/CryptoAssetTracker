@@ -41,10 +41,10 @@ namespace CAT.WebMVC.Controllers.Player
         }
 
         // GET: Player/Index
-        public ActionResult Index(int? page)
+        public ActionResult Index(string search, int? page)
         {
             var service = CreatePlayerService();
-            var model = service.GetPlayerIndex(page);
+            var model = service.GetPlayerIndex(search, page);
             return View(model);
         }
 

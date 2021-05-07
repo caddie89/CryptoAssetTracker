@@ -203,7 +203,12 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\AccountSnapshot.png" />
+    <Content Include="Images\AssetManagement.png" />
     <Content Include="Images\CAT_logo_placeholder.png" />
+    <Content Include="Images\Collections.png" />
+    <Content Include="Images\SoldAsset.png" />
+    <Content Include="Images\warning solid.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />

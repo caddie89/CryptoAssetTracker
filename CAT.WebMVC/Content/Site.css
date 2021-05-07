@@ -26,7 +26,7 @@ textarea {
 
 .navbar-brand img {
     width: auto;
-    max-height: 140px;
+    max-height: 170px;
 }
 
 .navlink_text {
@@ -102,7 +102,8 @@ body {
 
 .topdiv {
     height: 43vh;
-    background-color: #212121;
+    background-color: black;
+    /*background-color: #212121;*/
     position: relative;
 }
 
@@ -118,6 +119,18 @@ body {
     border: 2px solid #BDBDBD;
     background-image: linear-gradient(#EEEEEE, #BDBDBD);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.containerHome {
+    border-radius: 15px;
+    background-color: black;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.pictureHome {
+    height: auto;
+    min-width: 480px;
+    border-radius: 15px;
 }
 
 h3 {
