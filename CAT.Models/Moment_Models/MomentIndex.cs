@@ -49,21 +49,26 @@ namespace CAT.Models.Moment_Models
         public Mint MomentMint { get; set; }
 
         [Display(Name = "Individual Price")]
+        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
         public decimal IndividualMomentPrice { get; set; }
 
         [Display(Name = "Moment Total Value")]
+        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
         public decimal MomentTotalValue { get; set; }
 
         [Display(Name = "Sold Moment Total Value")]
+        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
         public decimal SoldMomentTotalValue { get; set; }
 
         [Display(Name = "Original Moment Total Value")]
+        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
         public decimal OriginalMomentTotalValue { get; set; }
 
         [Display(Name = "Moment Count")]
         public int MomentCount { get; set; }
 
         [Display(Name = "Sold For Amount")]
+        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
         public decimal SoldForAmount { get; set; }
 
         public string IndividualMomentProfitLoss
@@ -102,9 +107,9 @@ namespace CAT.Models.Moment_Models
         {
             get
             {
-                if (SoldMomentTotalValue != 0)
+                if (OriginalMomentTotalValue != 0)
                 {
-                    var ROI = (SoldMomentTotalValue - OriginalMomentTotalValue) / OriginalMomentTotalValue;
+                    var ROI = ((SoldMomentTotalValue - OriginalMomentTotalValue) / OriginalMomentTotalValue)* 100.00m;
                     return ROI;
                 }
                 return 0m;
@@ -183,7 +188,6 @@ namespace CAT.Models.Moment_Models
             }
         }
 
-        //public virtual List<ShowcaseIndex> Showcases { get; set; } needs list in 
         public List<int> ShowcaseIds { get; set; }
     }
 }

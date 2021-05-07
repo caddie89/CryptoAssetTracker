@@ -5,10 +5,10 @@
 }
 
 <!--header information-->
-<div class="container text-info p-2" style="min-width: 1000px;">
+<div class="container text-white p-2" style="min-width: 1000px;">
     <div class="row" style="min-height: 8vh;">
         <section class="col align-self-end">
-            <h1 class="display-4" style="font-weight: 500">
+            <h1 class="display-4">
                 Record Asset Sale
             </h1>
         </section>
@@ -31,10 +31,6 @@
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="row align-items-center d-flex justify-content-center">
                     <div class="col-4">
-                        <div class="text-center">
-                            <h4>How much did your Asset sell for?</h4>
-                            <hr />
-                        </div>
                         <div class="form-group d-none">
                             @Html.Label("Moment Id", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">

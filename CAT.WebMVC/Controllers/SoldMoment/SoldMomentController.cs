@@ -19,6 +19,7 @@ namespace CAT.WebMVC.Controllers.SoldMoment
         {
             var service = CreateSoldMomentService();
             var model = service.GetSoldMomentIndex();
+
             var count = service.MomentCount();
             var totalValue = service.MomentTotalValue();
             var profitLoss = service.MomentTotalProfitLoss();

@@ -54,6 +54,7 @@ namespace CAT.Models.SoldMoment_Models
         public decimal AmountInPack { get; set; }
 
         [Display(Name = "Individual Price")]
+        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
         public decimal IndividualMomentPrice { get; set; }
 
         [Display(Name = "Moment Total Value")]
@@ -61,25 +62,28 @@ namespace CAT.Models.SoldMoment_Models
         public decimal MomentTotalValue { get; set; }
 
         [Display(Name = "Sold Moment Total Value")]
+        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
         public decimal SoldMomentTotalValue { get; set; }
 
         [Display(Name = "Original Moment Total Value")]
+        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
         public decimal OriginalMomentTotalValue { get; set; }
 
         [Display(Name = "Moment Count")]
         public int MomentCount { get; set; }
 
         [Display(Name = "Sold For Amount")]
+        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
         public decimal SoldForAmount { get; set; }
 
-        public string IndividualMomentProfitLoss
+        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
+        public decimal IndividualMomentProfitLoss
         {
             get
             {
                 decimal profitLoss = SoldForAmount - IndividualMomentPrice;
                 profitLoss = Math.Truncate(100 * profitLoss) / 100;
-                string pL = profitLoss.ToString("C", new CultureInfo("en-US"));
-                return pL;
+                return profitLoss;
             }
         }
 
@@ -118,9 +122,9 @@ namespace CAT.Models.SoldMoment_Models
         {
             get
             {
-                if (SoldMomentTotalValue != 0)
+                if (OriginalMomentTotalValue != 0)
                 {
-                    var ROI = (SoldMomentTotalValue - OriginalMomentTotalValue) / OriginalMomentTotalValue;
+                    var ROI = ((SoldMomentTotalValue - OriginalMomentTotalValue) / OriginalMomentTotalValue)*100.00m;
                     return ROI;
                 }
                 return 0m;

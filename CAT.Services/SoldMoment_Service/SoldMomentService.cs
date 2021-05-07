@@ -273,7 +273,7 @@ namespace CAT.Services.SoldMoment_Service
                         .Sum();
 
                 decimal profitLoss = soldMomentValue - originalMomentValue;
-                profitLoss = Math.Truncate(100 * profitLoss) / 100;
+                
                 return profitLoss;
             }
         }
@@ -303,9 +303,10 @@ namespace CAT.Services.SoldMoment_Service
                         .DefaultIfEmpty(0)
                         .Sum();
 
-                if (soldMomentValue != 0)
+                if (originalMomentValue != 0)
                 {
-                    var ROI = (soldMomentValue - originalMomentValue) / originalMomentValue;
+                    decimal ROI = ((soldMomentValue - originalMomentValue) / originalMomentValue)*100.00m;
+                    ROI = Math.Round(ROI, 2);
                     return ROI;
                 }
                 return 0m;

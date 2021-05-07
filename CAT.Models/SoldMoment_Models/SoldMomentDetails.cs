@@ -75,6 +75,19 @@ namespace CAT.Models.SoldMoment_Models
             }
         }
 
+        public decimal DisplayIndividualROI
+        {
+            get
+            {
+                if (IndividualMomentPrice != 0)
+                {
+                    var ROI = ((SoldForAmount - IndividualMomentPrice) / IndividualMomentPrice)*100.00m;
+                    return ROI;
+                }
+                return 0m;
+            }
+        }
+
         [Display(Name = "Moment")]
         public string MomentComplete
         {

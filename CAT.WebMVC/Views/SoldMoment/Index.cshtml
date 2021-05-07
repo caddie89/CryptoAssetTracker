@@ -6,7 +6,23 @@
     ViewBag.Title = "Index";
 }
 
-
+<!--header information-->
+<div class="container text-white p-2" style="min-width: 1000px;">
+    <div class="row" style="min-height: 8vh;">
+        <section class="col align-self-end">
+            <h1 class="display-4">
+                <i class="fas fa-camera-retro text-white" style="font-size: 52px;"></i>
+                Snapshot
+            </h1>
+        </section>
+        <div class="w-100"></div>
+        <section class="col align-self-center">
+            <span style="font-weight: 200; font-size: 18px;">
+                Below is information on Asset status & performance.
+            </span>
+        </section>
+    </div><!--row-->
+</div><!--container-->
 
 <!--Display for Asset Value, Profit/Loss, ROI, & Asset Count-->
 <div class="container containerGradient p-3" style="min-width: 1000px;">
@@ -49,10 +65,10 @@
 <br />
 
 <!--header information-->
-<div class="container text-info p-2" style="min-width: 1000px;">
+<div class="container text-white p-2" style="min-width: 1000px;">
     <div class="row" style="min-height: 8vh;">
         <section class="col align-self-end">
-            <h1 class="display-4" style="font-weight: 500">
+            <h1 class="display-4">
                 Sold Assets
             </h1>
         </section>
@@ -64,17 +80,6 @@
         </section>
     </div><!--row-->
 </div><!--container-->
-
-@if (TempData.ContainsKey("SaveResult"))
-{
-    <div class="alert alert-success fade in" role="alert">
-        @ViewBag.SaveResult
-        <button type="button" class="close" data-dismiss="alert">
-            <span>&times;</span>
-        </button>
-        @TempData["SaveResult"]
-    </div>
-}
 
 <div class="container containerGradient p-3" style="min-width: 1000px;">
     @if (TempData.ContainsKey("SaveResult"))
@@ -132,7 +137,8 @@
                 <td style="vertical-align: middle;">
                     @Html.DisplayFor(modelItem => item.DisplaySoldForAmount)
                 </td>
-                <td style="vertical-align: middle;">
+                @{var profitLoss = item.IndividualMomentProfitLoss;}
+                <td class="@(profitLoss >= 0 ? "greenText" : "redText")" style="vertical-align: middle;">
                     @Html.DisplayFor(modelItem => item.IndividualMomentProfitLoss)
                 </td>
                 <td style="vertical-align: middle">
@@ -159,15 +165,4 @@
             }
         </tbody>
     </table>
-</div>
-
-<!--new asset button-->
-<div class="container p-3" style="min-width: 1000px;">
-    <div class="row text-right">
-        <div class="col form-group">
-            <a class="btn btn-outline-info" style="font-size: 20px;" href="@Url.Content("~/Moment/Create")">
-                <i class="fas fa-basketball-ball text-warning" style="font-size: 24px;"></i> New Asset
-            </a>
-        </div>
-    </div>
 </div>
