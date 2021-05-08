@@ -1,7 +1,9 @@
 ﻿using CAT.Contexts.Data;
 using CAT.Data.Entities;
 using CAT.Models;
+using CAT.Models.Moment_Models;
 using CAT.Models.Player_Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +33,7 @@ namespace CAT.Services.Player_Service
                     PositionOfPlayer = model.PositionOfPlayer,
                     PlayerTeam = model.PlayerTeam
                 };
-            
+
             using (var ctx = new ApplicationDbContext())
             {
                 ctx.Players.Add(entity);
@@ -40,25 +42,27 @@ namespace CAT.Services.Player_Service
         }
 
         // Get Player Index
-        public IEnumerable<PlayerIndex> GetPlayerIndex()
+        public IEnumerable<PlayerIndex> GetPlayerIndex(string search, int? page)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var query =
-                    ctx
-                    .Players
-                    .Where(e => e.OwnerId == _userId)
-                    .Select(
-                        e =>
-                        new PlayerIndex
-                        {
-                            PlayerId = e.PlayerId,
-                            PlayerFirstName = e.PlayerFirstName,
-                            PlayerLastName = e.PlayerLastName,
-                            PositionOfPlayer = e.PositionOfPlayer,
-                            PlayerTeam = e.PlayerTeam
-                        });
-                return query.ToArray();
+                var searchPlayers =
+                ctx
+                .Players
+                .Where(e => e.OwnerId == _userId && e.PlayerLastName.StartsWith(search) || e.PlayerFirstName.StartsWith(search) || search == null)
+                .OrderBy(p => p.PlayerLastName)
+                .Select(
+                    e =>
+                    new PlayerIndex
+                    {
+                        PlayerId = e.PlayerId,
+                        PlayerFirstName = e.PlayerFirstName,
+                        PlayerLastName = e.PlayerLastName,
+                        PositionOfPlayer = e.PositionOfPlayer,
+                        PlayerTeam = e.PlayerTeam
+                    });
+
+                return searchPlayers.ToArray().ToPagedList(page ?? 1, 9);
             }
         }
 
@@ -80,6 +84,17 @@ namespace CAT.Services.Player_Service
                         PositionOfPlayer = entity.PositionOfPlayer,
                         PlayerTeam = entity.PlayerTeam,
                         Moments = entity.Moments
+                        .Select(
+                        m =>
+                        new MomentIndex()
+                        {
+                            MomentId = m.MomentId,
+                            PlayerId = m.PlayerId,
+                            MomentCategory = m.MomentCategory,
+                            DateOfMoment = m.DateOfMoment,
+                            MomentSet = m.MomentSet,
+                            MomentSeries = m.MomentSeries,
+                        }).ToList()
                     };
             }
         }
@@ -99,7 +114,7 @@ namespace CAT.Services.Player_Service
                 entity.PositionOfPlayer = model.PositionOfPlayer;
                 entity.PlayerTeam = model.PlayerTeam;
 
-                return ctx.SaveChanges() == 1;
+                return ctx.SaveChanges() >= 0;
             }
         }
 
@@ -114,9 +129,8 @@ namespace CAT.Services.Player_Service
 
                 ctx.Players.Remove(entity);
 
-                return ctx.SaveChanges() > 0;
+                return ctx.SaveChanges() == 1;
             }
         }
-
     }
 }

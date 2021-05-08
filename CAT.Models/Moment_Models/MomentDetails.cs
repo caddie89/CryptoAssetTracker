@@ -15,7 +15,7 @@ namespace CAT.Models.Moment_Models
         public int MomentId { get; set; }
 
         [Display(Name = "Player ID")]
-        public int PlayerId { get; set; }
+        public int? PlayerId { get; set; }
 
         [Display(Name = "First Name")]
         public string PlayerFirstName { get; set; }
@@ -50,27 +50,14 @@ namespace CAT.Models.Moment_Models
         [Display(Name = "Purchased in Pack?")]
         public bool PurchasedInPack { get; set; }
 
-        [Display(Name = "Quantity in Pack")]
+        [Display(Name = "Pack Price")]
+        public decimal PackPrice { get; set; }
+
+        [Display(Name = "Amount in Pack")]
         public decimal AmountInPack { get; set; }
 
-        [Display(Name = "Purchase Price")]
-        public decimal PurchasedForPrice { get; set; }
-
-        [Display(Name = "Price")]
-        public decimal ActualPurchasedForPrice
-        {
-            get
-            {
-                if (PurchasedInPack is false)
-                {
-                    return PurchasedForPrice;
-                }
-
-                decimal actualPrice = PurchasedForPrice / AmountInPack;
-                actualPrice = Math.Truncate(100 * actualPrice) / 100;
-                return actualPrice;
-            }
-        }
+        [Display(Name = "Individual Price")]
+        public decimal IndividualMomentPrice { get; set; }
 
         [Display(Name = "Moment")]
         public string MomentComplete

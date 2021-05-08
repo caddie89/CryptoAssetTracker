@@ -1,6 +1,7 @@
 ﻿using CAT.Models.Player_Models;
 using CAT.Services.Player_Service;
 using Microsoft.AspNet.Identity;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace CAT.WebMVC.Controllers.Player
             return View();
         }
 
-        // PUT: Player/Create
+        // POST: Player/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(PlayerCreate model)
@@ -30,7 +31,7 @@ namespace CAT.WebMVC.Controllers.Player
 
             if (service.CreatePlayer(model))
             {
-                TempData["SaveResult"] = "Player successfully added.";
+                TempData["SaveResult"] = "Player successfully added!";
                 return RedirectToAction("Index");
             }
 
@@ -40,11 +41,10 @@ namespace CAT.WebMVC.Controllers.Player
         }
 
         // GET: Player/Index
-        public ActionResult Index()
+        public ActionResult Index(string search, int? page)
         {
             var service = CreatePlayerService();
-            var model = service.GetPlayerIndex();
-
+            var model = service.GetPlayerIndex(search, page);
             return View(model);
         }
 
@@ -89,12 +89,12 @@ namespace CAT.WebMVC.Controllers.Player
 
             if (service.EditPlayer(model))
             {
-                TempData["SaveResult"] = "Player was successfully updated.";
+                TempData["SaveResult"] = "Player successfully modified!";
                 return RedirectToAction("Index");
             }
 
             ModelState.AddModelError("", "Player could not be updated. Please make sure that all required input fields are populated.");
-            return View(model);            
+            return View(model);
         }
 
         // GET: Player/Delete/{id}
@@ -116,7 +116,7 @@ namespace CAT.WebMVC.Controllers.Player
 
             service.DeletePlayer(id);
 
-            TempData["SaveResult"] = "Player was successfully delete.";
+            TempData["SaveResult"] = "Player successfully removed!";
 
             return RedirectToAction("Index");
         }

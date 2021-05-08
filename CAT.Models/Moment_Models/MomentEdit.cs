@@ -44,10 +44,13 @@ namespace CAT.Models.Moment_Models
         [Display(Name = "Purchased in Pack?")]
         public bool PurchasedInPack { get; set; }
 
-        [Display(Name = "Quantity in Pack")]
-        public decimal AmountInPack { get; set; }
+        [Display(Name = "Pack Price")]
+        public decimal? PackPrice { get; set; }
 
-        [Display(Name = "Purchase Price")]
-        public decimal PurchasedForPrice { get; set; }
+        [Display(Name = "Amount in Pack")]
+        public decimal? AmountInPack { get; set; }
+
+        [Display(Name = "Individual Price")]
+        public decimal IndividualMomentPrice { get; set; }
     }
 }

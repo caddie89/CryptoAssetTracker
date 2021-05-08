@@ -2,6 +2,7 @@
 using CAT.Models.Moment_Models;
 using CAT.Services.Moment_Service;
 using Microsoft.AspNet.Identity;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,17 @@ namespace CAT.WebMVC.Controllers.Moment
         {
             var service = CreateMomentService();
             var model = service.GetMomentIndex();
+
+            var count = service.MomentCount();
+            var totalValue = service.MomentTotalValue();
+            var profitLoss = service.MomentTotalProfitLoss();
+            var ROI = service.MomentROI();
+
+            ViewData["AssetCount"] = count;
+            ViewData["AssetTotalValue"] = totalValue;
+            ViewData["ProfitLoss"] = profitLoss;
+            ViewData["ROI"] = ROI;
+
             return View(model);
         }
 
@@ -43,11 +55,11 @@ namespace CAT.WebMVC.Controllers.Moment
 
             if (service.CreateMoment(model))
             {
-                TempData["SaveResult"] = "Moment was successfully created.";
+                TempData["SaveResult"] = "Asset successfully added!";
                 return RedirectToAction("Index");
             }
 
-            ModelState.AddModelError("", "Moment could not be created. Please make sure that all required input fields are populated.");
+            ModelState.AddModelError("", "Asset could not be added. Please make sure that all required input fields are populated.");
 
             return View(model);
         }
@@ -65,8 +77,8 @@ namespace CAT.WebMVC.Controllers.Moment
         {
             var service = CreateMomentService();
             var detail = service.GetMomentDetails(id);
-            var playerList = service.PlayersList();
-            ViewData["Players"] = playerList;
+            var playerList = service.SelectPlayers();
+            ViewBag.PlayerList = playerList;
 
             var model =
                 new MomentEdit
@@ -83,7 +95,8 @@ namespace CAT.WebMVC.Controllers.Moment
                     MomentMint = detail.MomentMint,
                     PurchasedInPack = detail.PurchasedInPack,
                     AmountInPack = detail.AmountInPack,
-                    PurchasedForPrice = detail.PurchasedForPrice
+                    PackPrice = detail.PackPrice,
+                    IndividualMomentPrice = detail.IndividualMomentPrice
                 };
 
             return View(model);
@@ -107,11 +120,11 @@ namespace CAT.WebMVC.Controllers.Moment
 
             if (service.EditMoment(model))
             {
-                TempData["SaveResult"] = "Moment was successfully updated.";
+                TempData["SaveResult"] = "Asset successfully modified!";
                 return RedirectToAction("Index");
             }
 
-            ModelState.AddModelError("", "Moment could not be updated. Please make sure that all required input fields are populated.");
+            ModelState.AddModelError("", "Asset could not be modified. Please make sure that all required input fields are populated.");
 
             return View(model);
         }
@@ -135,7 +148,7 @@ namespace CAT.WebMVC.Controllers.Moment
 
             service.DeleteMoment(id);
 
-            TempData["SaveResult"] = "Moment was successfully deleted.";
+            TempData["SaveResult"] = "Asset successfully removed!";
 
             return RedirectToAction("Index");
         }

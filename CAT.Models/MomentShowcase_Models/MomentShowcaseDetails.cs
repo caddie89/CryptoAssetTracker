@@ -30,6 +30,15 @@ namespace CAT.Models.MomentShowcase_Models
         [Display(Name = "Series")]
         public int MomentSeries { get; set; }
 
+        [Display(Name = "Individual Price")]
+        public decimal IndividualMomentPrice { get; set; }
+
+        [Display(Name = "First Name")]
+        public string PlayerFirstName { get; set; }
+
+        [Display(Name = "Last Name")]
+        public string PlayerLastName { get; set; }
+
         [Display(Name = "Moment")]
         public string MomentComplete
         {
@@ -49,6 +58,16 @@ namespace CAT.Models.MomentShowcase_Models
                 string fmt = "MMMM dd yyyy";
                 var displayDate = date.Date.ToString(fmt);
                 return displayDate;
+            }
+        }
+
+        [Display(Name = "Full Name")]
+        public string PlayerFullName
+        {
+            get
+            {
+                var playerFullName = $"{PlayerFirstName} {PlayerLastName}";
+                return playerFullName;
             }
         }
     }

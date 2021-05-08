@@ -2,6 +2,8 @@
 using CAT.Services.Showcase_Service;
 using Microsoft.AspNet.Identity;
 using System;
+using PagedList;
+using PagedList.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -38,11 +40,11 @@ namespace CAT.WebMVC.Controllers.Showcase
 
             if (service.CreateShowcase(model))
             {
-                TempData["SaveResult"] = "Showcase was successfully created.";
+                TempData["SaveResult"] = "Collection successfully created!";
                 return RedirectToAction("Index");
             }
 
-            ModelState.AddModelError("", "Showcase could not be created. Please make sure that all required input fields are populated.");
+            ModelState.AddModelError("", "Collection could not be created. Please make sure that all required input fields are populated.");
 
             return View(model);
         }
@@ -89,11 +91,11 @@ namespace CAT.WebMVC.Controllers.Showcase
 
             if (service.EditShowcase(model))
             {
-                TempData["SaveResult"] = "Showcase was successfully updated.";
+                TempData["SaveResult"] = "Collection successfully modified!";
                 return RedirectToAction("Index");
             }
 
-            ModelState.AddModelError("", "Showcase could not be updated. Please make sure that all required input fields are populated.");
+            ModelState.AddModelError("", "Collection could not be modified. Please make sure that all required input fields are populated.");
 
             return View(model);
         }
@@ -117,7 +119,7 @@ namespace CAT.WebMVC.Controllers.Showcase
 
             service.DeleteShowcase(id);
 
-            TempData["SaveResult"] = "Showcase was successfully deleted.";
+            TempData["SaveResult"] = "Collection was successfully removed.";
 
             return RedirectToAction("Index");
         }

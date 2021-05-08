@@ -1,4 +1,5 @@
-﻿body {
+﻿
+body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -22,3 +23,174 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.navbar-brand img {
+    width: auto;
+    max-height: 170px;
+}
+
+.navlink_text {
+    font-size: 24px;
+}
+
+.navlink:hover {
+    font-size: 30px;
+    color: #ffc107 !important;
+}
+
+body {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-family: "Oswald", sans-serif;
+}
+
+.limited {
+    padding: 1px 7px 1px 7px;
+    background: rgba(33, 33, 33, 0.9);
+    color: rgb(120, 225, 0);
+    border: 2px solid rgba(120, 225, 0, 1);
+    border-radius: 4px;
+}
+
+.common {
+    padding: 1px 6px 1px 6px;
+    background: rgba(33, 33, 33, .9);
+    color: dodgerblue;
+    border: 2px solid dodgerblue;
+    border-radius: 4px;
+}
+
+.greenbox {
+    width: auto;
+    padding: 6px;
+    background: #212529;
+    color: rgb(120, 225, 0);
+    border: 2px solid rgba(120, 225, 0, 1);
+    border-radius: 6px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.greenText {
+    color: green;
+    font-size: 20px;
+}
+
+.bluebox {
+    width: auto;
+    padding: 6px;
+    background: #212529;
+    color: dodgerblue;
+    border: 2px solid dodgerblue;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.redbox {
+    width: auto;
+    padding: 6px;
+    background: #212529;
+    color: red;
+    border: 2px solid red;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.redText {
+    color: red;
+    font-size: 20px;
+}
+
+.topdiv {
+    height: 43vh;
+    background-color: black;
+    position: relative;
+}
+
+.backgroundGradient {
+    background-image: linear-gradient(#495057, #212529);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.containerGradient {
+    min-width: 1000px;
+    border-radius: 15px;
+    border: 2px solid #BDBDBD;
+    background-image: linear-gradient(#EEEEEE, #adb5bd);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.containerHome {
+    border-radius: 15px;
+    background-color: black;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.pictureHome {
+    height: auto;
+    min-width: 480px;
+    border-radius: 15px;
+}
+
+h3 {
+    margin-bottom: 8px;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: auto;
+    background-color: none;
+    text-align: right;
+}
+
+.picture_container {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.bottom_right_text {
+    position: absolute;
+    bottom: 0px;
+    right: 10px;
+}
+
+.top_left_text {
+    position: absolute;
+    top: 0px;
+    left: 10px;
+}
+
+.tableHeadText {
+    font-size: 20px;
+    font-weight: normal !important;
+}
+
+.playerText {
+    font-size: 20px;
+}
+
+.table-responsive {
+    overflow-x: visible !important;
+}
+
+.box_shadow {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.search_box {
+    width: 200px;
+}
+
+
+
+
+
+
+
+
+

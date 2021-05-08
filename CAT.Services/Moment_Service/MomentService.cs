@@ -2,9 +2,13 @@
 using CAT.Data.Entities;
 using CAT.Models.Moment_Models;
 using CAT.Models.Showcase_Models;
+using CAT.Models.SoldMoment_Models;
+using LinqToDB.SqlQuery;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,8 +42,9 @@ namespace CAT.Services.Moment_Service
                     MomentTier = model.MomentTier,
                     MomentMint = model.MomentMint,
                     PurchasedInPack = model.PurchasedInPack,
+                    PackPrice = model.PackPrice,
                     AmountInPack = model.AmountInPack,
-                    PurchasedForPrice = model.PurchasedForPrice
+                    IndividualMomentPrice = model.IndividualMomentPrice,
                 };
 
             using (var ctx = new ApplicationDbContext())
@@ -58,6 +63,7 @@ namespace CAT.Services.Moment_Service
                     ctx
                     .Moments
                     .Where(e => e.OwnerId == _userId)
+                    .OrderByDescending(p => p.IndividualMomentPrice)
                     .Select(
                         e =>
                         new MomentIndex
@@ -66,16 +72,44 @@ namespace CAT.Services.Moment_Service
                             PlayerId = e.Player.PlayerId,
                             PlayerFirstName = e.Player.PlayerFirstName,
                             PlayerLastName = e.Player.PlayerLastName,
-                            PurchasedForPrice = e.PurchasedForPrice,
+                            IndividualMomentPrice = e.IndividualMomentPrice,
                             MomentCategory = e.MomentCategory,
                             DateOfMoment = e.DateOfMoment,
                             MomentSet = e.MomentSet,
                             MomentSeries = e.MomentSeries,
                             MomentSerialNumber = e.MomentSerialNumber,
                             MomentCirculatingCount = e.MomentCirculatingCount,
-                            AmountInPack = e.AmountInPack,
+                            MomentTotalValue =
+                            ctx
+                            .Moments
+                            .Where(o => o.OwnerId == _userId)
+                            .Select(
+                                i =>
+                                i.IndividualMomentPrice)
+                            .DefaultIfEmpty(0)
+                            .Sum(),
+                            MomentCount = ctx.Moments.Count(),
+                            SoldMomentTotalValue =
+                            ctx
+                            .SoldMoments
+                            .Where(o => o.OwnerId == _userId)
+                            .Select(
+                                s =>
+                                s.SoldForAmount)
+                            .DefaultIfEmpty(0)
+                            .Sum(),
+                            OriginalMomentTotalValue =
+                            ctx
+                            .SoldMoments
+                            .Where(o => o.OwnerId == _userId)
+                            .Select(
+                                s =>
+                                s.IndividualMomentPrice)
+                            .DefaultIfEmpty(0)
+                            .Sum(),
                             MomentMint = e.MomentMint,
                             ShowcaseIds = e.Showcases
+                            .Where(o => o.OwnerId == _userId)
                             .Select(
                                 s =>
                                 s.Showcase.ShowcaseId).ToList()
@@ -94,6 +128,7 @@ namespace CAT.Services.Moment_Service
                     ctx
                     .Moments
                     .Single(e => e.MomentId == id && e.OwnerId == _userId);
+
                 if (entity.PlayerId == null)
                 {
                     return
@@ -102,15 +137,13 @@ namespace CAT.Services.Moment_Service
                         MomentId = entity.MomentId,
                         PlayerFirstName = null,
                         PlayerLastName = null,
-                        PurchasedForPrice = entity.PurchasedForPrice,
+                        IndividualMomentPrice = entity.IndividualMomentPrice,
                         MomentCategory = entity.MomentCategory,
                         DateOfMoment = entity.DateOfMoment,
                         MomentSet = entity.MomentSet,
                         MomentSeries = entity.MomentSeries,
                         MomentSerialNumber = entity.MomentSerialNumber,
                         MomentCirculatingCount = entity.MomentCirculatingCount,
-                        PurchasedInPack = entity.PurchasedInPack,
-                        AmountInPack = entity.AmountInPack,
                         MomentTier = entity.MomentTier,
                         MomentMint = entity.MomentMint,
                         Showcases = entity.Showcases
@@ -124,24 +157,24 @@ namespace CAT.Services.Moment_Service
                             }).ToList()
                     };
                 }
+
                 return
-                    new MomentDetails
-                    {
-                        MomentId = entity.MomentId,
-                        PlayerFirstName = entity.Player.PlayerFirstName,
-                        PlayerLastName = entity.Player.PlayerLastName,
-                        PurchasedForPrice = entity.PurchasedForPrice,
-                        MomentCategory = entity.MomentCategory,
-                        DateOfMoment = entity.DateOfMoment,
-                        MomentSet = entity.MomentSet,
-                        MomentSeries = entity.MomentSeries,
-                        MomentSerialNumber = entity.MomentSerialNumber,
-                        MomentCirculatingCount = entity.MomentCirculatingCount,
-                        PurchasedInPack = entity.PurchasedInPack,
-                        AmountInPack = entity.AmountInPack,
-                        MomentTier = entity.MomentTier,
-                        MomentMint = entity.MomentMint,
-                        Showcases = entity.Showcases
+                new MomentDetails
+                {
+                    MomentId = entity.MomentId,
+                    PlayerId = entity.PlayerId,
+                    PlayerFirstName = entity.Player.PlayerFirstName,
+                    PlayerLastName = entity.Player.PlayerLastName,
+                    IndividualMomentPrice = entity.IndividualMomentPrice,
+                    MomentCategory = entity.MomentCategory,
+                    DateOfMoment = entity.DateOfMoment,
+                    MomentSet = entity.MomentSet,
+                    MomentSeries = entity.MomentSeries,
+                    MomentSerialNumber = entity.MomentSerialNumber,
+                    MomentCirculatingCount = entity.MomentCirculatingCount,
+                    MomentTier = entity.MomentTier,
+                    MomentMint = entity.MomentMint,
+                    Showcases = entity.Showcases
                         .Select(
                             e =>
                             new ShowcaseIndex()
@@ -150,7 +183,7 @@ namespace CAT.Services.Moment_Service
                                 ShowcaseName = e.Showcase.ShowcaseName,
                                 ShowcaseDescription = e.Showcase.ShowcaseDescription
                             }).ToList()
-                    };
+                };
             }
         }
 
@@ -175,10 +208,10 @@ namespace CAT.Services.Moment_Service
                 entity.MomentMint = model.MomentMint;
                 entity.PurchasedInPack = model.PurchasedInPack;
                 entity.AmountInPack = model.AmountInPack;
-                entity.PurchasedForPrice = model.PurchasedForPrice;
+                entity.PackPrice = model.PackPrice;
+                entity.IndividualMomentPrice = model.IndividualMomentPrice;
 
                 return ctx.SaveChanges() >= 0;
-
             }
         }
 
@@ -198,7 +231,7 @@ namespace CAT.Services.Moment_Service
             }
         }
 
-        // Populate Player Drop-Down List (Create)
+        // Populate Player Drop-Down List
         public IEnumerable<SelectListItem> SelectPlayers()
         {
             using (var ctx = new ApplicationDbContext())
@@ -207,6 +240,7 @@ namespace CAT.Services.Moment_Service
                     ctx
                     .Players
                     .OrderBy(p => p.PlayerLastName)
+                    .Where(e => e.OwnerId == _userId)
                     .Select(
                      p =>
                      new SelectListItem
@@ -218,7 +252,7 @@ namespace CAT.Services.Moment_Service
                 var playerList = query.ToList();
 
                 playerList.Add(new SelectListItem { Text = "Unknown", Value = "" });
-                playerList.Insert(0, new SelectListItem { Text = "--Select--", Value = "" });
+                playerList.Insert(0, new SelectListItem { Text = "Select", Value = "" });
                 return playerList;
             }
         }
@@ -232,6 +266,7 @@ namespace CAT.Services.Moment_Service
                     ctx
                     .Players
                     .OrderBy(p => p.PlayerLastName)
+                    .Where(e => e.OwnerId == _userId)
                     .Select(
                      p =>
                      new SelectListItem
@@ -241,10 +276,116 @@ namespace CAT.Services.Moment_Service
                      });
 
                 var playerList = query.ToList();
+
                 playerList.Add(new SelectListItem { Text = "Unknown", Value = "" });
-                playerList.Insert(0, new SelectListItem { Text = "--Select--", Value = "" });
+                playerList.Insert(0, new SelectListItem { Text = "Select", Value = "" });
                 return playerList;
+            }
+        }
+
+        // Moment Count
+        public int MomentCount()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query =
+                    ctx
+                    .Moments
+                    .Where(e => e.OwnerId == _userId)
+                    .Count();
+
+                var momentCount = query;
+
+                return momentCount;
+            }
+        }
+
+        // Moment Total Value
+        public decimal MomentTotalValue()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query =
+                    ctx
+                    .Moments
+                    .Where(e => e.OwnerId == _userId)
+                    .Select(
+                        i =>
+                        i.IndividualMomentPrice)
+                        .DefaultIfEmpty(0)
+                        .Sum();
+
+                var momentTotalValue = query;
+
+                return momentTotalValue;
+            }
+        }
+
+        // Total Moment ProfitLoss
+        public decimal MomentTotalProfitLoss()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var soldMomentValue =
+                    ctx
+                    .SoldMoments
+                    .Where(e => e.OwnerId == _userId)
+                    .Select(
+                        i =>
+                        i.SoldForAmount)
+                        .DefaultIfEmpty(0)
+                        .Sum();
+
+                var originalMomentValue =
+                    ctx
+                    .SoldMoments
+                    .Where(o => o.OwnerId == _userId)
+                    .Select(
+                        i =>
+                        i.IndividualMomentPrice)
+                        .DefaultIfEmpty(0)
+                        .Sum();
+
+                decimal profitLoss = soldMomentValue - originalMomentValue;
+                
+                return profitLoss;
+            }
+        }
+
+        // Moment ROI
+        public decimal MomentROI()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var soldMomentValue =
+                    ctx
+                    .SoldMoments
+                    .Where(e => e.OwnerId == _userId)
+                    .Select(
+                        i =>
+                        i.SoldForAmount)
+                        .DefaultIfEmpty(0)
+                        .Sum();
+
+                var originalMomentValue =
+                    ctx
+                    .SoldMoments
+                    .Where(o => o.OwnerId == _userId)
+                    .Select(
+                        i =>
+                        i.IndividualMomentPrice)
+                        .DefaultIfEmpty(0)
+                        .Sum();
+
+                if (originalMomentValue != 0)
+                {
+                    decimal ROI = ((soldMomentValue - originalMomentValue) / originalMomentValue)*100.00m;
+                    ROI = Math.Round(ROI, 2);
+                    return ROI;
+                }
+                return 0m;
             }
         }
     }
 }
+

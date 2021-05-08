@@ -45,81 +45,18 @@ namespace CAT.Data.Entities
         public Mint MomentMint { get; set; }
 
         [Required]
-        public decimal PurchasedForPrice { get; set; }
+        public bool PurchasedInPack { get; set; }
 
-        //[Required]
-        public bool PurchasedInPack { get; set; } 
+        public decimal? PackPrice { get; set; }
 
-        //[Required]
-        public decimal AmountInPack { get; set; }
+        public decimal? AmountInPack { get; set; }
 
-        public decimal SoldForPrice { get; set; }
-
-        public decimal ActualPurchasedForPrice
-        {
-            get
-            {
-                if (PurchasedInPack is false)
-                {
-                    return PurchasedForPrice;
-                }
-
-                decimal actualPrice = PurchasedForPrice / AmountInPack;
-                actualPrice = Math.Truncate(100 * actualPrice) / 100;
-                return actualPrice;
-            }
-        }
-
-        public string MomentComplete
-        {
-            get
-            {
-                var momentFullName = $"{MomentCategory} - {DisplayDateOfMoment} - {MomentSet} (Series {MomentSeries})";
-                return momentFullName;
-            }
-        }
-
-        public string SerialComplete
-        {
-            get
-            {
-                var serialComplete = $"{MomentSerialNumber}/{MomentCirculatingCount}";
-                return serialComplete;
-            }
-        }
-
-        public string DisplayDateOfMoment
-        {
-            get
-            {
-                var date = DateOfMoment;
-                string fmt = "MMMM dd yyyy";
-                var displayDate = date.Date.ToString(fmt);
-                return displayDate;
-            }
-        }
-
-        public string Mint
-        {
-            get
-            {
-                int mintValue = (int)MomentMint;
-                string mintType = Enum.GetName(typeof(Mint), mintValue);
-
-                switch (mintValue)
-                {
-                    case 1:
-                        mintType = "LE";
-                        break;
-                    case 2:
-                        mintType = "CC";
-                        break;
-                }
-                return mintType;
-            }
-        }
+        [Required]
+        public decimal IndividualMomentPrice { get; set; }
 
         public virtual ICollection<MomentShowcase> Showcases { get; set; } = new List<MomentShowcase>();
+
+        public virtual ICollection<SoldMoment> SoldMoments { get; set; } = new List<SoldMoment>();
     }
 
     public enum Tier

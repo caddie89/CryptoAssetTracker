@@ -69,6 +69,7 @@
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Entities\Showcase.cs" />
     <Compile Include="Entities\MomentShowcase.cs" />
+    <Compile Include="Entities\SoldMoment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

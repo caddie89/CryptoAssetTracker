@@ -4,76 +4,49 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<!--header information-->
+<div class="container text-white p-3" style="min-width: 1000px;">
+    <div class="row" style="min-height: 8vh;">
+        <section class="col align-self-end">
+            <h1 class="display-4">
+                Player Stats
+            </h1>
+        </section>
+        <div class="w-100"></div>
+        <section class="col align-self-center">
+            <span style="font-weight: 200; font-size: 18px;">
+                Stats for player are shown below.
+            </span>
+        </section>
+    </div><!--row-->
+</div><!--container-->
 
-<div>
-    <h4>Player Details</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.PlayerId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PlayerId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PlayerFirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PlayerFirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PlayerLastName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PlayerLastName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PlayerTeam)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PlayerTeam)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PlayerFullName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PlayerFullName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Position)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Position)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Moments)
-        </dt>
-
-        @foreach (var item in Model.Moments)
-        {
-            <dd>
-                @Html.DisplayFor(modelItem => item.MomentComplete) -
-                @Html.ActionLink("View Moment", "Details", "Moment", new { id = item.MomentId }, null)
-            </dd>
-        }
-    </dl>
+<div class="container containerGradient p-3">
+    <div class="row pb-5">
+        <div class="col text-center">
+            <span class="display-1">Under Construction</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <span><i class="fas fa-hammer" style="font-size: 400px;"></i></span>
+        </div>
+    </div><div class="row pt-5">
+        <div class="col text-center">
+            <span class="display-1">(pardon my dust)</span>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.PlayerId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
 
+<!--submit/nav buttons-->
+<div class="container p-3" style="min-width: 1000px;">
+    <div class="row text-right">
+        <div class="col">
+            <a class="btn btn-outline-info" style="font-size: 20px;" href="@Url.Content("~/Player/Index")">
+                <i class="fas fa-arrow-left text-warning" style="font-size: 24px;"></i> Back to Players
+            </a>
+        </div>
+    </div>
+</div>
 
+<!-- R. Harper · M. Jordan · L. Longley · S. Pippen · D. Rodman -->

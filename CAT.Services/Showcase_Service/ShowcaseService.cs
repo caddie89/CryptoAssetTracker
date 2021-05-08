@@ -2,6 +2,7 @@
 using CAT.Data.Entities;
 using CAT.Models.Moment_Models;
 using CAT.Models.Showcase_Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,9 +56,11 @@ namespace CAT.Services.Showcase_Service
                             ShowcaseName = e.ShowcaseName,
                             ShowcaseDescription = e.ShowcaseDescription,
                             MomentIds = e.Moments
+                            .Where(o => o.OwnerId == _userId)
                             .Select(
                                 s =>
-                                s.Moment.MomentId).ToList()
+                                s.Moment.MomentId).ToList(),
+                            MomentIdsCount = e.Moments.Count()
                         });
                 return query.ToArray();
             }
@@ -86,15 +89,15 @@ namespace CAT.Services.Showcase_Service
                         {
                             MomentId = m.MomentId,
                             PlayerId = m.Moment.PlayerId,
-                            PurchasedForPrice = m.Moment.PurchasedForPrice,
+                            PlayerFirstName = m.Moment.Player.PlayerFirstName,
+                            PlayerLastName = m.Moment.Player.PlayerLastName,
+                            IndividualMomentPrice = m.Moment.IndividualMomentPrice,
                             MomentCategory = m.Moment.MomentCategory,
                             DateOfMoment = m.Moment.DateOfMoment,
                             MomentSet = m.Moment.MomentSet,
                             MomentSeries = m.Moment.MomentSeries,
                             MomentSerialNumber = m.Moment.MomentSerialNumber,
                             MomentCirculatingCount = m.Moment.MomentCirculatingCount,
-                            PurchasedInPack = m.Moment.PurchasedInPack,
-                            AmountInPack = m.Moment.AmountInPack,
                             MomentTier = m.Moment.MomentTier,
                             MomentMint = m.Moment.MomentMint,
                         }).ToList()
@@ -115,7 +118,7 @@ namespace CAT.Services.Showcase_Service
                 entity.ShowcaseName = model.ShowcaseName;
                 entity.ShowcaseDescription = model.ShowcaseDescription;
 
-                return ctx.SaveChanges() == 1;
+                return ctx.SaveChanges() >= 0;
             }
         }
 
@@ -130,45 +133,9 @@ namespace CAT.Services.Showcase_Service
                     .Single(e => e.ShowcaseId == id && e.OwnerId == _userId);
 
                 ctx.Showcases.Remove(entity);
+
                 return ctx.SaveChanges() == 1;
             }
         }
-
-        // Populate Moment Drop-Down List (Create)
-        //public ICollection<Moment> SelectMoments()
-        //{
-        //    var momentList = new List<Moment>();
-
-        //    using (var ctx = new ApplicationDbContext())
-        //    {
-        //        foreach (var moment in ctx.Moments)
-        //        {
-        //            momentList.Add(new Moment
-        //            {
-        //                MomentId = moment.MomentId,
-        //                MomentCategory = moment.MomentCategory
-        //            });
-        //        }
-
-        //var query =
-        //    ctx
-        //    .Moments
-        //    .OrderBy(p => p.ActualPurchasedForPrice)
-        //    .Select(
-        //     p =>
-        //     new SelectListItem
-        //     {
-        //         Text = p.ActualPurchasedForPrice + " - " + p.MomentComplete,
-        //         Value = p.MomentId.ToString()
-        //     });
-
-        //var momentList = query.ToList();
-
-        //momentList.Add(new SelectListItem { Text = "Unknown", Value = "" });
-        //momentList.Insert(0, new SelectListItem { Text = "--Select--", Value = "" });
-        //return momentList;
-        //    }
-        //    return momentList;
-        //}
     }
 }
