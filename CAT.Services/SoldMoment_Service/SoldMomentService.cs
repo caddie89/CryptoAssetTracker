@@ -59,6 +59,7 @@ namespace CAT.Services.SoldMoment_Service
                     ctx
                     .SoldMoments
                     .Where(e => e.OwnerId == _userId)
+                    .OrderByDescending(p => p.IndividualMomentPrice)
                     .Select(
                         e =>
                         new SoldMomentIndex
