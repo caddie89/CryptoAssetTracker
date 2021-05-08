@@ -65,12 +65,9 @@
   <ItemGroup>
     <Compile Include="Contexts\IdentityModels.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
-    <Compile Include="Entities\Team\Meta.cs" />
     <Compile Include="Entities\Moment.cs" />
     <Compile Include="Entities\Player.cs" />
-    <Compile Include="Entities\Team\Root.cs" />
     <Compile Include="Entities\Showcase.cs" />
-    <Compile Include="Entities\Team\Team.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

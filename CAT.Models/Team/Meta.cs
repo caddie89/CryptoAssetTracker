@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CAT.Data.Entities
+namespace CAT.Models.Team
 {
     public class Meta
     {
