@@ -73,11 +73,11 @@ namespace CAT.WebMVC.Controllers.SoldMoment
 
             if (service.CreateSoldMoment(model))
             {
-                TempData["SaveResult"] = "Success! Asset sale has been recorded. Recommended that Asset be removed from Asset List.";
+                TempData["SaveResult"] = "Asset sale recorded! Recommended that Asset be removed from Asset List.";
                 return RedirectToAction("Delete", "Moment", new { id = model.MomentId });
             }
 
-            ModelState.AddModelError("", "Moment could not be added to Sold List. Please make sure that all required input fields are populated.");
+            ModelState.AddModelError("", "Asset sale could not be recored. Please make sure that all required input fields are populated.");
 
             return View(model);
         }
@@ -138,11 +138,11 @@ namespace CAT.WebMVC.Controllers.SoldMoment
 
             if (service.EditSoldMoment(model))
             {
-                TempData["SaveResult"] = "Sale price for Sold Asset was successfully updated.";
+                TempData["SaveResult"] = "Sale price for Sold Asset successfully modified!";
                 return RedirectToAction("Index");
             }
 
-            ModelState.AddModelError("", "Sale price for Sold Asset could not be updated. Please make sure that all required input fields are populated.");
+            ModelState.AddModelError("", "Sale price for Sold Asset could not be modified. Please make sure that all required input fields are populated.");
 
             return View(model);
         }
@@ -166,7 +166,7 @@ namespace CAT.WebMVC.Controllers.SoldMoment
 
             service.DeleteSoldMoment(id);
 
-            TempData["SaveResult"] = "Sold Moment was successfully deleted.";
+            TempData["SaveResult"] = "Sold Asset successfully removed!";
 
             return RedirectToAction("Index");
         }

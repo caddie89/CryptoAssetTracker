@@ -89,7 +89,7 @@ namespace CAT.WebMVC.Controllers.Player
 
             if (service.EditPlayer(model))
             {
-                TempData["SaveResult"] = "Player successfully updated!";
+                TempData["SaveResult"] = "Player successfully modified!";
                 return RedirectToAction("Index");
             }
 

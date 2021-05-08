@@ -2,6 +2,7 @@
 using CAT.Models.Moment_Models;
 using CAT.Services.Moment_Service;
 using Microsoft.AspNet.Identity;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,7 +59,7 @@ namespace CAT.WebMVC.Controllers.Moment
                 return RedirectToAction("Index");
             }
 
-            ModelState.AddModelError("", "Asset could not be created. Please make sure that all required input fields are populated.");
+            ModelState.AddModelError("", "Asset could not be added. Please make sure that all required input fields are populated.");
 
             return View(model);
         }
@@ -119,11 +120,11 @@ namespace CAT.WebMVC.Controllers.Moment
 
             if (service.EditMoment(model))
             {
-                TempData["SaveResult"] = "Asset successfully updated!";
+                TempData["SaveResult"] = "Asset successfully modified!";
                 return RedirectToAction("Index");
             }
 
-            ModelState.AddModelError("", "Asset could not be updated. Please make sure that all required input fields are populated.");
+            ModelState.AddModelError("", "Asset could not be modified. Please make sure that all required input fields are populated.");
 
             return View(model);
         }

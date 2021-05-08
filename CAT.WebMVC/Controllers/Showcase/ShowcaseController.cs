@@ -95,7 +95,7 @@ namespace CAT.WebMVC.Controllers.Showcase
                 return RedirectToAction("Index");
             }
 
-            ModelState.AddModelError("", "Collection could not be modified! Please make sure that all required input fields are populated.");
+            ModelState.AddModelError("", "Collection could not be modified. Please make sure that all required input fields are populated.");
 
             return View(model);
         }
@@ -119,7 +119,7 @@ namespace CAT.WebMVC.Controllers.Showcase
 
             service.DeleteShowcase(id);
 
-            TempData["SaveResult"] = "Showcase was successfully deleted.";
+            TempData["SaveResult"] = "Collection was successfully removed.";
 
             return RedirectToAction("Index");
         }

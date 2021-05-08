@@ -33,7 +33,7 @@
             </div>
         </div>
     }
-    <table class="table">
+    <table class="table" data-toggle="table" data-pagination="true" data-search="true">
         <thead>
             <tr>
                 <th class="tableHeadText">
@@ -55,8 +55,8 @@
                 var showcase = showcaseName.ToString();
 
                 <tr>
-                    <td style="vertical-align: middle; font-size: 18px;">
-                        @Html.ActionLink(showcase, "Details", "Showcase", new { id = item.ShowcaseId }, htmlAttributes: new { @class = "text-info text-decoration-none" })
+                    <td style="vertical-align: middle;">
+                        @Html.ActionLink(showcase, "Details", "Showcase", new { id = item.ShowcaseId }, htmlAttributes: new { @class = "text-info playerText text-decoration-none" })
                     </td>
                     <td style="vertical-align: middle">
                         @Html.DisplayFor(modelItem => item.ShowcaseDescription)

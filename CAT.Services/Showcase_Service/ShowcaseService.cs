@@ -137,42 +137,5 @@ namespace CAT.Services.Showcase_Service
                 return ctx.SaveChanges() == 1;
             }
         }
-
-        // Populate Moment Drop-Down List (Create)
-        //public ICollection<Moment> SelectMoments()
-        //{
-        //    var momentList = new List<Moment>();
-
-        //    using (var ctx = new ApplicationDbContext())
-        //    {
-        //        foreach (var moment in ctx.Moments)
-        //        {
-        //            momentList.Add(new Moment
-        //            {
-        //                MomentId = moment.MomentId,
-        //                MomentCategory = moment.MomentCategory
-        //            });
-        //        }
-
-        //var query =
-        //    ctx
-        //    .Moments
-        //    .OrderBy(p => p.ActualPurchasedForPrice)
-        //    .Select(
-        //     p =>
-        //     new SelectListItem
-        //     {
-        //         Text = p.ActualPurchasedForPrice + " - " + p.MomentComplete,
-        //         Value = p.MomentId.ToString()
-        //     });
-
-        //var momentList = query.ToList();
-
-        //momentList.Add(new SelectListItem { Text = "Unknown", Value = "" });
-        //momentList.Insert(0, new SelectListItem { Text = "--Select--", Value = "" });
-        //return momentList;
-        //    }
-        //    return momentList;
-        //}
     }
 }

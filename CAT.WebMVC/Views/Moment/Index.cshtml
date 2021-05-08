@@ -1,4 +1,7 @@
-﻿@model IEnumerable<CAT.Models.Moment_Models.MomentIndex>
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IEnumerable<CAT.Models.Moment_Models.MomentIndex>
 
 @{
     ViewBag.Title = "Index";
@@ -21,7 +24,6 @@
         </section>
     </div><!--row-->
 </div><!--container-->
-
 <!--Display for Asset Value, Profit/Loss, ROI, & Asset Count-->
 <div class="container containerGradient p-3" style="min-width: 1000px;">
     <div class="row align-items-center text-center d-flex justify-content-center" style="min-height: 20vh">
@@ -92,17 +94,17 @@
             </div>
         </div>
     }
-    <table class="table">
+    <table class="table table-borderless" data-toggle="table" data-pagination="true" data-search="true">
         <thead>
             <tr>
-                <th class="tableHeadText">
+                <th class="tableHeadText" >
                     @Html.DisplayNameFor(model => model.PlayerFullName)
                 </th>
                 <th class="tableHeadText">
                     Price
                 </th>
                 <th class="tableHeadText">
-                    @Html.DisplayNameFor(model => model.MomentComplete)
+                    Asset
                 </th>
                 <th class="tableHeadText">
                     @Html.DisplayNameFor(model => model.MomentCategory)
@@ -119,18 +121,18 @@
         </thead>
 
         <tbody>
-            @foreach (var item in Model.OrderBy(i => i.PlayerLastName))
+            @foreach (var item in Model)
             {
                 var playerName = @Html.DisplayFor(modelItem => item.PlayerFullName);
                 var player = playerName.ToString();
 
                 var mint = (int)item.MomentMint;
                 <tr>
-                    <td style="vertical-align: middle; font-size: 18px;">
-                        @Html.ActionLink(player, "Details", "Player", new { id = item.PlayerId }, htmlAttributes: new { @class = "text-info text-decoration-none" })
+                    <td style="vertical-align: middle;">
+                        @Html.ActionLink(player, "Details", "Player", new { id = item.PlayerId }, htmlAttributes: new { @class = "text-info playerText text-decoration-none" })
                     </td>
                     <td style="vertical-align: middle">
-                        @Html.DisplayFor(modelItem => item.DisplayIndividualMomentPrice)
+                        @Html.DisplayFor(modelItem => item.IndividualMomentPrice)
                     </td>
                     <td style="vertical-align: middle">
                         @Html.DisplayFor(modelItem => item.MomentComplete)
@@ -170,6 +172,12 @@
 </div>
 
 @section Scripts{
+
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
 
 }
 

@@ -24,7 +24,7 @@
 <!--form-->
 <div class="container containerGradient p-3" style="min-width: 1000px;">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col">
             <section id="loginForm">
                 @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                 {
@@ -73,11 +73,11 @@
                 }
             </section><!--form group-->
         </div><!--col-->
-        <div class="col">
+        <!--<-->@*div class="col">
             <section id="socialLoginForm">
                 @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
             </section>
-        </div>
+        </div>*@
     </div><!--row-->
 </div><!--container-->
 

@@ -38,42 +38,6 @@ namespace CAT.Services.MomentShowcase_Service
             }
         }
 
-        //foreach (int bookid in model.Moments)
-        //    {
-        //        var entity - new AuthorBook()
-        //{ AuthorId = model.AuthorId,
-        //BookId = bookId
-        //        }
-        //    }
-
-        // Create MomentShowcase
-        //public bool CreateMomentShowcase(MomentShowcaseCreate model)
-        //{
-        //    var entity =
-        //        new MomentShowcase()
-        //        {
-        //            OwnerId = _userId,
-        //            ShowcaseId = model.ShowcaseId,
-        //            MomentId = model.
-        //        };
-
-        //    using (var ctx = new ApplicationDbContext())
-        //    {
-        //        ctx.MomentsShowcases.Add(entity);
-        //        ctx.SaveChanges();
-
-        //        foreach (int momentId in model.SelectedMomentIds)
-        //        {
-        //            var moment = ctx.Moments.Find(momentId);
-        //            if (moment != null)
-        //            {
-        //                entity.Moments.Add(moment);
-        //            }
-        //        }
-        //        return ctx.SaveChanges() == 1;
-        //    }
-        //}
-
         // Get Showcase Details
         public MomentShowcaseDetails GetMomentShowcaseDetails(int momentId, int showcaseId)
         {
@@ -174,37 +138,5 @@ namespace CAT.Services.MomentShowcase_Service
                 return showcaseList;
             }
         }
-
-        // Populate Moment Drop-Down List
-        //public MultiSelectList SelectMoments()
-        //{
-        //    var viewModel = new MomentShowcaseCreate();
-
-        //    using (var ctx = new ApplicationDbContext())
-        //    {
-        //        var moments =
-        //            ctx
-        //            .Moments
-        //            .OrderBy(p => p.Player.PlayerLastName)
-        //            .Select(
-        //            moment =>
-        //            new
-        //            {
-        //                MomentId = moment.MomentId,
-        //                CompleteMoment =
-        //                moment.Player.PlayerFirstName + " " +
-        //                moment.Player.PlayerLastName + "-" +
-        //                moment.MomentCategory + "-" +
-        //                moment.MomentSet + "-Series " +
-        //                moment.MomentSeries
-        //            }).ToList();
-
-        //        viewModel.MomentList = new MultiSelectList(moments, "MomentId", "CompleteMoment");
-
-        //        return viewModel.MomentList;
-        //    }
-        //}
-
-        //public List<MomentIndex> GetMoments(){
     }
 }

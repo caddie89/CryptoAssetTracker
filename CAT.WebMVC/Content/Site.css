@@ -65,7 +65,7 @@ body {
 .greenbox {
     width: auto;
     padding: 6px;
-    background: rgba(33, 33, 33, 0.9);
+    background: #212529;
     color: rgb(120, 225, 0);
     border: 2px solid rgba(120, 225, 0, 1);
     border-radius: 6px;
@@ -74,12 +74,13 @@ body {
 
 .greenText {
     color: green;
+    font-size: 20px;
 }
 
 .bluebox {
     width: auto;
     padding: 6px;
-    background: rgba(33, 33, 33, 0.9);
+    background: #212529;
     color: dodgerblue;
     border: 2px solid dodgerblue;
     border-radius: 6px;
@@ -89,7 +90,7 @@ body {
 .redbox {
     width: auto;
     padding: 6px;
-    background: rgba(33, 33, 33, 0.9);
+    background: #212529;
     color: red;
     border: 2px solid red;
     border-radius: 6px;
@@ -98,17 +99,17 @@ body {
 
 .redText {
     color: red;
+    font-size: 20px;
 }
 
 .topdiv {
     height: 43vh;
     background-color: black;
-    /*background-color: #212121;*/
     position: relative;
 }
 
 .backgroundGradient {
-    background-image: linear-gradient(#424242, #212121);
+    background-image: linear-gradient(#495057, #212529);
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
@@ -117,7 +118,7 @@ body {
     min-width: 1000px;
     border-radius: 15px;
     border: 2px solid #BDBDBD;
-    background-image: linear-gradient(#EEEEEE, #BDBDBD);
+    background-image: linear-gradient(#EEEEEE, #adb5bd);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -166,10 +167,11 @@ h3 {
 
 .tableHeadText {
     font-size: 20px;
+    font-weight: normal !important;
 }
 
 .playerText {
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .table-responsive {

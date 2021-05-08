@@ -4,6 +4,7 @@ using CAT.Models.Moment_Models;
 using CAT.Models.Showcase_Models;
 using CAT.Models.SoldMoment_Models;
 using LinqToDB.SqlQuery;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -62,6 +63,7 @@ namespace CAT.Services.Moment_Service
                     ctx
                     .Moments
                     .Where(e => e.OwnerId == _userId)
+                    .OrderByDescending(p => p.IndividualMomentPrice)
                     .Select(
                         e =>
                         new MomentIndex

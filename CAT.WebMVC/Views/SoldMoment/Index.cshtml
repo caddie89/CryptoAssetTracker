@@ -94,7 +94,7 @@
             </div>
         </div>
     }
-    <table class="table">
+    <table class="table" data-toggle="table" data-pagination="true" data-search="true">
         <thead>
             <tr>
                 <th class="tableHeadText">
@@ -131,8 +131,8 @@
 
                 var mint = (int)item.MomentMint;
             <tr>
-                <td style="vertical-align: middle; font-size: 18px;">
-                    @Html.ActionLink(player, "Details", "Player", new { id = item.PlayerId }, htmlAttributes: new { @class = "text-info text-decoration-none" })
+                <td style="vertical-align: middle;">
+                    @Html.ActionLink(player, "Details", "Player", new { id = item.PlayerId }, htmlAttributes: new { @class = "text-info playerText text-decoration-none" })
                 </td>
                 <td style="vertical-align: middle;">
                     @Html.DisplayFor(modelItem => item.DisplaySoldForAmount)
@@ -166,3 +166,5 @@
         </tbody>
     </table>
 </div>
+<br />
+<br />
