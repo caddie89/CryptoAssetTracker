@@ -1,4 +1,5 @@
-﻿using CAT.Models.Moment_Models;
+﻿using CAT.Contracts.Moment_Contract;
+using CAT.Models.Moment_Models;
 using CAT.Models.SoldMoment_Models;
 using CAT.Services.Moment_Service;
 using CAT.Services.SoldMoment_Service;
@@ -14,6 +15,15 @@ namespace CAT.WebMVC.Controllers.SoldMoment
     [Authorize]
     public class SoldMomentController : Controller
     {
+        private Guid _userId;
+
+        private readonly IMomentService _momentService;
+
+        public SoldMomentController(IMomentService momentService)
+        {
+            _momentService = momentService;
+        }
+
         // GET: SoldMoment/Index
         public ActionResult Index()
         {
@@ -33,11 +43,13 @@ namespace CAT.WebMVC.Controllers.SoldMoment
             return View(model);
         }
 
-        // GET: SoldMoment/Create/{id}
+        //GET: SoldMoment/Create/{id}
         public ActionResult Create(int id)
         {
-            var momentService = CreateMomentService();
-            var detail = momentService.GetMomentDetails(id);
+            _userId = Guid.Parse(User.Identity.GetUserId());
+            var userId = _userId;
+
+            var detail = _momentService.GetMomentDetails(id, userId);
 
             var model =
                 new SoldMomentCreate
@@ -95,7 +107,7 @@ namespace CAT.WebMVC.Controllers.SoldMoment
         {
             var service = CreateSoldMomentService();
             var detail = service.GetSoldMomentDetails(id);
-            
+
             var model =
                 new SoldMomentEdit
                 {
@@ -180,11 +192,11 @@ namespace CAT.WebMVC.Controllers.SoldMoment
         }
 
         // Helper Method
-        private MomentService CreateMomentService()
-        {
-            Guid userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new MomentService(userId);
-            return service;
-        }
+        //private MomentService CreateMomentService()
+        //{
+        //    Guid userId = Guid.Parse(User.Identity.GetUserId());
+        //    var service = new MomentService(userId);
+        //    return service;
+        //}
     }
 }

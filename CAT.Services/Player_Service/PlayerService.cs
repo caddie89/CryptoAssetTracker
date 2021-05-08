@@ -46,23 +46,46 @@ namespace CAT.Services.Player_Service
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var searchPlayers =
-                ctx
-                .Players
-                .Where(e => e.OwnerId == _userId && e.PlayerLastName.StartsWith(search) || e.PlayerFirstName.StartsWith(search) || search == null)
-                .OrderBy(p => p.PlayerLastName)
-                .Select(
-                    e =>
-                    new PlayerIndex
-                    {
-                        PlayerId = e.PlayerId,
-                        PlayerFirstName = e.PlayerFirstName,
-                        PlayerLastName = e.PlayerLastName,
-                        PositionOfPlayer = e.PositionOfPlayer,
-                        PlayerTeam = e.PlayerTeam
-                    });
-
-                return searchPlayers.ToArray().ToPagedList(page ?? 1, 9);
+                if (search == null)
+                {
+                    var searchPlayers =
+                    ctx
+                    .Players
+                    .Where(e => e.OwnerId == _userId)
+                    .OrderBy(p => p.PlayerLastName)
+                    .Select(
+                        e =>
+                        new PlayerIndex
+                        {
+                            OwnerId = e.OwnerId,
+                            PlayerId = e.PlayerId,
+                            PlayerFirstName = e.PlayerFirstName,
+                            PlayerLastName = e.PlayerLastName,
+                            PositionOfPlayer = e.PositionOfPlayer,
+                            PlayerTeam = e.PlayerTeam
+                        });
+                    return searchPlayers.ToArray().ToPagedList(page ?? 1, 9);
+                }
+                else
+                {
+                    var searchPlayers =
+                    ctx
+                    .Players
+                    .Where(e => e.OwnerId == _userId && (e.PlayerLastName.StartsWith(search) || e.PlayerFirstName.StartsWith(search)))
+                    .OrderBy(p => p.PlayerLastName)
+                    .Select(
+                        e =>
+                        new PlayerIndex
+                        {
+                            OwnerId = e.OwnerId,
+                            PlayerId = e.PlayerId,
+                            PlayerFirstName = e.PlayerFirstName,
+                            PlayerLastName = e.PlayerLastName,
+                            PositionOfPlayer = e.PositionOfPlayer,
+                            PlayerTeam = e.PlayerTeam
+                        });
+                    return searchPlayers.ToArray().ToPagedList(page ?? 1, 9);
+                }
             }
         }
 

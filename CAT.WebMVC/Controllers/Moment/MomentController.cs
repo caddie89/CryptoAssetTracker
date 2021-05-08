@@ -1,4 +1,5 @@
 ﻿using CAT.Contexts.Data;
+using CAT.Contracts.Moment_Contract;
 using CAT.Models.Moment_Models;
 using CAT.Services.Moment_Service;
 using Microsoft.AspNet.Identity;
@@ -14,16 +15,27 @@ namespace CAT.WebMVC.Controllers.Moment
     [Authorize]
     public class MomentController : Controller
     {
+        private Guid _userId;
+
+        private readonly IMomentService _momentService;
+
+        public MomentController(IMomentService momentService)
+        {
+            _momentService = momentService;
+        }
+
         // GET: Moment/Index
         public ActionResult Index()
         {
-            var service = CreateMomentService();
-            var model = service.GetMomentIndex();
+            _userId = Guid.Parse(User.Identity.GetUserId());
+            var userId = _userId;
 
-            var count = service.MomentCount();
-            var totalValue = service.MomentTotalValue();
-            var profitLoss = service.MomentTotalProfitLoss();
-            var ROI = service.MomentROI();
+            var model = _momentService.GetMomentIndex(userId);
+
+            var count = _momentService.MomentCount(userId);
+            var totalValue = _momentService.MomentTotalValue(userId);
+            var profitLoss = _momentService.MomentTotalProfitLoss(userId);
+            var ROI = _momentService.MomentROI(userId);
 
             ViewData["AssetCount"] = count;
             ViewData["AssetTotalValue"] = totalValue;
@@ -36,8 +48,10 @@ namespace CAT.WebMVC.Controllers.Moment
         // GET: Moment/Create
         public ActionResult Create()
         {
-            var service = CreateMomentService();
-            var model = service.SelectPlayers();
+            _userId = Guid.Parse(User.Identity.GetUserId());
+            var userId = _userId;
+
+            var model = _momentService.SelectPlayers(userId);
             ViewData["Players"] = model;
 
             return View();
@@ -51,9 +65,9 @@ namespace CAT.WebMVC.Controllers.Moment
             if (!ModelState.IsValid)
                 return View(model);
 
-            var service = CreateMomentService();
+            model.OwnerId = Guid.Parse(User.Identity.GetUserId());
 
-            if (service.CreateMoment(model))
+            if (_momentService.CreateMoment(model))
             {
                 TempData["SaveResult"] = "Asset successfully added!";
                 return RedirectToAction("Index");
@@ -67,17 +81,23 @@ namespace CAT.WebMVC.Controllers.Moment
         // GET: Moment/Details/{id}
         public ActionResult Details(int id)
         {
-            var service = CreateMomentService();
-            var model = service.GetMomentDetails(id);
+            _userId = Guid.Parse(User.Identity.GetUserId());
+            var userId = _userId;
+
+            var model = _momentService.GetMomentDetails(id, userId);
+
             return View(model);
         }
 
         // GET: Moment/Edit/{id}
         public ActionResult Edit(int id)
         {
-            var service = CreateMomentService();
-            var detail = service.GetMomentDetails(id);
-            var playerList = service.SelectPlayers();
+            _userId = Guid.Parse(User.Identity.GetUserId());
+            var userId = _userId;
+
+            var detail = _momentService.GetMomentDetails(id, userId);
+            var playerList = _momentService.SelectPlayers(userId);
+
             ViewBag.PlayerList = playerList;
 
             var model =
@@ -116,9 +136,10 @@ namespace CAT.WebMVC.Controllers.Moment
                 return View(model);
             }
 
-            var service = CreateMomentService();
+            model.OwnerId = Guid.Parse(User.Identity.GetUserId());
+            var userId = model.OwnerId;
 
-            if (service.EditMoment(model))
+            if (_momentService.EditMoment(model, userId))
             {
                 TempData["SaveResult"] = "Asset successfully modified!";
                 return RedirectToAction("Index");
@@ -133,20 +154,23 @@ namespace CAT.WebMVC.Controllers.Moment
         [ActionName("Delete")]
         public ActionResult Delete(int id)
         {
-            var service = CreateMomentService();
-            var model = service.GetMomentDetails(id);
+            _userId = Guid.Parse(User.Identity.GetUserId());
+            var userId = _userId;
+
+            var model = _momentService.GetMomentDetails(id, userId);
             return View(model);
         }
 
-        // POST: Moment/Delete/{id}
+        //POST: Moment/Delete/{id}
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult MomentDelete(int id)
         {
-            var service = CreateMomentService();
+            _userId = Guid.Parse(User.Identity.GetUserId());
+            var userId = _userId;
 
-            service.DeleteMoment(id);
+            _momentService.DeleteMoment(id, userId);
 
             TempData["SaveResult"] = "Asset successfully removed!";
 
@@ -154,11 +178,11 @@ namespace CAT.WebMVC.Controllers.Moment
         }
 
         // Helper Method
-        private MomentService CreateMomentService()
-        {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new MomentService(userId);
-            return service;
-        }
+        //private MomentService CreateMomentService()
+        //{
+        //    var userId = Guid.Parse(User.Identity.GetUserId());
+        //    var service = new MomentService(userId);
+        //    return service;
+        //}
     }
 }

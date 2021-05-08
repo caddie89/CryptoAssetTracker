@@ -104,6 +104,10 @@
     <Compile Include="SoldMoment_Service\SoldMomentService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CAT.Contracts\CAT.Contracts.csproj">
+      <Project>{3825c7ec-ec28-4a7e-9a6e-ed69df9235c2}</Project>
+      <Name>CAT.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CAT.Data\CAT.Data.csproj">
       <Project>{46ef42c8-b209-428e-8267-9c86fcd0c6ad}</Project>
       <Name>CAT.Data</Name>

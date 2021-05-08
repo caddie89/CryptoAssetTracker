@@ -422,20 +422,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CAT.Data\CAT.Data.csproj">
-      <Project>{46ef42c8-b209-428e-8267-9c86fcd0c6ad}</Project>
-      <Name>CAT.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CAT.Models\CAT.Models.csproj">
-      <Project>{0B8E6131-272F-4C02-A2C2-C3C442C2EE0D}</Project>
-      <Name>CAT.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CAT.Services\CAT.Services.csproj">
-      <Project>{1cc5c770-4bc2-4df2-97fd-f5a56027a38e}</Project>
-      <Name>CAT.Services</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
@@ -443,6 +429,28 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CAT.Contracts\CAT.Contracts.csproj">
+      <Project>{3825c7ec-ec28-4a7e-9a6e-ed69df9235c2}</Project>
+      <Name>CAT.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CAT.Data\CAT.Data.csproj">
+      <Project>{46ef42c8-b209-428e-8267-9c86fcd0c6ad}</Project>
+      <Name>CAT.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CAT.Models\CAT.Models.csproj">
+      <Project>{0b8e6131-272f-4c02-a2c2-c3c442c2ee0d}</Project>
+      <Name>CAT.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CAT.Services\CAT.Services.csproj">
+      <Project>{1cc5c770-4bc2-4df2-97fd-f5a56027a38e}</Project>
+      <Name>CAT.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CAT.Tests\CAT.Tests.csproj">
+      <Project>{33145253-9b12-49e0-9663-f75bedb96461}</Project>
+      <Name>CAT.Tests</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
