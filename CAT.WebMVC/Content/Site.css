@@ -108,6 +108,10 @@ body {
     position: relative;
 }
 
+.navbackground {
+    background-color: black;
+}
+
 .backgroundGradient {
     background-image: linear-gradient(#495057, #212529);
     background-repeat: no-repeat;
