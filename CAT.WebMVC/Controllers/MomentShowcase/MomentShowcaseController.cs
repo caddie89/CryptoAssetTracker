@@ -28,9 +28,9 @@ namespace CAT.WebMVC.Controllers.MomentShowcase
             var userId = _userId;
 
             var momentList = _momentShowcaseService.SelectMoment(userId);
-            TempData["MomentId"] = momentList;
+            ViewData["MomentId"] = momentList;
             var showcaseList = _momentShowcaseService.SelectShowcase(userId);
-            TempData["ShowcaseId"] = showcaseList;
+            ViewData["ShowcaseId"] = showcaseList;
 
             return View();
         }
@@ -44,20 +44,23 @@ namespace CAT.WebMVC.Controllers.MomentShowcase
                 return View(model);
 
             model.OwnerId = Guid.Parse(User.Identity.GetUserId());
-
-            if (_momentShowcaseService.CreateMomentShowcase(model) == false)
+            
+            if (_momentShowcaseService.CreateMomentShowcase(model))
+            {
+                TempData["SaveResult"] = "Asset successfully added to Collection!";
+                return RedirectToAction("Index", "Showcase");
+            }
+            else if(_momentShowcaseService.CreateMomentShowcase(model) == false)
             {
                 TempData["AlreadyAdded"] = "Oops! Collection already contains this Asset. Please select a different Asset to add.";
                 return RedirectToAction("Create", "MomentShowcase");
             }
-
-            if (_momentShowcaseService.CreateMomentShowcase(model))
-            {
-                TempData["SaveResult"] = "Asset successfully added to Collection!";
-                return RedirectToAction("Index", "MomentShowcase");
-            }
-            
             ModelState.AddModelError("", "Asset could not be added to Collection. Please make sure all input fields are populated.");
+
+            var momentList = _momentShowcaseService.SelectMoment(model.OwnerId);
+            ViewData["MomentId"] = momentList;
+            var showcaseList = _momentShowcaseService.SelectShowcase(model.OwnerId);
+            ViewData["ShowcaseId"] = showcaseList;
 
             return View(model);
         }

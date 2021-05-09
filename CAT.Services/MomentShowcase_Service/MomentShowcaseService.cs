@@ -30,7 +30,7 @@ namespace CAT.Services.MomentShowcase_Service
             using (var ctx = new ApplicationDbContext())
             {
                 // Error Handling
-                var exists = ctx.MomentsShowcases.Where(p => p.MomentId == entity.MomentId).Count();
+                var exists = ctx.MomentsShowcases.Where(p => p.MomentId == entity.MomentId && p.ShowcaseId == entity.ShowcaseId).Count();
                 if (exists > 0)
                 {
                     return false;
