@@ -11,11 +11,12 @@ namespace CAT.Models.MomentShowcase_Models
     public class MomentShowcaseCreate
     {
         [Required]
+        public Guid OwnerId { get; set; }
+
+        [Required]
         public int MomentId { get; set; }
 
         [Required]
         public int ShowcaseId { get; set; }
-
-        public int[] MomentIds { get; set; }
     }
 }

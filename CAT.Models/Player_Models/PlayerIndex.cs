@@ -11,6 +11,8 @@ namespace CAT.Models
 {
     public class PlayerIndex
     {
+        public Guid OwnerId { get; set; }
+
         [Display(Name = "Player ID")]
         public int PlayerId { get; set; }
 

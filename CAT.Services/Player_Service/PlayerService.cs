@@ -1,4 +1,6 @@
 ﻿using CAT.Contexts.Data;
+using CAT.Contracts.Moment_Contract;
+using CAT.Contracts.Player_Contract;
 using CAT.Data.Entities;
 using CAT.Models;
 using CAT.Models.Moment_Models;
@@ -12,22 +14,15 @@ using System.Threading.Tasks;
 
 namespace CAT.Services.Player_Service
 {
-    public class PlayerService
+    public class PlayerService : IPlayerService
     {
-        private readonly Guid _userId;
-
-        public PlayerService(Guid userId)
-        {
-            _userId = userId;
-        }
-
         // Create Player
         public bool CreatePlayer(PlayerCreate model)
         {
             var entity =
                 new Player()
                 {
-                    OwnerId = _userId,
+                    OwnerId = model.OwnerId,
                     PlayerFirstName = model.PlayerFirstName,
                     PlayerLastName = model.PlayerLastName,
                     PositionOfPlayer = model.PositionOfPlayer,
@@ -42,39 +37,62 @@ namespace CAT.Services.Player_Service
         }
 
         // Get Player Index
-        public IEnumerable<PlayerIndex> GetPlayerIndex(string search, int? page)
+        public IEnumerable<PlayerIndex> GetPlayerIndex(string search, int? page, Guid userId)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var searchPlayers =
-                ctx
-                .Players
-                .Where(e => e.OwnerId == _userId && e.PlayerLastName.StartsWith(search) || e.PlayerFirstName.StartsWith(search) || search == null)
-                .OrderBy(p => p.PlayerLastName)
-                .Select(
-                    e =>
-                    new PlayerIndex
-                    {
-                        PlayerId = e.PlayerId,
-                        PlayerFirstName = e.PlayerFirstName,
-                        PlayerLastName = e.PlayerLastName,
-                        PositionOfPlayer = e.PositionOfPlayer,
-                        PlayerTeam = e.PlayerTeam
-                    });
-
-                return searchPlayers.ToArray().ToPagedList(page ?? 1, 9);
+                if (search == null)
+                {
+                    var searchPlayers =
+                    ctx
+                    .Players
+                    .Where(e => e.OwnerId == userId)
+                    .OrderBy(p => p.PlayerLastName)
+                    .Select(
+                        e =>
+                        new PlayerIndex
+                        {
+                            OwnerId = e.OwnerId,
+                            PlayerId = e.PlayerId,
+                            PlayerFirstName = e.PlayerFirstName,
+                            PlayerLastName = e.PlayerLastName,
+                            PositionOfPlayer = e.PositionOfPlayer,
+                            PlayerTeam = e.PlayerTeam
+                        });
+                    return searchPlayers.ToArray().ToPagedList(page ?? 1, 9);
+                }
+                else
+                {
+                    var searchPlayers =
+                    ctx
+                    .Players
+                    .Where(e => e.OwnerId == userId && (e.PlayerLastName.StartsWith(search) || e.PlayerFirstName.StartsWith(search)))
+                    .OrderBy(p => p.PlayerLastName)
+                    .Select(
+                        e =>
+                        new PlayerIndex
+                        {
+                            OwnerId = e.OwnerId,
+                            PlayerId = e.PlayerId,
+                            PlayerFirstName = e.PlayerFirstName,
+                            PlayerLastName = e.PlayerLastName,
+                            PositionOfPlayer = e.PositionOfPlayer,
+                            PlayerTeam = e.PlayerTeam
+                        });
+                    return searchPlayers.ToArray().ToPagedList(page ?? 1, 9);
+                }
             }
         }
 
         // Get Player Details
-        public PlayerDetails GetPlayerDetails(int id)
+        public PlayerDetails GetPlayerDetails(int id, Guid userId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
                     .Players
-                    .Single(e => e.PlayerId == id && e.OwnerId == _userId);
+                    .Single(e => e.PlayerId == id && e.OwnerId == userId);
                 return
                     new PlayerDetails
                     {
@@ -100,14 +118,14 @@ namespace CAT.Services.Player_Service
         }
 
         // Edit Player
-        public bool EditPlayer(PlayerEdit model)
+        public bool EditPlayer(PlayerEdit model, Guid userId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
                     .Players
-                    .Single(e => e.PlayerId == model.PlayerId && e.OwnerId == _userId);
+                    .Single(e => e.PlayerId == model.PlayerId && e.OwnerId == userId);
 
                 entity.PlayerFirstName = model.PlayerFirstName;
                 entity.PlayerLastName = model.PlayerLastName;
@@ -119,13 +137,13 @@ namespace CAT.Services.Player_Service
         }
 
         // Delete Player
-        public bool DeletePlayer(int id)
+        public bool DeletePlayer(int id, Guid userId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx.
-                    Players.Single(e => e.PlayerId == id && e.OwnerId == _userId);
+                    Players.Single(e => e.PlayerId == id && e.OwnerId == userId);
 
                 ctx.Players.Remove(entity);
 

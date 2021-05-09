@@ -10,6 +10,8 @@ namespace CAT.Models.Player_Models
 {
     public class PlayerCreate
     {
+        public Guid OwnerId { get; set; }
+
         [Required]
         [Display(Name = "First Name")]
         public string PlayerFirstName { get; set; }

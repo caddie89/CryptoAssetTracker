@@ -8,17 +8,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CAT.Contracts.Showcase_Contract;
 
 namespace CAT.WebMVC.Controllers.Showcase
 {
     [Authorize]
     public class ShowcaseController : Controller
     {
+        private Guid _userId;
+
+        private readonly IShowcaseService _showcaseService;
+
+        public ShowcaseController(IShowcaseService showcaseService)
+        {
+            _showcaseService = showcaseService;
+        }
+
         // GET: Showcase/Index
         public ActionResult Index()
         {
-            var service = CreateShowcaseService();
-            var model = service.GetShowcaseIndex();
+            _userId = Guid.Parse(User.Identity.GetUserId());
+            var userId = _userId;
+
+            var model = _showcaseService.GetShowcaseIndex(userId);
             return View(model);
         }
 
@@ -36,9 +48,9 @@ namespace CAT.WebMVC.Controllers.Showcase
             if (!ModelState.IsValid)
                 return View(model);
 
-            var service = CreateShowcaseService();
+            model.OwnerId = Guid.Parse(User.Identity.GetUserId());
 
-            if (service.CreateShowcase(model))
+            if (_showcaseService.CreateShowcase(model))
             {
                 TempData["SaveResult"] = "Collection successfully created!";
                 return RedirectToAction("Index");
@@ -52,16 +64,20 @@ namespace CAT.WebMVC.Controllers.Showcase
         // GET: Showcase/Details/{id}
         public ActionResult Details(int id)
         {
-            var service = CreateShowcaseService();
-            var model = service.GetShowcaseDetails(id);
+            _userId = Guid.Parse(User.Identity.GetUserId());
+            var userId = _userId;
+
+            var model = _showcaseService.GetShowcaseDetails(id, userId);
             return View(model);
         }
 
         // GET: Showcase/Edit
         public ActionResult Edit(int id)
         {
-            var service = CreateShowcaseService();
-            var detail = service.GetShowcaseDetails(id);
+            _userId = Guid.Parse(User.Identity.GetUserId());
+            var userId = _userId;
+
+            var detail = _showcaseService.GetShowcaseDetails(id, userId);
 
             var model =
                 new ShowcaseEdit 
@@ -78,6 +94,9 @@ namespace CAT.WebMVC.Controllers.Showcase
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, ShowcaseEdit model)
         {
+            _userId = Guid.Parse(User.Identity.GetUserId());
+            var userId = _userId;
+
             if (!ModelState.IsValid)
                 return View(model);
 
@@ -87,9 +106,7 @@ namespace CAT.WebMVC.Controllers.Showcase
                 return View(model);
             }
 
-            var service = CreateShowcaseService();
-
-            if (service.EditShowcase(model))
+            if (_showcaseService.EditShowcase(model, userId))
             {
                 TempData["SaveResult"] = "Collection successfully modified!";
                 return RedirectToAction("Index");
@@ -104,8 +121,10 @@ namespace CAT.WebMVC.Controllers.Showcase
         [ActionName("Delete")]
         public ActionResult Delete(int id)
         {
-            var service = CreateShowcaseService();
-            var model = service.GetShowcaseDetails(id);
+            _userId = Guid.Parse(User.Identity.GetUserId());
+            var userId = _userId;
+
+            var model = _showcaseService.GetShowcaseDetails(id, userId);
             return View(model);
         }
 
@@ -115,21 +134,14 @@ namespace CAT.WebMVC.Controllers.Showcase
         [ValidateAntiForgeryToken]
         public ActionResult ShowcaseDelete(int id)
         {
-            var service = CreateShowcaseService();
+            _userId = Guid.Parse(User.Identity.GetUserId());
+            var userId = _userId;
 
-            service.DeleteShowcase(id);
+            _showcaseService.DeleteShowcase(id, userId);
 
             TempData["SaveResult"] = "Collection was successfully removed.";
 
             return RedirectToAction("Index");
-        }
-
-        // Helper Method
-        private ShowcaseService CreateShowcaseService()
-        {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new ShowcaseService(userId);
-            return service;
         }
     }
 }

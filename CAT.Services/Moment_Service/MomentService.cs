@@ -1,4 +1,5 @@
 ﻿using CAT.Contexts.Data;
+using CAT.Contracts.Moment_Contract;
 using CAT.Data.Entities;
 using CAT.Models.Moment_Models;
 using CAT.Models.Showcase_Models;
@@ -16,22 +17,15 @@ using System.Web.Mvc;
 
 namespace CAT.Services.Moment_Service
 {
-    public class MomentService
+    public class MomentService : IMomentService
     {
-        private readonly Guid _userId;
-
-        public MomentService(Guid userId)
-        {
-            _userId = userId;
-        }
-
         // Create Moment
         public bool CreateMoment(MomentCreate model)
         {
             var entity =
                 new Moment()
                 {
-                    OwnerId = _userId,
+                    OwnerId = model.OwnerId,
                     PlayerId = model.PlayerId,
                     MomentCategory = model.MomentCategory,
                     DateOfMoment = model.DateOfMoment,
@@ -55,19 +49,20 @@ namespace CAT.Services.Moment_Service
         }
 
         // Get All Moments
-        public IEnumerable<MomentIndex> GetMomentIndex()
+        public IEnumerable<MomentIndex> GetMomentIndex(Guid userId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx
                     .Moments
-                    .Where(e => e.OwnerId == _userId)
+                    .Where(e => e.OwnerId == userId)
                     .OrderByDescending(p => p.IndividualMomentPrice)
                     .Select(
                         e =>
                         new MomentIndex
                         {
+                            OwnerId = e.OwnerId,
                             MomentId = e.MomentId,
                             PlayerId = e.Player.PlayerId,
                             PlayerFirstName = e.Player.PlayerFirstName,
@@ -82,17 +77,21 @@ namespace CAT.Services.Moment_Service
                             MomentTotalValue =
                             ctx
                             .Moments
-                            .Where(o => o.OwnerId == _userId)
+                            .Where(o => o.OwnerId == userId)
                             .Select(
                                 i =>
                                 i.IndividualMomentPrice)
                             .DefaultIfEmpty(0)
                             .Sum(),
-                            MomentCount = ctx.Moments.Count(),
+                            MomentCount = 
+                            ctx
+                            .Moments
+                            .Where(o => o.OwnerId == userId)
+                            .Count(),
                             SoldMomentTotalValue =
                             ctx
                             .SoldMoments
-                            .Where(o => o.OwnerId == _userId)
+                            .Where(o => o.OwnerId == userId)
                             .Select(
                                 s =>
                                 s.SoldForAmount)
@@ -101,7 +100,7 @@ namespace CAT.Services.Moment_Service
                             OriginalMomentTotalValue =
                             ctx
                             .SoldMoments
-                            .Where(o => o.OwnerId == _userId)
+                            .Where(o => o.OwnerId == userId)
                             .Select(
                                 s =>
                                 s.IndividualMomentPrice)
@@ -109,7 +108,7 @@ namespace CAT.Services.Moment_Service
                             .Sum(),
                             MomentMint = e.MomentMint,
                             ShowcaseIds = e.Showcases
-                            .Where(o => o.OwnerId == _userId)
+                            .Where(o => o.OwnerId == userId)
                             .Select(
                                 s =>
                                 s.Showcase.ShowcaseId).ToList()
@@ -120,14 +119,14 @@ namespace CAT.Services.Moment_Service
         }
 
         // Get Moment Details
-        public MomentDetails GetMomentDetails(int id)
+        public MomentDetails GetMomentDetails(int id, Guid userId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
                     .Moments
-                    .Single(e => e.MomentId == id && e.OwnerId == _userId);
+                    .Single(e => e.MomentId == id && e.OwnerId == userId);
 
                 if (entity.PlayerId == null)
                 {
@@ -188,14 +187,14 @@ namespace CAT.Services.Moment_Service
         }
 
         // Edit Moment
-        public bool EditMoment(MomentEdit model)
+        public bool EditMoment(MomentEdit model, Guid userId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
                     .Moments
-                    .Single(e => e.MomentId == model.MomentId && e.OwnerId == _userId);
+                    .Single(e => e.MomentId == model.MomentId && e.OwnerId == userId);
 
                 entity.PlayerId = model.PlayerId;
                 entity.MomentCategory = model.MomentCategory;
@@ -216,14 +215,14 @@ namespace CAT.Services.Moment_Service
         }
 
         // Delete Moment
-        public bool DeleteMoment(int id)
+        public bool DeleteMoment(int id, Guid userId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
                     .Moments
-                    .Single(e => e.MomentId == id && e.OwnerId == _userId);
+                    .Single(e => e.MomentId == id && e.OwnerId == userId);
 
                 ctx.Moments.Remove(entity);
 
@@ -232,7 +231,7 @@ namespace CAT.Services.Moment_Service
         }
 
         // Populate Player Drop-Down List
-        public IEnumerable<SelectListItem> SelectPlayers()
+        public IEnumerable<SelectListItem> SelectPlayers(Guid userId)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -240,33 +239,7 @@ namespace CAT.Services.Moment_Service
                     ctx
                     .Players
                     .OrderBy(p => p.PlayerLastName)
-                    .Where(e => e.OwnerId == _userId)
-                    .Select(
-                     p =>
-                     new SelectListItem
-                     {
-                         Text = p.PlayerFirstName + " " + p.PlayerLastName,
-                         Value = p.PlayerId.ToString()
-                     });
-
-                var playerList = query.ToList();
-
-                playerList.Add(new SelectListItem { Text = "Unknown", Value = "" });
-                playerList.Insert(0, new SelectListItem { Text = "Select", Value = "" });
-                return playerList;
-            }
-        }
-
-        // Populate Player Drop-Down List (Edit)
-        public List<SelectListItem> PlayersList()
-        {
-            using (var ctx = new ApplicationDbContext())
-            {
-                var query =
-                    ctx
-                    .Players
-                    .OrderBy(p => p.PlayerLastName)
-                    .Where(e => e.OwnerId == _userId)
+                    .Where(e => e.OwnerId == userId)
                     .Select(
                      p =>
                      new SelectListItem
@@ -284,14 +257,14 @@ namespace CAT.Services.Moment_Service
         }
 
         // Moment Count
-        public int MomentCount()
+        public int MomentCount(Guid userId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx
                     .Moments
-                    .Where(e => e.OwnerId == _userId)
+                    .Where(e => e.OwnerId == userId)
                     .Count();
 
                 var momentCount = query;
@@ -301,14 +274,14 @@ namespace CAT.Services.Moment_Service
         }
 
         // Moment Total Value
-        public decimal MomentTotalValue()
+        public decimal MomentTotalValue(Guid userId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx
                     .Moments
-                    .Where(e => e.OwnerId == _userId)
+                    .Where(e => e.OwnerId == userId)
                     .Select(
                         i =>
                         i.IndividualMomentPrice)
@@ -322,14 +295,14 @@ namespace CAT.Services.Moment_Service
         }
 
         // Total Moment ProfitLoss
-        public decimal MomentTotalProfitLoss()
+        public decimal MomentTotalProfitLoss(Guid userId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var soldMomentValue =
                     ctx
                     .SoldMoments
-                    .Where(e => e.OwnerId == _userId)
+                    .Where(e => e.OwnerId == userId)
                     .Select(
                         i =>
                         i.SoldForAmount)
@@ -339,7 +312,7 @@ namespace CAT.Services.Moment_Service
                 var originalMomentValue =
                     ctx
                     .SoldMoments
-                    .Where(o => o.OwnerId == _userId)
+                    .Where(e => e.OwnerId == userId)
                     .Select(
                         i =>
                         i.IndividualMomentPrice)
@@ -353,14 +326,14 @@ namespace CAT.Services.Moment_Service
         }
 
         // Moment ROI
-        public decimal MomentROI()
+        public decimal MomentROI(Guid userId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var soldMomentValue =
                     ctx
                     .SoldMoments
-                    .Where(e => e.OwnerId == _userId)
+                    .Where(e => e.OwnerId == userId)
                     .Select(
                         i =>
                         i.SoldForAmount)
@@ -370,7 +343,7 @@ namespace CAT.Services.Moment_Service
                 var originalMomentValue =
                     ctx
                     .SoldMoments
-                    .Where(o => o.OwnerId == _userId)
+                    .Where(o => o.OwnerId == userId)
                     .Select(
                         i =>
                         i.IndividualMomentPrice)

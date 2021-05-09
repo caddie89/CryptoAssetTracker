@@ -1,4 +1,5 @@
-﻿using CAT.Models.MomentShowcase_Models;
+﻿using CAT.Contracts.MomentShowcase_Contract;
+using CAT.Models.MomentShowcase_Models;
 using CAT.Services.MomentShowcase_Service;
 using Microsoft.AspNet.Identity;
 using System;
@@ -12,17 +13,24 @@ namespace CAT.WebMVC.Controllers.MomentShowcase
     [Authorize]
     public class MomentShowcaseController : Controller
     {
+        private Guid _userId;
+
+        private readonly IMomentShowcaseService _momentShowcaseService;
+        public MomentShowcaseController(IMomentShowcaseService momentShowcaseService)
+        {
+            _momentShowcaseService = momentShowcaseService;
+        }
+
         // GET: MomentShowcase/Create
         public ActionResult Create()
         {
-            var service = CreateMomentShowcaseService();
-            var momentList = service.SelectMoment();
-            ViewData["Moments"] = momentList;
-            var showcaseList = service.SelectShowcase();
-            ViewData["Showcases"] = showcaseList;
+            _userId = Guid.Parse(User.Identity.GetUserId());
+            var userId = _userId;
 
-            //var moments = service.SelectMoments();
-            //ViewBag.Moments = moments;
+            var momentList = _momentShowcaseService.SelectMoment(userId);
+            ViewData["MomentId"] = momentList;
+            var showcaseList = _momentShowcaseService.SelectShowcase(userId);
+            ViewData["ShowcaseId"] = showcaseList;
 
             return View();
         }
@@ -35,17 +43,24 @@ namespace CAT.WebMVC.Controllers.MomentShowcase
             if (!ModelState.IsValid)
                 return View(model);
 
-            var service = CreateMomentShowcaseService();
-
-            if (service.CreateMomentShowcase(model))
+            model.OwnerId = Guid.Parse(User.Identity.GetUserId());
+            
+            if (_momentShowcaseService.CreateMomentShowcase(model))
             {
                 TempData["SaveResult"] = "Asset successfully added to Collection!";
                 return RedirectToAction("Index", "Showcase");
             }
-
+            else if(_momentShowcaseService.CreateMomentShowcase(model) == false)
+            {
+                TempData["AlreadyAdded"] = "Oops! Collection already contains this Asset. Please select a different Asset to add.";
+                return RedirectToAction("Create", "MomentShowcase");
+            }
             ModelState.AddModelError("", "Asset could not be added to Collection. Please make sure all input fields are populated.");
 
-            // service.CreateMomentShowcase(model);
+            var momentList = _momentShowcaseService.SelectMoment(model.OwnerId);
+            ViewData["MomentId"] = momentList;
+            var showcaseList = _momentShowcaseService.SelectShowcase(model.OwnerId);
+            ViewData["ShowcaseId"] = showcaseList;
 
             return View(model);
         }
@@ -53,8 +68,10 @@ namespace CAT.WebMVC.Controllers.MomentShowcase
         // GET: MomentShowcase/Details/{id}/{id}
         public ActionResult Details(int momentId, int showcaseId)
         {
-            var service = CreateMomentShowcaseService();
-            var model = service.GetMomentShowcaseDetails(momentId, showcaseId);
+            _userId = Guid.Parse(User.Identity.GetUserId());
+            var userId = _userId;
+
+            var model = _momentShowcaseService.GetMomentShowcaseDetails(momentId, showcaseId, userId);
             return View(model);
         }
 
@@ -62,8 +79,10 @@ namespace CAT.WebMVC.Controllers.MomentShowcase
         [ActionName("Delete")]
         public ActionResult Delete(int momentId, int showcaseId)
         {
-            var service = CreateMomentShowcaseService();
-            var model = service.GetMomentShowcaseDetails(momentId, showcaseId);
+            _userId = Guid.Parse(User.Identity.GetUserId());
+            var userId = _userId;
+
+            var model = _momentShowcaseService.GetMomentShowcaseDetails(momentId, showcaseId, userId);
             return View(model);
         }
 
@@ -73,20 +92,14 @@ namespace CAT.WebMVC.Controllers.MomentShowcase
         [ValidateAntiForgeryToken]
         public ActionResult ShowcaseDelete(int momentId, int showcaseId)
         {
-            var service = CreateMomentShowcaseService();
-            service.DeleteMomentShowcase(momentId, showcaseId);
+            _userId = Guid.Parse(User.Identity.GetUserId());
+            var userId = _userId;
+
+            _momentShowcaseService.DeleteMomentShowcase(momentId, showcaseId, userId);
 
             TempData["SaveResult"] = "Asset successfully removed from Collection!";
 
             return RedirectToAction("Index", "Showcase");
-        }
-
-        // Helper Method
-        private MomentShowcaseService CreateMomentShowcaseService()
-        {
-            Guid userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new MomentShowcaseService(userId);
-            return service;
         }
     }
 }

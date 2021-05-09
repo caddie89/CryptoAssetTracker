@@ -11,6 +11,9 @@ namespace CAT.Models.Showcase_Models
     public class ShowcaseCreate
     {
         [Required]
+        public Guid OwnerId { get; set; }
+
+        [Required]
         [Display(Name = "Showcase")]
         [MaxLength(50)]
         public string ShowcaseName { get; set; }

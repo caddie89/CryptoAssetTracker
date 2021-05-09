@@ -10,6 +10,8 @@ namespace CAT.Services.SoldMoment_Service
 {
     public class SoldMomentCreate
     {
+        public Guid OwnerId { get; set; }
+
         [Display(Name = "Player ID")]
         public int? MomentId { get; set; }
 

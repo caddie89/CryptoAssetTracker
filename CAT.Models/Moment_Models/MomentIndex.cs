@@ -15,6 +15,8 @@ namespace CAT.Models.Moment_Models
         [Display(Name = "Moment ID")]
         public int MomentId { get; set; }
 
+        public Guid OwnerId { get; set; }
+
         [Display(Name = "Player ID")]
         public int? PlayerId { get; set; }
 
