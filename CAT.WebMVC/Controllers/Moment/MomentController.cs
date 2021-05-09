@@ -75,6 +75,9 @@ namespace CAT.WebMVC.Controllers.Moment
 
             ModelState.AddModelError("", "Asset could not be added. Please make sure that all required input fields are populated.");
 
+            var players = _momentService.SelectPlayers(model.OwnerId);
+            ViewData["Players"] = players;
+
             return View(model);
         }
 

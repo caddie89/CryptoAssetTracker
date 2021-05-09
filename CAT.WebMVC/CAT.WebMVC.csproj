@@ -207,7 +207,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\MomentShowcase\IShowcaseMomentService.cs" />
     <Compile Include="Controllers\MomentShowcase\MomentShowcaseController.cs" />
     <Compile Include="Controllers\Moment\MomentController.cs" />
     <Compile Include="Controllers\Player\PlayerController.cs" />
