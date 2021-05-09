@@ -53,7 +53,7 @@ This app was optimized for running with the Google Chrome web browser. The user 
 
 ### Register User & Login
 
-![Login/Register](C:/ElevenFiftyProjects/RedBadgeProjects/CryptoAssetTracker/CryptoAssetTracker/CAT.WebMVC/Images/SelfPortrait.png)
+![Login/Register](/Images/SelfPortrait.jpg)
 
 
 
