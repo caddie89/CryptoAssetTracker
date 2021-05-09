@@ -70,9 +70,18 @@
     <Compile Include="Entities\Showcase.cs" />
     <Compile Include="Entities\MomentShowcase.cs" />
     <Compile Include="Entities\SoldMoment.cs" />
+    <Compile Include="Migrations\202105091830550_Initial Migration.cs" />
+    <Compile Include="Migrations\202105091830550_Initial Migration.designer.cs">
+      <DependentUpon>202105091830550_Initial Migration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202105091830550_Initial Migration.resx">
+      <DependentUpon>202105091830550_Initial Migration.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
