@@ -1,4 +1,6 @@
-﻿using CAT.Models.Moment_Models;
+﻿using CAT.Models;
+using CAT.Models.Moment_Models;
+using CAT.Models.Player_Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,7 @@ namespace CAT.Contracts.Moment_Contract
 {
     public interface IMomentService
     {
+        // Moment Service Methods
         bool CreateMoment(MomentCreate model);
         IEnumerable<MomentIndex> GetMomentIndex(Guid userId);
         MomentDetails GetMomentDetails(int id, Guid userId);

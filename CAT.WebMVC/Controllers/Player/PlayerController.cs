@@ -1,4 +1,5 @@
-﻿using CAT.Models.Player_Models;
+﻿using CAT.Contracts.Player_Contract;
+using CAT.Models.Player_Models;
 using CAT.Services.Player_Service;
 using Microsoft.AspNet.Identity;
 using PagedList;
@@ -13,13 +14,22 @@ namespace CAT.WebMVC.Controllers.Player
     [Authorize]
     public class PlayerController : Controller
     {
-        // GET: Player/Create
+        private Guid _userId;
+
+        private readonly IPlayerService _playerService;
+
+        public PlayerController(IPlayerService playerService)
+        {
+            _playerService = playerService;
+        }
+
+        //GET: Player/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Player/Create
+        //POST: Player/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(PlayerCreate model)
@@ -27,9 +37,9 @@ namespace CAT.WebMVC.Controllers.Player
             if (!ModelState.IsValid)
                 return View(model);
 
-            var service = CreatePlayerService();
+            model.OwnerId = Guid.Parse(User.Identity.GetUserId());
 
-            if (service.CreatePlayer(model))
+            if (_playerService.CreatePlayer(model))
             {
                 TempData["SaveResult"] = "Player successfully added!";
                 return RedirectToAction("Index");
@@ -40,28 +50,34 @@ namespace CAT.WebMVC.Controllers.Player
             return View(model);
         }
 
-        // GET: Player/Index
+        //GET: Player/Index
         public ActionResult Index(string search, int? page)
         {
-            var service = CreatePlayerService();
-            var model = service.GetPlayerIndex(search, page);
+            _userId = Guid.Parse(User.Identity.GetUserId());
+            var userId = _userId;
+
+            var model = _playerService.GetPlayerIndex(search, page, userId);
             return View(model);
         }
 
-        // GET: Player/Detail/{id}
+        //GET: Player/Detail/{id}
         public ActionResult Details(int id)
         {
-            var service = CreatePlayerService();
-            var model = service.GetPlayerDetails(id);
+            _userId = Guid.Parse(User.Identity.GetUserId());
+            var userId = _userId;
+
+            var model = _playerService.GetPlayerDetails(id, userId);
 
             return View(model);
         }
 
-        // GET: Player/Edit/{id}
+        //GET: Player/Edit/{id}
         public ActionResult Edit(int id)
         {
-            var service = CreatePlayerService();
-            var detail = service.GetPlayerDetails(id);
+            _userId = Guid.Parse(User.Identity.GetUserId());
+            var userId = _userId;
+
+            var detail = _playerService.GetPlayerDetails(id, userId);
             var model =
                 new PlayerEdit
                 {
@@ -74,7 +90,7 @@ namespace CAT.WebMVC.Controllers.Player
             return View(model);
         }
 
-        // POST: Player/Edit/{id}
+        //POST: Player/Edit/{id}
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, PlayerEdit model)
@@ -85,9 +101,10 @@ namespace CAT.WebMVC.Controllers.Player
             if (model.PlayerId != id)
                 ModelState.AddModelError("", "IDs do not match.");
 
-            var service = CreatePlayerService();
+            model.OwnerId = Guid.Parse(User.Identity.GetUserId());
+            var userId = model.OwnerId;
 
-            if (service.EditPlayer(model))
+            if (_playerService.EditPlayer(model, userId))
             {
                 TempData["SaveResult"] = "Player successfully modified!";
                 return RedirectToAction("Index");
@@ -97,37 +114,31 @@ namespace CAT.WebMVC.Controllers.Player
             return View(model);
         }
 
-        // GET: Player/Delete/{id}
+        //GET: Player/Delete/{id}
         [ActionName("Delete")]
         public ActionResult Delete(int id)
         {
-            var service = CreatePlayerService();
-            var model = service.GetPlayerDetails(id);
+            _userId = Guid.Parse(User.Identity.GetUserId());
+            var userId = _userId;
+
+            var model = _playerService.GetPlayerDetails(id, userId);
             return View(model);
         }
 
-        // POST: Player/Delete/{id}
+        //POST: Player/Delete/{id}
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeletePost(int id)
         {
-            var service = CreatePlayerService();
+            _userId = Guid.Parse(User.Identity.GetUserId());
+            var userId = _userId;
 
-            service.DeletePlayer(id);
+            _playerService.DeletePlayer(id, userId);
 
             TempData["SaveResult"] = "Player successfully removed!";
 
             return RedirectToAction("Index");
-        }
-
-        // Helper Method - CreateService()
-        private PlayerService CreatePlayerService()
-        {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-
-            var service = new PlayerService(userId);
-            return service;
         }
     }
 }

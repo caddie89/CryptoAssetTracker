@@ -1,4 +1,5 @@
 ﻿using CAT.Contexts.Data;
+using CAT.Contracts.Showcase_Contract;
 using CAT.Data.Entities;
 using CAT.Models.Moment_Models;
 using CAT.Models.Showcase_Models;
@@ -12,22 +13,15 @@ using System.Web.Mvc;
 
 namespace CAT.Services.Showcase_Service
 {
-    public class ShowcaseService
+    public class ShowcaseService : IShowcaseService
     {
-        private readonly Guid _userId;
-
-        public ShowcaseService(Guid userId)
-        {
-            _userId = userId;
-        }
-
         // Create Showcase
         public bool CreateShowcase(ShowcaseCreate model)
         {
             var entity =
                 new Showcase()
                 {
-                    OwnerId = _userId,
+                    OwnerId = model.OwnerId,
                     ShowcaseName = model.ShowcaseName,
                     ShowcaseDescription = model.ShowcaseDescription,
                 };
@@ -40,14 +34,14 @@ namespace CAT.Services.Showcase_Service
         }
 
         // Get Showcase Index
-        public IEnumerable<ShowcaseIndex> GetShowcaseIndex()
+        public IEnumerable<ShowcaseIndex> GetShowcaseIndex(Guid userId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx
                     .Showcases
-                    .Where(e => e.OwnerId == _userId)
+                    .Where(e => e.OwnerId == userId)
                     .Select(
                         e =>
                         new ShowcaseIndex
@@ -56,7 +50,7 @@ namespace CAT.Services.Showcase_Service
                             ShowcaseName = e.ShowcaseName,
                             ShowcaseDescription = e.ShowcaseDescription,
                             MomentIds = e.Moments
-                            .Where(o => o.OwnerId == _userId)
+                            .Where(o => o.OwnerId == userId)
                             .Select(
                                 s =>
                                 s.Moment.MomentId).ToList(),
@@ -67,14 +61,14 @@ namespace CAT.Services.Showcase_Service
         }
 
         // Get Showcase Details
-        public ShowcaseDetails GetShowcaseDetails(int id)
+        public ShowcaseDetails GetShowcaseDetails(int id, Guid userId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
                     .Showcases
-                    .Single(e => e.ShowcaseId == id && e.OwnerId == _userId);
+                    .Single(e => e.ShowcaseId == id && e.OwnerId == userId);
 
                 return
                 new ShowcaseDetails
@@ -106,14 +100,14 @@ namespace CAT.Services.Showcase_Service
         }
 
         // Edit Showcase
-        public bool EditShowcase(ShowcaseEdit model)
+        public bool EditShowcase(ShowcaseEdit model, Guid userId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
                     .Showcases
-                    .Single(e => e.ShowcaseId == model.ShowcaseId && e.OwnerId == _userId);
+                    .Single(e => e.ShowcaseId == model.ShowcaseId && e.OwnerId == userId);
 
                 entity.ShowcaseName = model.ShowcaseName;
                 entity.ShowcaseDescription = model.ShowcaseDescription;
@@ -123,14 +117,14 @@ namespace CAT.Services.Showcase_Service
         }
 
         // Delete Showcase
-        public bool DeleteShowcase(int id)
+        public bool DeleteShowcase(int id, Guid userId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
                     .Showcases
-                    .Single(e => e.ShowcaseId == id && e.OwnerId == _userId);
+                    .Single(e => e.ShowcaseId == id && e.OwnerId == userId);
 
                 ctx.Showcases.Remove(entity);
 

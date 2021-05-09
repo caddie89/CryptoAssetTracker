@@ -176,13 +176,5 @@ namespace CAT.WebMVC.Controllers.Moment
 
             return RedirectToAction("Index");
         }
-
-        // Helper Method
-        //private MomentService CreateMomentService()
-        //{
-        //    var userId = Guid.Parse(User.Identity.GetUserId());
-        //    var service = new MomentService(userId);
-        //    return service;
-        //}
     }
 }

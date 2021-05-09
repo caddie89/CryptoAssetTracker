@@ -1,52 +1,54 @@
 ﻿using CAT.Contexts.Data;
+using CAT.Contracts.MomentShowcase_Contract;
 using CAT.Data.Entities;
 using CAT.Models.MomentShowcase_Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Xceed.Wpf.Toolkit;
 
 namespace CAT.Services.MomentShowcase_Service
 {
-    public class MomentShowcaseService
+    public class MomentShowcaseService : IMomentShowcaseService
     {
-        private readonly Guid _userId;
-
-        public MomentShowcaseService(Guid userId)
-        {
-            _userId = userId;
-        }
-
         // Create MomentShowcase
         public bool CreateMomentShowcase(MomentShowcaseCreate model)
         {
             var entity =
                 new MomentShowcase()
                 {
-                    OwnerId = _userId,
+                    OwnerId = model.OwnerId,
                     MomentId = model.MomentId,
                     ShowcaseId = model.ShowcaseId,
                 };
 
             using (var ctx = new ApplicationDbContext())
             {
+                // Error Handling
+                var exists = ctx.MomentsShowcases.Where(p => p.MomentId == entity.MomentId).Count();
+                if (exists > 0)
+                {
+                    return false;
+                }
                 ctx.MomentsShowcases.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
         }
 
         // Get Showcase Details
-        public MomentShowcaseDetails GetMomentShowcaseDetails(int momentId, int showcaseId)
+        public MomentShowcaseDetails GetMomentShowcaseDetails(int momentId, int showcaseId, Guid userId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
                     .MomentsShowcases
-                    .Single(e => e.MomentId == momentId && e.ShowcaseId == showcaseId && e.OwnerId == _userId);
+                    .Single(e => e.MomentId == momentId && e.ShowcaseId == showcaseId && e.OwnerId == userId);
 
                 return
                 new MomentShowcaseDetails
@@ -65,14 +67,14 @@ namespace CAT.Services.MomentShowcase_Service
         }
 
         // Delete MomentShowcase
-        public bool DeleteMomentShowcase(int momentId, int showcaseId)
+        public bool DeleteMomentShowcase(int momentId, int showcaseId, Guid userId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
                     .MomentsShowcases
-                    .SingleOrDefault(e => e.MomentId == momentId && e.ShowcaseId == showcaseId && e.OwnerId == _userId);
+                    .SingleOrDefault(e => e.MomentId == momentId && e.ShowcaseId == showcaseId && e.OwnerId == userId);
 
                 if (entity != null)
                 {
@@ -84,7 +86,7 @@ namespace CAT.Services.MomentShowcase_Service
         }
 
         // Populate Moment Drop-Down List (Create)
-        public IEnumerable<SelectListItem> SelectMoment()
+        public IEnumerable<SelectListItem> SelectMoment(Guid userId)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -92,7 +94,7 @@ namespace CAT.Services.MomentShowcase_Service
                     ctx
                     .Moments
                     .OrderBy(p => p.IndividualMomentPrice)
-                    .Where(e => e.OwnerId == _userId)
+                    .Where(e => e.OwnerId == userId)
                     .Select(
                      p =>
                      new SelectListItem
@@ -115,7 +117,7 @@ namespace CAT.Services.MomentShowcase_Service
         }
 
         // Populate Showcase Drop-Down List (Create)
-        public IEnumerable<SelectListItem> SelectShowcase()
+        public IEnumerable<SelectListItem> SelectShowcase(Guid userId)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -123,7 +125,7 @@ namespace CAT.Services.MomentShowcase_Service
                     ctx
                     .Showcases
                     .OrderBy(p => p.ShowcaseName)
-                    .Where(e => e.OwnerId == _userId)
+                    .Where(e => e.OwnerId == userId)
                     .Select(
                      p =>
                      new SelectListItem
@@ -135,6 +137,7 @@ namespace CAT.Services.MomentShowcase_Service
                 var showcaseList = query.ToList();
 
                 showcaseList.Insert(0, new SelectListItem { Text = "Select Collection", Value = "" });
+
                 return showcaseList;
             }
         }
