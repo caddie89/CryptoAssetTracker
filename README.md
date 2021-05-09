@@ -53,7 +53,7 @@ This app was optimized for running with the Google Chrome web browser. The user 
 
 ### Register User & Login
 
-![Login/Register](/Images/warning solid.jpg)
+![Login/Register](~/CAT.WebMVC/Images/SelfPortrait.png)
 
 
 
