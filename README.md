@@ -51,7 +51,11 @@ This app was optimized for running with the Google Chrome web browser. The user 
 
 ## Usage
 
-### Initial Setup and Account Setup
+### Register User & Login
+
+![Login/Register](/Images/warningsold.jpg)
+
+
 
 
 
