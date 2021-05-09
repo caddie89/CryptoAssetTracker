@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CAT.WebMVC.Models;
+using CAT.Data.Entities;
 
 namespace CAT.WebMVC.Controllers
 {

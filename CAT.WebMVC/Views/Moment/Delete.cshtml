@@ -1,0 +1,112 @@
+﻿@model CAT.Models.Moment_Models.MomentDetails
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<!--header information-->
+<div class="container text-danger p-3" style="min-width: 1000px;">
+    <div class="row" style="min-height: 8vh;">
+        <section class="col align-self-end">
+            <h1 class="display-4" style="font-weight: 500">
+                Remove Asset
+            </h1>
+        </section>
+        <div class="w-100"></div>
+        <section class="col align-self-center">
+            <span style="font-weight: 200; font-size: 18px;">
+                WARNING: Removing an Asset cannot be undone.
+            </span>
+        </section>
+    </div><!--row-->
+</div><!--container-->
+
+<div class="container containerGradient card_container p-3" style="min-width: 1000px">
+    @if (TempData.ContainsKey("SaveResult"))
+    {
+        <div class="container">
+            <div class="alert alert-success carousel-fade" role="alert">
+                @ViewBag.SaveResult
+                <button type="button" class="close" data-dismiss="alert">
+                    <span>&times;</span>
+                </button>
+                @TempData["SaveResult"]
+            </div>
+        </div>
+    }
+    <div class="row d-flex justify-content-center">
+        <div class="col-6">
+            <div class="card mx-auto box_shadow">
+                <div class="picture_container">
+                    <img class="card-img-top box_shadow" src="~/Images/500x500_placeholder.png" alt="Player Picture Placeholder">
+                    @{var mint = (int)Model.MomentMint;}
+                    <h1 class=" display-4 top_left_text text-white">
+                        @Html.DisplayFor(model => model.MomentTier)
+                    </h1>
+                    <h1 class=" display-4 bottom_right_text @(mint == 1 ? "limited" : "common")">
+                        @Html.DisplayFor(model => model.Mint)
+                    </h1>
+                </div> <!--picture-->
+                <div class="container p-2">
+                    <h5 class="text-center text-info display-4">@Html.DisplayFor(model => model.PlayerFullName)</h5>
+                    <hr class="bg-dark" />
+                    <h5 class="text-center mb-2 text-muted">@Html.DisplayFor(model => model.MomentComplete)</h5>
+                    <hr class="bg-dark" />
+                    <div class="row text-center align-items-center">
+                        <section class="col">
+                            <h6>Price</h6>
+                            <h6 class="text-muted">$@Html.DisplayFor(model => model.IndividualMomentPrice)</h6>
+                        </section>
+                        <section class="col">
+                            <h6>Serial/Circulating Count</h6>
+                            <h6 class="text-muted">@Html.DisplayFor(model => model.SerialComplete)</h6>
+                        </section>
+                    </div><!--card details-->
+                    <hr class="bg-dark" />
+                    <h4 class="text-center mb-2">Collections</h4>
+                    @foreach (var item in Model.Showcases)
+                    {
+                        var showcaseName = @Html.DisplayFor(modelItem => item.ShowcaseName);
+                        var showcase = showcaseName.ToString();
+
+                        <h5 class="text-center">
+                            @Html.ActionLink(showcase, "Details", "Showcase", new { id = item.ShowcaseId }, htmlAttributes: new { @class = "text-info text-decoration-none" })
+                        </h5>
+                    }
+
+                </div><!--card text-->
+            </div><!--card-->
+        </div><!--col-->
+    </div><!--row-->
+    <!--remove button-->
+    <div class="row text-center pt-3">
+        <hr class="bg-dark" />
+        <h3 class="text-center mb-2">Are you sure you want to remove Asset?</h3>
+        <p class="text-center text-muted">Asset will be removed from any associated Collections.</p>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="col form-actions">
+                <button type="submit" class="btn btn-danger" style="font-size: 20px;">
+                    <i class="fas fa-trash text-white" style="font-size: 24px;"></i>
+                    Remove Asset
+                </button>
+            </div><!--col-->
+        }
+    </div><!--row-->
+</div><!--card container-->
+
+<!--nav button-->
+<div class="container p-3" style="min-width: 1000px;">
+    <div class="row text-right">
+        <div class="col form-group">
+            <a class="btn btn-outline-info" style="font-size: 20px;" href="@Url.Content("~/Moment/Index")">
+                <i class="fas fa-arrow-left text-warning" style="font-size: 24px;"></i> Back to Assets
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+}

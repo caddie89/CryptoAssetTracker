@@ -1,0 +1,186 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IEnumerable<CAT.Models.Moment_Models.MomentIndex>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!--header information-->
+<div class="container text-white p-2" style="min-width: 1000px;">
+    <div class="row" style="min-height: 8vh;">
+        <section class="col align-self-end">
+            <h1 class="display-4">
+                <i class="fas fa-camera-retro text-white" style="font-size: 52px;"></i>
+                Snapshot
+            </h1>
+        </section>
+        <div class="w-100"></div>
+        <section class="col align-self-center">
+            <span style="font-weight: 200; font-size: 18px;">
+                Below is information on Asset status & performance.
+            </span>
+        </section>
+    </div><!--row-->
+</div><!--container-->
+<!--Display for Asset Value, Profit/Loss, ROI, & Asset Count-->
+<div class="container containerGradient p-3" style="min-width: 1000px;">
+    <div class="row align-items-center text-center d-flex justify-content-center" style="min-height: 20vh">
+        <div class="col">
+            <h3 class="font-weight-bold">
+                Asset Value:
+            </h3>
+            <h3 class="@((decimal)ViewData["AssetTotalValue"] >= 0 ? "greenbox" : "redbox")">
+                $@ViewData["AssetTotalValue"]
+            </h3>
+        </div>
+        <div class="col">
+            <h3 class="font-weight-bold">
+                Profit/Loss:
+            </h3>
+            <h3 class="@((decimal)ViewData["ProfitLoss"] >= 0 ? "greenbox" : "redbox")">
+                @ViewData["ProfitLoss"]
+            </h3>
+        </div>
+        <section class="col">
+            <h3 class="font-weight-bold">
+                ROI:
+            </h3>
+            <h3 class="@((decimal)ViewData["ROI"] >= 0 ? "greenbox" : "redbox")">
+                @ViewData["ROI"]%
+            </h3>
+        </section>
+        <section class="col">
+            <h3 class="font-weight-bold">
+                Asset Count:
+            </h3>
+            <h3 class="@((int)ViewData["AssetCount"] >= 1 ? "bluebox" : "bluebox")">
+                @ViewData["AssetCount"]
+            </h3>
+        </section>
+    </div><!--row-->
+</div><!--container-->
+
+<br />
+
+<!--header information-->
+<div class="container text-white p-2" style="min-width: 1000px;">
+    <div class="row" style="min-height: 8vh;">
+        <section class="col align-self-end">
+            <h1 class="display-4">
+                Assets
+            </h1>
+        </section>
+        <div class="w-100"></div>
+        <section class="col align-self-center">
+            <span style="font-weight: 200; font-size: 18px;">
+                Below is a list of all Assets.
+            </span>
+        </section>
+    </div><!--row-->
+</div><!--container-->
+<!--table-->
+<div class="container containerGradient p-3" style="min-width: 1000px;">
+    @if (TempData.ContainsKey("SaveResult"))
+    {
+        <div class="container">
+            <div class="alert alert-success carousel-fade" role="alert">
+                @ViewBag.SaveResult
+                <button type="button" class="close" data-dismiss="alert">
+                    <span>&times;</span>
+                </button>
+                @TempData["SaveResult"]
+            </div>
+        </div>
+    }
+    <table class="table table-borderless" data-toggle="table" data-pagination="true" data-search="true">
+        <thead>
+            <tr>
+                <th class="tableHeadText" >
+                    @Html.DisplayNameFor(model => model.PlayerFullName)
+                </th>
+                <th class="tableHeadText">
+                    Price
+                </th>
+                <th class="tableHeadText">
+                    Asset
+                </th>
+                <th class="tableHeadText">
+                    @Html.DisplayNameFor(model => model.MomentCategory)
+                </th>
+                <th class="tableHeadText">
+                    @Html.DisplayNameFor(model => model.MomentSet)
+                </th>
+                <th class="tableHeadText">
+                    @Html.DisplayNameFor(model => model.MomentSerialNumber)
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                var playerName = @Html.DisplayFor(modelItem => item.PlayerFullName);
+                var player = playerName.ToString();
+
+                var mint = (int)item.MomentMint;
+                <tr>
+                    <td style="vertical-align: middle;">
+                        @Html.ActionLink(player, "Details", "Player", new { id = item.PlayerId }, htmlAttributes: new { @class = "text-info playerText text-decoration-none" })
+                    </td>
+                    <td style="vertical-align: middle">
+                        @Html.DisplayFor(modelItem => item.IndividualMomentPrice)
+                    </td>
+                    <td style="vertical-align: middle">
+                        @Html.DisplayFor(modelItem => item.MomentComplete)
+                    </td>
+                    <td style="vertical-align: middle">
+                        @Html.DisplayFor(modelItem => item.MomentCategory)
+                    </td>
+                    <td style="vertical-align: middle">
+                        @Html.DisplayFor(modelItem => item.MomentSet)
+                    </td>
+                    <td style="vertical-align: middle">
+                        @Html.DisplayFor(modelItem => item.SerialComplete)
+                    </td>
+                    <td style="vertical-align: middle">
+                        <span class="@(mint == 1 ? "limited" : "common")">
+                            @Html.DisplayFor(modelItem => item.Mint)
+                        </span>
+                    </td>
+                    <td style="vertical-align: middle">
+                        @Html.ActionLink("Inspect/Manage", "Details", new { id = item.MomentId }, htmlAttributes: new { @class = "btn btn-info" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!--new asset button-->
+<div class="container p-3" style="min-width: 1000px;">
+    <div class="row text-right">
+        <div class="col form-group">
+            <a class="btn btn-outline-info" style="font-size: 20px;" href="@Url.Content("~/Moment/Create")">
+                <i class="fas fa-basketball-ball text-warning" style="font-size: 24px;"></i> New Asset
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
+
+}
+
+
+
+

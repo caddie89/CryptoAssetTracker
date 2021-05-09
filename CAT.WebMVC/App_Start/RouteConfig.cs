@@ -17,7 +17,19 @@ namespace CAT.WebMVC
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
+                );
+
+            routes.MapRoute(
+                name: "MomentShowcaseDetails",
+                url: "{controller}/{action}/{moment}/{showcase}",
+                defaults: new { controller = "Home", action = "Details", moment = UrlParameter.Optional, showcase = UrlParameter.Optional }
+                );
+
+            routes.MapRoute(
+                name: "MomentShowcaseDelete",
+                url: "{controller}/{action}/{moment}/{showcase}",
+                defaults: new { controller = "Home", action = "Delete", moment = UrlParameter.Optional, showcase = UrlParameter.Optional }
+                );
         }
     }
 }

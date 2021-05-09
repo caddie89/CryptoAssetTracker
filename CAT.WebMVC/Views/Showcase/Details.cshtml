@@ -1,0 +1,88 @@
+﻿@model CAT.Models.Showcase_Models.ShowcaseDetails
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container containerGradient p-3" style="min-width: 1000px;">
+    <div class="row">
+        <div class="col text-center">
+            <h1 class="display-3">@Html.DisplayFor(model => model.ShowcaseName)</h1>
+            <h4 class="text-muted">@Html.DisplayFor(model => model.ShowcaseDescription)</h4>
+            <hr class="bg-dark" />
+        </div>
+    </div><!--row-->
+    <div class="row d-flex justify-content-center">
+        @foreach (var item in Model.Moments.OrderBy(i => i.PlayerLastName))
+        {
+            <div class="col-4 pb-4">
+                <div class="card mx-auto box_shadow">
+                    <div class="picture_container">
+                        <img class="card-img-top box_shadow" src="~/Images/500x500_placeholder.png" alt="Player Picture Placeholder">
+                        @{var momentMint = (int)item.MomentMint;
+                        }
+                        <h2 class="top_left_text text-white">
+                            @Html.DisplayFor(modelItem => item.MomentTier)
+                        </h2>
+                        <h2 class="bottom_right_text @(momentMint == 1 ? "limited" : "common")">
+                            @Html.DisplayFor(modelItem => item.Mint)
+                        </h2>
+                    </div> <!--picture container-->
+                    <div class="container pt-3">
+                        <h4 class="text-center text-info">@Html.DisplayFor(modelItem => item.PlayerFullName)</h4>
+                        <hr class="bg-dark" />
+                        <h6 class="text-center mb-2 text-muted">@Html.DisplayFor(modelItem => item.MomentComplete)</h6>
+                        <hr class="bg-dark" />
+                        <div class="row text-center align-items-center">
+                            <section class="col">
+                                <h6>Price</h6>
+                                <h6 class="text-muted">@Html.DisplayFor(modelItem => item.IndividualMomentPrice)</h6>
+                                <hr class="bg-dark" />
+                            </section>
+                            <section class="col">
+                                <h6>Serial/Edition Size</h6>
+                                <h6 class="text-muted">@Html.DisplayFor(modelItem => item.SerialComplete)</h6>
+                                <hr class="bg-dark" />
+                            </section>
+                        </div>
+                        <div class="card-subtitle p-2 text-center">
+                            <a href="@Url.Action("Delete", "MomentShowcase", new { item.MomentId, Model.ShowcaseId } )" class="btn btn-info" style="font-size: 16px;">
+                                <i class="fas fa-trash text-warning" style="font-size: 20px;"></i>
+                                Remove from
+                                <i class="far fa-clone text-warning" style="font-size: 20px;"></i>
+                                Collection
+                            </a>
+                        </div>
+                    </div><!--container-->
+                </div><!--card-->
+            </div><!--col-->
+        } <!--end foreach-->
+    </div><!--row-->
+    <div class="row">
+        <hr class="bg-dark" />
+        <h3 class="text-center">Collection Management</h3>
+        <p class="text-muted text-center">Manage Collection by selecting from one of the options below.</p>
+        <div class="col text-center pb-3">
+            <a href="@Url.Action("Edit", "Showcase", new { id = Model.ShowcaseId } )" class="btn btn-info" style="font-size: 20px;">
+                <i class="far fa-edit text-warning" style="font-size: 24px;"></i>
+                Modify Collection
+            </a>
+            <a href="@Url.Action("Delete", "Showcase", new { id = Model.ShowcaseId } )" class="btn btn-info" style="font-size: 20px;">
+                <i class="fas fa-trash text-warning" style="font-size: 24px;"></i>
+                Remove Collection
+            </a>
+        </div>
+    </div><!--row-->
+</div><!--container-->
+
+<!--navigation-->
+<div class="container p-3" style="min-width: 1000px;">
+    <div class="row text-right">
+        <div class="col form-group">
+            <a class="btn btn-outline-info" style="font-size: 20px;" href="@Url.Content("~/Showcase/Index")">
+                <i class="fas fa-arrow-left text-warning" style="font-size: 24px;"></i> Back to Collections
+            </a>
+        </div>
+    </div>
+</div>
+

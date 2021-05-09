@@ -6,6 +6,8 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using CAT.WebMVC.Models;
+using CAT.Contexts.Data;
+using CAT.Data.Entities;
 
 namespace CAT.WebMVC
 {
