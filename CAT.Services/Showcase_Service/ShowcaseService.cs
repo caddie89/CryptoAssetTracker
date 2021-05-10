@@ -77,6 +77,7 @@ namespace CAT.Services.Showcase_Service
                     ShowcaseName = entity.ShowcaseName,
                     ShowcaseDescription = entity.ShowcaseDescription,
                     Moments = entity.Moments
+                    .Where(c => c.Moment.PlayerId != null)
                     .Select(
                         m =>
                         new MomentIndex()
@@ -130,6 +131,14 @@ namespace CAT.Services.Showcase_Service
 
                 return ctx.SaveChanges() == 1;
             }
+        }
+
+        // Error - No Player in Asset
+        public int NoPlayerInAsset(int showcaseId, Guid userId)
+        {
+            var ctx = new ApplicationDbContext();
+            var count = ctx.MomentsShowcases.Where(p => p.Moment.PlayerId == null && p.ShowcaseId == showcaseId && p.OwnerId == userId).Count();
+            return count;
         }
     }
 }
