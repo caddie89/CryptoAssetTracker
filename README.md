@@ -1,6 +1,6 @@
 # Crypto Asset Tracker - Sports Edition
 
-## Final Project for Eleven Fifty Academy's Software Development Course
+### Final Project for Eleven Fifty Academy's Software Development Course
 
 Crypto Asset Tracker - Sports Edition (or CATsport for short) is an ASP.NET Web Application (.NET Framework) in the C# programming language. CATsport is an application that aims to provide an easy way for sports enthusiasts to visualize and manage sports-related, non-fungible token (NFT) assets across multiple platforms. Without question, the visibility, popularity, and accessibility of sports NFTs has been on the rise. While Version 1 of the application focuses on a single type of sports NFT (NBA's TopShot), I wanted to lay the foundation for a potentially beneficial tool for cross-platform collectors. Future versions will hopefully expand functionality and have greater utility as well as accessibility.
 
@@ -14,7 +14,7 @@ This ReadMe file was created for the release of V1 and has not yet been updated 
 
 ## Description
 
-This app enables the creation, modification, and removal of: Players, Assets, Collections, and Sold Assets.
+This app enables the creation, modification, and removal of: Players, Assets, Collections, and Sold Assets. Additionally, it stores and displays the value, profit/loss, ROI, and count of Assets.
 
 More specifically, a user can view, create, update, and delete an Asset that includes the following information:
 
