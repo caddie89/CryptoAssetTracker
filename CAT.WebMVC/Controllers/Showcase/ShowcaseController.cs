@@ -9,6 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CAT.Contracts.Showcase_Contract;
+using CAT.Contexts.Data;
 
 namespace CAT.WebMVC.Controllers.Showcase
 {
@@ -68,6 +69,13 @@ namespace CAT.WebMVC.Controllers.Showcase
             var userId = _userId;
 
             var model = _showcaseService.GetShowcaseDetails(id, userId);
+
+            var count = _showcaseService.NoPlayerInAsset(model.ShowcaseId, userId);
+            if (count > 0)
+            {
+                TempData["MissingAsset"] = $"{count} Assets are missing from this Collection because the Player has been removed! Please re-add player to Asset in order to view in this Collection.";
+            }
+
             return View(model);
         }
 

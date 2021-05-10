@@ -50,6 +50,22 @@ namespace CAT.Services.MomentShowcase_Service
                     .MomentsShowcases
                     .Single(e => e.MomentId == momentId && e.ShowcaseId == showcaseId && e.OwnerId == userId);
 
+                if (entity.Moment.PlayerId == null)
+                {
+                    return
+                    new MomentShowcaseDetails
+                    {
+                        MomentId = entity.MomentId,
+                        PlayerFirstName = null,
+                        PlayerLastName = null,
+                        ShowcaseId = entity.ShowcaseId,
+                        ShowcaseName = entity.Showcase.ShowcaseName,
+                        MomentCategory = entity.Moment.MomentCategory,
+                        DateOfMoment = entity.Moment.DateOfMoment,
+                        MomentSet = entity.Moment.MomentSet,
+                        MomentSeries = entity.Moment.MomentSeries,
+                    };
+                }
                 return
                 new MomentShowcaseDetails
                 {

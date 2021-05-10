@@ -14,5 +14,6 @@ namespace CAT.Contracts.Showcase_Contract
         ShowcaseDetails GetShowcaseDetails(int id, Guid userId);
         bool EditShowcase(ShowcaseEdit model, Guid userId);
         bool DeleteShowcase(int id, Guid userId);
+        int NoPlayerInAsset(int showcaseId, Guid userId);
     }
 }
