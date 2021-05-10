@@ -5,6 +5,7 @@ using CAT.Data.Entities;
 using CAT.Models;
 using CAT.Models.Moment_Models;
 using CAT.Models.Player_Models;
+using CAT.Models.PlayerAPI_Models;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -14,8 +15,6 @@ using System.Threading.Tasks;
 
 namespace CAT.Services.Player_Service
 {
-    
-
     public class PlayerService : IPlayerService
     {
         // Create Player
@@ -85,6 +84,27 @@ namespace CAT.Services.Player_Service
                 }
             }
         }
+
+        // Get Player Details
+        //public PlayerAPIModel GetPlayerDetails(int id, Guid userId, List<RootAPIModel> playerList)
+        //{
+        //    using (var ctx = new ApplicationDbContext())
+        //    {
+        //        var entity =
+        //            ctx
+        //            .Players
+        //            .Single(e => e.PlayerId == id && e.OwnerId == userId && e.PlayerFirstName );
+        //        return
+        //        new
+        //        PlayerAPIModel
+        //        {
+        //            id = entity.PlayerId,
+        //            FirstName = entity.PlayerFirstName,
+        //            LastName = entity.PlayerLastName,
+        //            Position = player.Position
+        //        }
+        //    }
+        //}
 
         // Get Player Details
         public PlayerDetails GetPlayerDetails(int id, Guid userId)
