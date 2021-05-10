@@ -103,6 +103,7 @@ body {
 }
 
 .topdiv {
+    width: 100vw;
     height: 43vh;
     background-color: black;
     position: relative;
