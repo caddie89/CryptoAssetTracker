@@ -1,11 +1,20 @@
-﻿using CAT.Contracts.Player_Contract;
+﻿using CAT.Contexts.Data;
+using CAT.Contracts.Player_Contract;
 using CAT.Models.Player_Models;
+using CAT.Models.PlayerAPI_Models;
 using CAT.Services.Player_Service;
+using CAT.WebMVC.Controllers.PlayerAPI;
 using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Nito.AsyncEx;
 using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -60,24 +69,13 @@ namespace CAT.WebMVC.Controllers.Player
             return View(model);
         }
 
-        //GET: Player/Detail/{id}
-        public ActionResult Details(int id)
-        {
-            _userId = Guid.Parse(User.Identity.GetUserId());
-            var userId = _userId;
-
-            var model = _playerService.GetPlayerDetails(id, userId);
-
-            return View(model);
-        }
-
         //GET: Player/Edit/{id}
         public ActionResult Edit(int id)
         {
             _userId = Guid.Parse(User.Identity.GetUserId());
             var userId = _userId;
 
-            var detail = _playerService.GetPlayerDetails(id, userId);
+            var detail = _playerService.AlsoGetPlayerDetails(id, userId);
             var model =
                 new PlayerEdit
                 {
@@ -121,7 +119,7 @@ namespace CAT.WebMVC.Controllers.Player
             _userId = Guid.Parse(User.Identity.GetUserId());
             var userId = _userId;
 
-            var model = _playerService.GetPlayerDetails(id, userId);
+            var model = _playerService.AlsoGetPlayerDetails(id, userId);
             return View(model);
         }
 
@@ -140,5 +138,18 @@ namespace CAT.WebMVC.Controllers.Player
 
             return RedirectToAction("Index");
         }
+
+        //GET: Player/Detail/{id} (async)
+        //public async Task<ActionResult> Details(int id)
+        //{
+        //    var playerInfo = await _playerAPIController.PlayerInfo();
+
+        //    _userId = Guid.Parse(User.Identity.GetUserId());
+        //    var userId = _userId;
+
+        //    var model = _playerService.GetPlayerDetails(id, userId, playerInfo);
+
+        //    return View(model);
+        //}
     }
 }
