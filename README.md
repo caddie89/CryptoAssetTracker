@@ -140,9 +140,17 @@ Selecting a "Remove" button will cause re-direction to a page to verify the desi
 
 ## Resources
 
+API: https://www.balldontlie.io/#introduction
+Pagination Guide: https://developer.wordpress.org/rest-api/using-the-rest-api/pagination/
+NBA Team Logos: https://logoeps.com/all-nba-team-logos/31287/
+
+## Acknowledgements
+
+I wanted to take a moment to thank my amazing instructors, Simon and Nick, the learning assistants, especially Jess, Peyton, and Mitchell, all of my classmates, especially Adam and Jon, and my family for all of their patience, support, and guidance. Y'all are the best!
+
 ## Developer
 
-Caleb Addie, ASP.NET/C# developer.
+Caleb Addie, aspiring ASP.NET/C# developer.
 
 
 
