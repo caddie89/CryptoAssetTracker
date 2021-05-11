@@ -1,4 +1,6 @@
-﻿using CAT.Models.PlayerAPI_Models;
+﻿using CAT.Contracts.PlayerAPI_Contract;
+using CAT.Models.PlayerAPI_Models;
+using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -13,75 +15,100 @@ namespace CAT.WebMVC.Controllers.PlayerAPI
 {
     public class PlayerAPIController : Controller
     {
-        //private readonly HttpClient _client;
-        //private readonly string _url = "https://www.balldontlie.io/api/v1/team/1";
-        //private readonly string _urlPlayers = "https://www.balldontlie.io/api/v1/players";
+        private Guid _userId;
+        private readonly IPlayerAPIService _playerAPIService;
+        private readonly string _baseurl = "https://www.balldontlie.io/api/v1/";
 
-        //public PlayerAPIController()
-        //{
-        //    _client = new HttpClient();
-        //    _client.BaseAddress = new Uri(_url);
-        //    _client.DefaultRequestHeaders.Accept.Clear();
-        //    _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        //}
+        public PlayerAPIController(IPlayerAPIService playerAPIService)
+        {
+            _playerAPIService = playerAPIService;
+        }
 
-        //public async Task<ActionResult> SingleTeam()
-        //{
-        //    HttpResponseMessage response = await _client.GetAsync(_url);
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        Team team = await response.Content.ReadAsAsync<Team>();
-        //        var teamList = new List<Team> { team };
-        //        return View(teamList);
-        //    }
-        //    return View();
-        //}
-
-        //        public async Task<ActionResult> MultipleTeams()
-        //        {
-        //            HttpResponseMessage response = await _client.GetAsync(_urlPlayers);
-        //            if (response.IsSuccessStatusCode)
-        //            {
-        //                //Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
-        //                RootAPIModel player = await response.Content.ReadAsAsync<RootAPIModel>();
-        //                var playerList = new List<RootAPIModel> { player };
-        //                return View(playerList);
-        //            }
-        //            return View();
-        //        }
-
-        //Hosted web API REST Service base url  
-        string Baseurl = "https://www.balldontlie.io/api/v1/";
-
-        public async Task<ActionResult> Index()
+        // Ogle at its brilliance, Simon!
+        public async Task<ActionResult> Details(int id)
         {
             RootAPIModel playerInfo = new RootAPIModel();
+            RootAPIModel list = new RootAPIModel();
+            list.data = new List<PlayerAPIModel>();
+
+            _userId = Guid.Parse(User.Identity.GetUserId());
 
             using (var client = new HttpClient())
             {
-                //Passing service base url  
-                client.BaseAddress = new Uri(Baseurl);
-
+                client.BaseAddress = new Uri(_baseurl);
                 client.DefaultRequestHeaders.Clear();
-                //Define request data format  
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
-                HttpResponseMessage Res = await client.GetAsync("players");
+                var storedPlayers = _playerAPIService.GetPlayerDetails(id, _userId);
 
-                //Checking the response is successful or not which is sent using HttpClient  
+                HttpResponseMessage Res = await client.GetAsync($"players?search={storedPlayers.PlayerLastName}");
+
                 if (Res.IsSuccessStatusCode)
                 {
-                    //Storing the response details recieved from web api   
-                    var PlayerResponse = Res.Content.ReadAsStringAsync().Result;
+                    var PlayerResponse = await Res.Content.ReadAsStringAsync();
 
-                    //Deserializing the response recieved from web api and storing into the Employee list  
-                    playerInfo = JsonConvert.DeserializeObject<RootAPIModel>(PlayerResponse);
+                    var settings = new JsonSerializerSettings
+                    {
+                        NullValueHandling = NullValueHandling.Ignore,
+                        MissingMemberHandling = MissingMemberHandling.Ignore
+                    };
 
+                    playerInfo = JsonConvert.DeserializeObject<RootAPIModel>(PlayerResponse, settings);
+                    list.data.AddRange(playerInfo.data);
                 }
-                //returning the employee list to view  
-                return View(playerInfo);
+
+                foreach (var player in list.data)
+                {
+                    if (player.first_name == storedPlayers.PlayerFirstName && player.last_name == storedPlayers.PlayerLastName)
+                    {
+                        storedPlayers.id = player.team.id;
+                        storedPlayers.abbreviation = player.team.abbreviation;
+                        storedPlayers.division = player.team.division;
+                        storedPlayers.conference = player.team.conference;
+
+                        return View(storedPlayers);
+                    }
+                }
+                return View(storedPlayers);
+            }
+        }
+
+        // Don't worry about this shame, Simon!
+        public async Task<List<PlayerAPIModel>> PlayerInfo()
+        {
+            RootAPIModel playerInfo = new RootAPIModel();
+            RootAPIModel list = new RootAPIModel();
+
+            list.data = new List<PlayerAPIModel>();
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var page = 1;
+
+                while (page <= 34)
+                {
+                    HttpResponseMessage Res = await client.GetAsync($"players?per_page=100&page={page}");
+
+                    if (Res.IsSuccessStatusCode)
+                    {
+                        var PlayerResponse = await Res.Content.ReadAsStringAsync();
+                        playerInfo = JsonConvert.DeserializeObject<RootAPIModel>(PlayerResponse);
+                        list.data.AddRange(playerInfo.data);
+                    }
+
+                    if (playerInfo.meta.current_page <= 34)
+                    {
+                        page++;
+                    }
+                }
+                return list.data;
             }
         }
     }
 }
+
+

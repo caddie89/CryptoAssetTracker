@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace CAT.Services.Player_Service
 {
@@ -85,29 +86,87 @@ namespace CAT.Services.Player_Service
             }
         }
 
-        // Get Player Details
-        //public PlayerAPIModel GetPlayerDetails(int id, Guid userId, List<RootAPIModel> playerList)
-        //{
-        //    using (var ctx = new ApplicationDbContext())
-        //    {
-        //        var entity =
-        //            ctx
-        //            .Players
-        //            .Single(e => e.PlayerId == id && e.OwnerId == userId && e.PlayerFirstName );
-        //        return
-        //        new
-        //        PlayerAPIModel
-        //        {
-        //            id = entity.PlayerId,
-        //            FirstName = entity.PlayerFirstName,
-        //            LastName = entity.PlayerLastName,
-        //            Position = player.Position
-        //        }
-        //    }
-        //}
+        // Get Player Details (for async)
+        public PlayerDetails GetPlayerDetails(int id, Guid userId, List<PlayerAPIModel> playerInfo)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Players
+                    .Where(e => e.PlayerId == id && e.OwnerId == userId)
+                    .SingleOrDefault();
 
-        // Get Player Details
-        public PlayerDetails GetPlayerDetails(int id, Guid userId)
+                foreach (var player in playerInfo)
+                {
+                    if (entity.PlayerFirstName == player.first_name && entity.PlayerLastName == player.last_name)
+                    {
+                        return
+                        new PlayerDetails
+                        {
+                            PlayerId = entity.PlayerId,
+                            PlayerFirstName = entity.PlayerFirstName,
+                            PlayerLastName = entity.PlayerLastName,
+                            PositionOfPlayer = entity.PositionOfPlayer,
+                            id = player.team.id,
+                            abbreviation = player.team.abbreviation,
+                            division = player.team.division,
+                            conference = player.team.conference,
+                            PlayerTeam = entity.PlayerTeam,
+                            Moments = entity.Moments
+                            .Select(
+                            m =>
+                            new MomentIndex()
+                            {
+                                MomentId = m.MomentId,
+                                PlayerId = m.PlayerId,
+                                MomentCategory = m.MomentCategory,
+                                DateOfMoment = m.DateOfMoment,
+                                MomentSet = m.MomentSet,
+                                MomentSeries = m.MomentSeries,
+                            }).ToList()
+                        };
+                    }
+                }
+            }
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Players
+                    .Where(e => e.PlayerId == id && e.OwnerId == userId)
+                    .SingleOrDefault();
+
+                return
+                new PlayerDetails
+                {
+                    PlayerId = entity.PlayerId,
+                    PlayerFirstName = entity.PlayerFirstName,
+                    PlayerLastName = entity.PlayerLastName,
+                    PositionOfPlayer = entity.PositionOfPlayer,
+                    abbreviation = "UK",
+                    id = null,
+                    division = "Unknown Division",
+                    conference = "Unknown Conference",
+                    PlayerTeam = entity.PlayerTeam,
+                    Moments = entity.Moments
+                    .Select(
+                    m =>
+                    new MomentIndex()
+                    {
+                        MomentId = m.MomentId,
+                        PlayerId = m.PlayerId,
+                        MomentCategory = m.MomentCategory,
+                        DateOfMoment = m.DateOfMoment,
+                        MomentSet = m.MomentSet,
+                        MomentSeries = m.MomentSeries,
+                    }).ToList()
+                };
+            }
+        }
+
+        // Get Player Details 
+        public PlayerDetails AlsoGetPlayerDetails(int id, Guid userId)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -115,27 +174,28 @@ namespace CAT.Services.Player_Service
                     ctx
                     .Players
                     .Single(e => e.PlayerId == id && e.OwnerId == userId);
+
                 return
-                    new PlayerDetails
+                new PlayerDetails
+                {
+                    PlayerId = entity.PlayerId,
+                    PlayerFirstName = entity.PlayerFirstName,
+                    PlayerLastName = entity.PlayerLastName,
+                    PositionOfPlayer = entity.PositionOfPlayer,
+                    PlayerTeam = entity.PlayerTeam,
+                    Moments = entity.Moments
+                    .Select(
+                    m =>
+                    new MomentIndex()
                     {
-                        PlayerId = entity.PlayerId,
-                        PlayerFirstName = entity.PlayerFirstName,
-                        PlayerLastName = entity.PlayerLastName,
-                        PositionOfPlayer = entity.PositionOfPlayer,
-                        PlayerTeam = entity.PlayerTeam,
-                        Moments = entity.Moments
-                        .Select(
-                        m =>
-                        new MomentIndex()
-                        {
-                            MomentId = m.MomentId,
-                            PlayerId = m.PlayerId,
-                            MomentCategory = m.MomentCategory,
-                            DateOfMoment = m.DateOfMoment,
-                            MomentSet = m.MomentSet,
-                            MomentSeries = m.MomentSeries,
-                        }).ToList()
-                    };
+                        MomentId = m.MomentId,
+                        PlayerId = m.PlayerId,
+                        MomentCategory = m.MomentCategory,
+                        DateOfMoment = m.DateOfMoment,
+                        MomentSet = m.MomentSet,
+                        MomentSeries = m.MomentSeries,
+                    }).ToList()
+                };
             }
         }
 
