@@ -41,11 +41,11 @@ namespace CAT.WebMVC.Controllers.PlayerAPI
 
                 var storedPlayers = _playerAPIService.GetPlayerDetails(id, _userId);
 
-                HttpResponseMessage Res = await client.GetAsync($"players?search={storedPlayers.PlayerLastName}");
+                HttpResponseMessage Res = await client.GetAsync($"players?search={storedPlayers.PlayerLastName}&per_page=100");
 
                 if (Res.IsSuccessStatusCode)
                 {
-                    var PlayerResponse = await Res.Content.ReadAsStringAsync();
+                    var PlayerResponse = Res.Content.ReadAsStringAsync().Result;
 
                     var settings = new JsonSerializerSettings
                     {
@@ -65,6 +65,9 @@ namespace CAT.WebMVC.Controllers.PlayerAPI
                         storedPlayers.abbreviation = player.team.abbreviation;
                         storedPlayers.division = player.team.division;
                         storedPlayers.conference = player.team.conference;
+                        storedPlayers.height_feet = player.height_feet;
+                        storedPlayers.height_inches = player.height_inches;
+                        storedPlayers.weight_pounds = player.weight_pounds;
 
                         return View(storedPlayers);
                     }

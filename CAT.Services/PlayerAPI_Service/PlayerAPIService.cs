@@ -33,6 +33,9 @@ namespace CAT.Services.PlayerAPI_Service
                     abbreviation = "Unknown",
                     division = "Unknown",
                     conference = "Unknown",
+                    height_feet = null,
+                    height_inches = null,
+                    weight_pounds = null,
                     Moments = entity.Moments
                     .Select(
                     m =>
@@ -40,10 +43,17 @@ namespace CAT.Services.PlayerAPI_Service
                     {
                         MomentId = m.MomentId,
                         PlayerId = m.PlayerId,
+                        PlayerFirstName = m.Player.PlayerFirstName,
+                        PlayerLastName = m.Player.PlayerLastName,
+                        IndividualMomentPrice = m.IndividualMomentPrice,
                         MomentCategory = m.MomentCategory,
                         DateOfMoment = m.DateOfMoment,
                         MomentSet = m.MomentSet,
                         MomentSeries = m.MomentSeries,
+                        MomentSerialNumber = m.MomentSerialNumber,
+                        MomentCirculatingCount = m.MomentCirculatingCount,
+                        MomentTier = m.MomentTier,
+                        MomentMint = m.MomentMint,
                     }).ToList()
                 };
             }
