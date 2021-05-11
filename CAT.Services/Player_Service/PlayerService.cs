@@ -86,7 +86,75 @@ namespace CAT.Services.Player_Service
             }
         }
 
-        // Get Player Details (for async)
+        // Get Player Details 
+        public PlayerDetails AlsoGetPlayerDetails(int id, Guid userId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Players
+                    .Single(e => e.PlayerId == id && e.OwnerId == userId);
+
+                return
+                new PlayerDetails
+                {
+                    PlayerId = entity.PlayerId,
+                    PlayerFirstName = entity.PlayerFirstName,
+                    PlayerLastName = entity.PlayerLastName,
+                    PositionOfPlayer = entity.PositionOfPlayer,
+                    PlayerTeam = entity.PlayerTeam,
+                    Moments = entity.Moments
+                    .Select(
+                    m =>
+                    new MomentIndex()
+                    {
+                        MomentId = m.MomentId,
+                        PlayerId = m.PlayerId,
+                        MomentCategory = m.MomentCategory,
+                        DateOfMoment = m.DateOfMoment,
+                        MomentSet = m.MomentSet,
+                        MomentSeries = m.MomentSeries,
+                    }).ToList()
+                };
+            }
+        }
+
+        // Edit Player
+        public bool EditPlayer(PlayerEdit model, Guid userId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Players
+                    .Single(e => e.PlayerId == model.PlayerId && e.OwnerId == userId);
+
+                entity.PlayerFirstName = model.PlayerFirstName;
+                entity.PlayerLastName = model.PlayerLastName;
+                entity.PositionOfPlayer = model.PositionOfPlayer;
+                entity.PlayerTeam = model.PlayerTeam;
+
+                return ctx.SaveChanges() >= 0;
+            }
+        }
+
+        // Delete Player
+        public bool DeletePlayer(int id, Guid userId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx.
+                    Players.Single(e => e.PlayerId == id && e.OwnerId == userId);
+
+                ctx.Players.Remove(entity);
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
+        // Get Player Details (for async) - THIS METHOD IS NOT USED (more shame, Simon)!
         public PlayerDetails GetPlayerDetails(int id, Guid userId, List<PlayerAPIModel> playerInfo)
         {
             using (var ctx = new ApplicationDbContext())
@@ -162,74 +230,6 @@ namespace CAT.Services.Player_Service
                         MomentSeries = m.MomentSeries,
                     }).ToList()
                 };
-            }
-        }
-
-        // Get Player Details 
-        public PlayerDetails AlsoGetPlayerDetails(int id, Guid userId)
-        {
-            using (var ctx = new ApplicationDbContext())
-            {
-                var entity =
-                    ctx
-                    .Players
-                    .Single(e => e.PlayerId == id && e.OwnerId == userId);
-
-                return
-                new PlayerDetails
-                {
-                    PlayerId = entity.PlayerId,
-                    PlayerFirstName = entity.PlayerFirstName,
-                    PlayerLastName = entity.PlayerLastName,
-                    PositionOfPlayer = entity.PositionOfPlayer,
-                    PlayerTeam = entity.PlayerTeam,
-                    Moments = entity.Moments
-                    .Select(
-                    m =>
-                    new MomentIndex()
-                    {
-                        MomentId = m.MomentId,
-                        PlayerId = m.PlayerId,
-                        MomentCategory = m.MomentCategory,
-                        DateOfMoment = m.DateOfMoment,
-                        MomentSet = m.MomentSet,
-                        MomentSeries = m.MomentSeries,
-                    }).ToList()
-                };
-            }
-        }
-
-        // Edit Player
-        public bool EditPlayer(PlayerEdit model, Guid userId)
-        {
-            using (var ctx = new ApplicationDbContext())
-            {
-                var entity =
-                    ctx
-                    .Players
-                    .Single(e => e.PlayerId == model.PlayerId && e.OwnerId == userId);
-
-                entity.PlayerFirstName = model.PlayerFirstName;
-                entity.PlayerLastName = model.PlayerLastName;
-                entity.PositionOfPlayer = model.PositionOfPlayer;
-                entity.PlayerTeam = model.PlayerTeam;
-
-                return ctx.SaveChanges() >= 0;
-            }
-        }
-
-        // Delete Player
-        public bool DeletePlayer(int id, Guid userId)
-        {
-            using (var ctx = new ApplicationDbContext())
-            {
-                var entity =
-                    ctx.
-                    Players.Single(e => e.PlayerId == id && e.OwnerId == userId);
-
-                ctx.Players.Remove(entity);
-
-                return ctx.SaveChanges() == 1;
             }
         }
     }

@@ -73,7 +73,7 @@ namespace CAT.WebMVC.Controllers.PlayerAPI
             }
         }
 
-        // Don't worry about this shame, Simon!
+        // Don't worry about this shame, Simon! - THIS METHOD IS NOT USED ANYWHERE
         public async Task<List<PlayerAPIModel>> PlayerInfo()
         {
             RootAPIModel playerInfo = new RootAPIModel();
