@@ -1,5 +1,6 @@
 ﻿using CAT.Models;
 using CAT.Models.Player_Models;
+using CAT.Models.PlayerAPI_Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,8 @@ namespace CAT.Contracts.Player_Contract
     {
         bool CreatePlayer(PlayerCreate model);
         IEnumerable<PlayerIndex> GetPlayerIndex(string search, int? page, Guid userId);
-        PlayerDetails GetPlayerDetails(int id, Guid userId);
+        PlayerDetails GetPlayerDetails(int id, Guid userId, List<PlayerAPIModel> playerInfo);
+        PlayerDetails AlsoGetPlayerDetails(int id, Guid userId);
         bool EditPlayer(PlayerEdit model, Guid userId);
         bool DeletePlayer(int id, Guid userId);
     }

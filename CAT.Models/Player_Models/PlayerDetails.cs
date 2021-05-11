@@ -68,5 +68,14 @@ namespace CAT.Models.Player_Models
         }
 
         public ICollection<MomentIndex> Moments { get; set; }
+
+        // API model properties
+        public int? id { get; set; }
+        public string conference { get; set; }
+        public string division { get; set; }
+        public string abbreviation { get; set; }
+        public int? height_feet { get; set; }
+        public int? height_inches { get; set; }
+        public int? weight_pounds { get; set; }
     }
 }
