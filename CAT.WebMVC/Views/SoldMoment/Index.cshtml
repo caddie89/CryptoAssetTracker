@@ -7,7 +7,7 @@
 }
 
 <!--header information-->
-<div class="container text-white p-2" style="min-width: 1000px;">
+<div class="container text-white p-2 topContainer" style="min-width: 1000px;">
     <div class="row" style="min-height: 8vh;">
         <section class="col align-self-end">
             <h1 class="display-4">
@@ -132,7 +132,7 @@
                 var mint = (int)item.MomentMint;
             <tr>
                 <td style="vertical-align: middle;">
-                    @Html.ActionLink(player, "Details", "Player", new { id = item.PlayerId }, htmlAttributes: new { @class = "text-info playerText text-decoration-none" })
+                    @Html.ActionLink(player, "Details", "PlayerAPI", new { id = item.PlayerId }, htmlAttributes: new { @class = "text-info playerText text-decoration-none" })
                 </td>
                 <td style="vertical-align: middle;">
                     @Html.DisplayFor(modelItem => item.DisplaySoldForAmount)

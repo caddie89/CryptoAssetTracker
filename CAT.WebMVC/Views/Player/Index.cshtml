@@ -8,7 +8,7 @@
 }
 
 <!--header information-->
-<div class="container text-white p-2" style="min-width: 1000px;">
+<div class="container text-white p-2 topContainer" style="min-width: 1000px;">
     <div class="row" style="min-height: 8vh;">
         <section class="col align-self-end">
             <h1 class="display-4">
@@ -95,7 +95,7 @@
                                     <i class="far fa-edit text-warning" style="font-size: 20px;"></i>
                                     Modify
                                 </a>
-                                <a href="@Url.Action("Details", "Player", new { id = item.PlayerId } )" class="btn btn-info" style="font-size: 16px;">
+                                <a href="@Url.Action("Details", "PlayerAPI", new { id = item.PlayerId } )" class="btn btn-info" style="font-size: 16px;">
                                     <i class="fas fa-running text-warning" style="font-size: 20px;"></i>
                                     Inspect
                                 </a>
