@@ -179,10 +179,19 @@
             @foreach (var item in Model.Moments)
             {
                 <div class="col-4 pb-4">
-                    <a class="assetMouseover" style="" href="@Url.Action("Details", "Moment", new { id = item.MomentId } )">
+                    <a class="assetMouseover" style="" href="@Url.Action("Details", "Moment", new { id = item.MomentId })">
                         <div class="card mx-auto box_shadow divMouseover">
                             <div class="picture_container">
-                                <img class="card-img-top box_shadow" src="~/Images/500x500_placeholder.png" alt="Player Picture Placeholder">
+                                @{ if (item.PlayerLastName == "Nowitzki" || item.PlayerFirstName == "Dirk")
+                                    {
+                                        <img class="card-img-top box_shadow" src="~/Images/Dirk.jpeg" alt="Player Picture Placeholder">
+                                    }
+                                    else
+                                    {
+                                        <img class="card-img-top box_shadow" src="~/Images/500x500_placeholder.png" alt="Player Picture Placeholder">
+                                    }
+                                }
+
                                 @{var momentMint = (int)item.MomentMint;
                                 }
                                 <h2 class="top_left_text text-white">
