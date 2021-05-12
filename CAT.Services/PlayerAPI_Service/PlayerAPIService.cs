@@ -12,6 +12,7 @@ namespace CAT.Services.PlayerAPI_Service
 {
     public class PlayerAPIService : IPlayerAPIService
     {
+        // Get Player Details
         public PlayerDetails GetPlayerDetails(int id, Guid userId)
         {
             using (var ctx = new ApplicationDbContext())

@@ -32,13 +32,13 @@ namespace CAT.WebMVC.Controllers.Player
             _playerService = playerService;
         }
 
-        //GET: Player/Create
+        // GET: Player/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        //POST: Player/Create
+        // POST: Player/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(PlayerCreate model)
@@ -59,7 +59,7 @@ namespace CAT.WebMVC.Controllers.Player
             return View(model);
         }
 
-        //GET: Player/Index
+        // GET: Player/Index
         public ActionResult Index(string search, int? page)
         {
             _userId = Guid.Parse(User.Identity.GetUserId());
@@ -69,7 +69,7 @@ namespace CAT.WebMVC.Controllers.Player
             return View(model);
         }
 
-        //GET: Player/Edit/{id}
+        // GET: Player/Edit/{id}
         public ActionResult Edit(int id)
         {
             _userId = Guid.Parse(User.Identity.GetUserId());
@@ -88,7 +88,7 @@ namespace CAT.WebMVC.Controllers.Player
             return View(model);
         }
 
-        //POST: Player/Edit/{id}
+        // POST: Player/Edit/{id}
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, PlayerEdit model)
@@ -112,7 +112,7 @@ namespace CAT.WebMVC.Controllers.Player
             return View(model);
         }
 
-        //GET: Player/Delete/{id}
+        // GET: Player/Delete/{id}
         [ActionName("Delete")]
         public ActionResult Delete(int id)
         {
@@ -123,7 +123,7 @@ namespace CAT.WebMVC.Controllers.Player
             return View(model);
         }
 
-        //POST: Player/Delete/{id}
+        // POST: Player/Delete/{id}
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
