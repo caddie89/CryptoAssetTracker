@@ -143,6 +143,7 @@ Selecting a "Remove" button will cause re-direction to a page to verify the desi
 - API: https://www.balldontlie.io/#introduction
 - Pagination Guide: https://developer.wordpress.org/rest-api/using-the-rest-api/pagination/
 - NBA Team Logos: https://logoeps.com/all-nba-team-logos/31287/
+- Icons: https://favicon.io/favicon-converter/
 
 ## Acknowledgements
 
