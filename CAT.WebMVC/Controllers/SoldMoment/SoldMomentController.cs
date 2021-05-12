@@ -48,7 +48,7 @@ namespace CAT.WebMVC.Controllers.SoldMoment
             return View(model);
         }
 
-        //GET: SoldMoment/Create/{id}
+        // GET: SoldMoment/Create/{id}
         public ActionResult Create(int id)
         {
             _userId = Guid.Parse(User.Identity.GetUserId());

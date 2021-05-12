@@ -13,6 +13,7 @@ using System.Web.Mvc;
 
 namespace CAT.WebMVC.Controllers.PlayerAPI
 {
+    [Authorize]
     public class PlayerAPIController : Controller
     {
         private Guid _userId;
