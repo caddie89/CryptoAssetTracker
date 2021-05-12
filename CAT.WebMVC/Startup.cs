@@ -3,12 +3,14 @@ using Autofac.Integration.Mvc;
 using CAT.Contracts.Moment_Contract;
 using CAT.Contracts.MomentShowcase_Contract;
 using CAT.Contracts.Player_Contract;
+using CAT.Contracts.PlayerAPI_Contract;
 using CAT.Contracts.Showcase_Contract;
 using CAT.Contracts.SoldMoment_Contract;
 using CAT.Data.Entities;
 using CAT.Services.Moment_Service;
 using CAT.Services.MomentShowcase_Service;
 using CAT.Services.Player_Service;
+using CAT.Services.PlayerAPI_Service;
 using CAT.Services.Showcase_Service;
 using CAT.Services.SoldMoment_Service;
 using Microsoft.Owin;
@@ -35,6 +37,7 @@ namespace CAT.WebMVC
             builder.RegisterType<ShowcaseService>().As<IShowcaseService>();
             builder.RegisterType<SoldMomentService>().As<ISoldMomentService>();
             builder.RegisterType<MomentShowcaseService>().As<IMomentShowcaseService>();
+            builder.RegisterType<PlayerAPIService>().As<IPlayerAPIService>();
 
             // Build the container to finalize registrations
             // and prepare for object resolution.

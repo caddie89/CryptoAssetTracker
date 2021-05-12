@@ -1,0 +1,243 @@
+﻿@model CAT.Models.Player_Models.PlayerDetails
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container containerGradient p-3" style="min-width: 1000px;">
+    <div class="container p-3 playerDetails" style="min-width: 950px;">
+        <div class="row align-items-center">
+            <div class="col-3 borderRight text-center">
+                @{var teamId = Model.id;
+
+                    if (Model.id == null)
+                    {
+                        <img class="" src="~/Images/Teams/nba-logo-vector-01.png" alt="NBA">
+                    }
+
+                    if (Model.id != null)
+                    {
+                        switch (teamId)
+                        {
+                            case 1:
+                                // Atlanta
+                                <img class="" src="~/Images/Teams/atlanta-hawks-logo-vector-200x200.png" alt="Atlanta">
+                                break;
+                            case 2:
+                                // Boston
+                                <img class="" src="~/Images/Teams/boston-celtics-logo-vector-200x200.png" alt="Boston">
+                                break;
+                            case 3:
+                                // Brooklyn
+                                <img class="" src="~/Images/Teams/brooklyn-nets-logo-vector-200x200.png" alt="Brooklyn">
+                                break;
+                            case 4:
+                                // Charlotte
+                                <img class="" src="~/Images/Teams/charlotte-bobcats-logo-vector-200x200.png" alt="Charlotte">
+                                break;
+                            case 5:
+                                // Chicago
+                                <img class="" src="~/Images/Teams/chicago-bulls-logo-vector.png" alt="Chicago" style="max-width: 200px; height: auto">
+                                break;
+                            case 6:
+                                // Cleveland
+                                <img class="" src="~/Images/Teams/cleveland-cavaliers-logo-vector-200x200.png" alt="Cleveland">
+                                break;
+                            case 7:
+                                // Dallas
+                                <img class="" src="~/Images/Teams/dallas-mavericks-logo-vector-200x200.png" alt="Dallas">
+                                break;
+                            case 8:
+                                // Denver
+                                <img class="" src="~/Images/Teams/denver-nuggets-logo-vector-200x200.png" alt="Denver">
+                                break;
+                            case 9:
+                                // Detroit
+                                <img class="" src="~/Images/Teams/detroit-pistons-logo-vector-200x200.png" alt="Detroit">
+                                break;
+                            case 10:
+                                // Golden State
+                                <img class="" src="~/Images/Teams/golden-state-warriors-logo-vector-200x200.png" alt="Golden State">
+                                break;
+                            case 11:
+                                // Houston
+                                <img class="" src="~/Images/Teams/houston-rockets-logo-vector-200x200.png" alt="Houston">
+                                break;
+                            case 12:
+                                // Indiana
+                                <img class="" src="~/Images/Teams/indiana-pacers-logo-vector-200x200.png" alt="Indiana">
+                                break;
+                            case 13:
+                                // LA Clippers
+                                <img class="" src="~/Images/Teams/los-angeles-clippers-logo-vector-200x200.png" alt="Clippers">
+                                break;
+                            case 14:
+                                // LA Lakers
+                                <img class="" src="~/Images/Teams/los-angeles-lakers-logo-vector-200x200.png" alt="Lakers">
+                                break;
+                            case 15:
+                                // Memphis
+                                <img class="" src="~/Images/Teams/memphis-grizzlies-logo-vector-200x200.png" alt="Memphis">
+                                break;
+                            case 16:
+                                // Miami
+                                <img class="" src="~/Images/Teams/miami-heat-logo-vector-200x200.png" alt="Miami">
+                                break;
+                            case 17:
+                                // Milwaukee
+                                <img class="" src="~/Images/Teams/milwaukee-bucks-logo-vector-200x200.png" alt="Milwaukee">
+                                break;
+                            case 18:
+                                // Minnesota
+                                <img class="" src="~/Images/Teams/minnesota-timberwolves-logo-vector-200x200.png" alt="Minnesota">
+                                break;
+                            case 19:
+                                // New Orleans
+                                <img class="" src="~/Images/Teams/new-orleans-hornets-logo-vector-200x200.png" alt="New Orleans">
+                                break;
+                            case 20:
+                                // New York
+                                <img class="" src="~/Images/Teams/new-york-knicks-logo-vector-200x200.png" alt="New York">
+                                break;
+                            case 21:
+                                // Oklahoma City
+                                <img class="" src="~/Images/Teams/oklahoma-city-thunder-logo-vector-200x200.png" alt="Oklahoma City">
+                                break;
+                            case 22:
+                                // Orlando
+                                <img class="" src="~/Images/Teams/orlando-magic-logo-vector-200x200.png" alt="Orlando">
+                                break;
+                            case 23:
+                                // Philly
+                                <img class="" src="~/Images/Teams/philadelphia-76ers-logo-vector-200x200.png" alt="Philly">
+                                break;
+                            case 24:
+                                // Phoenix
+                                <img class="" src="~/Images/Teams/phoenix-suns-logo-vector-200x200.png" alt="Phoenix">
+                                break;
+                            case 25:
+                                // Portland
+                                <img class="" src="~/Images/Teams/portland-trail-blazers-logo-vector-200x200.png" alt="Portland">
+                                break;
+                            case 26:
+                                // Sacramento
+                                <img class="" src="~/Images/Teams/sacramento-kings-logo-vector-200x200.png" alt="Sacramento">
+                                break;
+                            case 27:
+                                // San Antonio
+                                <img class="" src="~/Images/Teams/san-antonio-spurs-logo-vector-200x200.png" alt="San Antonio">
+                                break;
+                            case 28:
+                                // Toronto
+                                <img class="" src="~/Images/Teams/toronto-raptors-logo-vector-200x200.png" alt="Toronto">
+                                break;
+                            case 29:
+                                // Utah
+                                <img class="" src="~/Images/Teams/utah-jazz-logo-vector-200x200.png" alt="Utah">
+                                break;
+                            case 30:
+                                // Washington
+                                <img class="" src="~/Images/Teams/washington-wizards-logo-vector-200x200.png" alt="Washington">
+                                break;
+                        }
+                    }
+                }
+            </div>
+            <div class="col-9">
+                <section class="row text-left">
+                    <h1 class="display-1">@Html.DisplayFor(model => model.PlayerFullName)</h1>
+                </section>
+                <section class="row no-gutters align-items-center">
+                    <h1 class="text-info">@Html.DisplayFor(model => model.Position) <span class="text-muted" style="font-size: 20px;">for the</span></h1>
+                    <h1 class="text-info">@Html.DisplayFor(model => model.PlayerTeam) <span class="text-muted">(@Html.DisplayFor(model => model.abbreviation))</span></h1>
+                </section>
+            </div>
+        </div>
+        <hr />
+        <div class="row align-items-center p-3">
+            <div class="col pl-5">
+                <div class="container containerHome text-white">
+                    <div class="row p-3">
+                        <h3><span class="text-info">Height:</span> @Html.DisplayFor(model => model.height_feet)' @Html.DisplayFor(model => model.height_inches)"</h3>
+                        <h3><span class="text-info">Weight:</span> @Html.DisplayFor(model => model.weight_pounds)lbs </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col pr-5">
+                <div class="container containerHome text-white">
+                    <div class="row p-3">
+                        <h3><span class="text-info">Conference:</span> @Html.DisplayFor(model => model.conference)</h3>
+                        <h3><span class="text-info">Division:</span> @Html.DisplayFor(model => model.division)</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <h1 class="text-center">Assets</h1>
+        <hr />
+        <div class="row d-flex justify-content-center">
+            @foreach (var item in Model.Moments)
+            {
+                <div class="col-4 pb-4">
+                    <a class="assetMouseover" style="" href="@Url.Action("Details", "Moment", new { id = item.MomentId } )">
+                        <div class="card mx-auto box_shadow divMouseover">
+                            <div class="picture_container">
+                                <img class="card-img-top box_shadow" src="~/Images/500x500_placeholder.png" alt="Player Picture Placeholder">
+                                @{var momentMint = (int)item.MomentMint;
+                                }
+                                <h2 class="top_left_text text-white">
+                                    @Html.DisplayFor(modelItem => item.MomentTier)
+                                </h2>
+                                <h2 class="bottom_right_text @(momentMint == 1 ? "limited" : "common")">
+                                    @Html.DisplayFor(modelItem => item.Mint)
+                                </h2>
+                            </div> <!--picture container-->
+                            <div class="container pt-3">
+                                <h4 class="text-center text-info">@Html.DisplayFor(modelItem => item.PlayerFullName)</h4>
+                                <hr class="bg-dark" />
+                                <h6 class="text-center mb-2 text-muted">@Html.DisplayFor(modelItem => item.MomentComplete)</h6>
+                                <hr class="bg-dark" />
+                                <div class="row text-center align-items-center">
+                                    <section class="col text-dark">
+                                        <h6>Price</h6>
+                                        <h6 class="text-muted">@Html.DisplayFor(modelItem => item.IndividualMomentPrice)</h6>
+                                    </section>
+                                    <section class="col text-dark">
+                                        <h6>Serial/Edition Size</h6>
+                                        <h6 class="text-muted">@Html.DisplayFor(modelItem => item.SerialComplete)</h6>
+                                    </section>
+                                </div>
+                            </div><!--container-->
+                        </div><!--card-->
+                    </a>
+                </div><!--col-->
+            } <!--end foreach-->
+        </div><!--row-->
+    </div>
+    <div class="row pt-4">
+        <hr class="bg-dark" />
+        <h3 class="text-center">Player Management</h3>
+        <p class="text-muted text-center">Manage Player by selecting from one of the options below.</p>
+        <div class="col text-center pb-3">
+            <a href="@Url.Action("Edit", "Player", new { id = Model.PlayerId } )" class="btn btn-info" style="font-size: 20px;">
+                <i class="far fa-edit text-warning" style="font-size: 24px;"></i>
+                Modify Player
+            </a>
+            <a href="@Url.Action("Delete", "Player", new { id = Model.PlayerId } )" class="btn btn-info" style="font-size: 20px;">
+                <i class="fas fa-trash text-warning" style="font-size: 24px;"></i>
+                Remove Player
+            </a>
+        </div>
+    </div><!--row-->
+</div><!--container-->
+<!--nav button-->
+<div class="container p-3" style="min-width: 1000px;">
+    <div class="row text-right">
+        <div class="col form-group">
+            <a class="btn btn-outline-info" style="font-size: 20px;" href="@Url.Content("~/Player/Index")">
+                <i class="fas fa-arrow-left text-warning" style="font-size: 24px;"></i> Back to Players
+            </a>
+        </div>
+    </div>
+</div>
+

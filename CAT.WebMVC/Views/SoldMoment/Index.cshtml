@@ -132,7 +132,7 @@
                 var mint = (int)item.MomentMint;
             <tr>
                 <td style="vertical-align: middle;">
-                    @Html.ActionLink(player, "Details", "Player", new { id = item.PlayerId }, htmlAttributes: new { @class = "text-info playerText text-decoration-none" })
+                    @Html.ActionLink(player, "Details", "PlayerAPI", new { id = item.PlayerId }, htmlAttributes: new { @class = "text-info playerText text-decoration-none" })
                 </td>
                 <td style="vertical-align: middle;">
                     @Html.DisplayFor(modelItem => item.DisplaySoldForAmount)
